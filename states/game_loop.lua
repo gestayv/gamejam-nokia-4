@@ -5,20 +5,21 @@ require '../Player'
 local game_loop = {}
 
 function game_loop:enter()
-    gameMap = sti('maps/map_one.lua')
     cam = camera()
-    player = Player(44, 22, 8, 8);
+    player = Player(44, 10, 8, 8);
 end
 
 function game_loop:update(dt)
+    world:update(dt)
     player:update(dt)
     cam:lookAt(getViewpointForCamera())
 end
 
 function game_loop:draw()
     cam:attach()
-        gameMap:drawLayer(gameMap.layers["Tile Layer 1"])
+        gameMap:drawLayer(gameMap.layers["Layer 1"])
         player:render()
+        -- world:draw()
     cam:detach()
 end
 
@@ -32,8 +33,8 @@ function getViewpointForCamera()
     topBound = push._RHEIGHT/2
     bottomBound = topBound + gameMapPixelHeight - VIRTUAL_HEIGHT
 
-    coordsx = math.floor(leftBound - VIRTUAL_WIDTH/2 + player.x)
-    coordsy = math.floor(topBound - VIRTUAL_HEIGHT/2 + player.y) --push._RWIDTH/2, push._RHEIGHT/2
+    coordsx = math.floor(leftBound - VIRTUAL_WIDTH/2 + player.x + 0.5)
+    coordsy = math.floor(topBound - VIRTUAL_HEIGHT/2 + player.y + 0.5)
 
     -- Bound camera to map size horizontally
     if coordsx < leftBound then

@@ -4,6 +4,8 @@ Class = require 'libraries/hump/class'
 Gamestate = require "libraries/hump/gamestate"
 main_menu = require "states/main_menu"
 game_loop = require "states/game_loop"
+wf = require '../libraries/windfield'
+world = wf.newWorld(0, 3000)
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -30,6 +32,18 @@ function love.load()
         pixelperfect = true,
     })
 
+    gameMap = sti('maps/map_one.lua')
+
+    walls = {}
+
+    if gameMap.layers["Walls"] then
+        for i, obj in pairs(gameMap.layers["Walls"].objects) do
+            wall = world:newRectangleCollider(obj.x + 1, obj.y + 1, obj.width - 2, obj.height - 2)
+            wall:setType('static')
+            table.insert(walls, wall)
+        end
+    end
+
     Gamestate.registerEvents({'update', 'keypressed'})
     Gamestate.switch(main_menu)
 end
@@ -42,6 +56,10 @@ function love.keypressed(key)
     -- Delte following code on production
     if key == "escape" then
         love.event.push("quit")
+    end
+
+    if key == 'escape' then
+        love.event.quit()
     end
 end
 
