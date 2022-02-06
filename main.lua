@@ -32,18 +32,6 @@ function love.load()
         pixelperfect = true,
     })
 
-    gameMap = sti('maps/map_one.lua')
-
-    walls = {}
-
-    if gameMap.layers["Walls"] then
-        for i, obj in pairs(gameMap.layers["Walls"].objects) do
-            wall = world:newRectangleCollider(obj.x + 1, obj.y + 1, obj.width - 2, obj.height - 2)
-            wall:setType('static')
-            table.insert(walls, wall)
-        end
-    end
-
     Gamestate.registerEvents({'update', 'keypressed'})
     Gamestate.switch(main_menu)
 end
@@ -67,6 +55,7 @@ function love.draw()
     push:apply('start')
 
     Gamestate.current():draw()
+    -- love.graphics.print("fps: "..tostring(love.timer.getFPS( )), 10, 10)
 
     push:apply('end')
 end

@@ -2,7 +2,6 @@
 require "Bullet"
 Player = Class{}
 
-GRAVITY = 40
 JUMP_SPEED = 50
 
 function Player:init(x, y, width, height)

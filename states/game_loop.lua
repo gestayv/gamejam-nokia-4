@@ -5,8 +5,20 @@ require '../Player'
 local game_loop = {}
 
 function game_loop:enter()
+    gameMap = sti('maps/map_one.lua')
+
+    walls = {}
+
     cam = camera()
     player = Player(44, 10, 8, 8);
+    
+    if gameMap.layers["Walls"] then
+        for i, obj in pairs(gameMap.layers["Walls"].objects) do
+            wall = world:newRectangleCollider(obj.x + 1, obj.y + 1, obj.width - 2, obj.height - 2)
+            wall:setType('static')
+            table.insert(walls, wall)
+        end
+    end
 end
 
 function game_loop:update(dt)
