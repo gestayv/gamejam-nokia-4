@@ -1,5 +1,6 @@
 push = require 'push'
 Class = require 'class'
+require 'Player'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -12,6 +13,7 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     math.randomseed(os.time())
+    player = Player(10, 10, 8, 8);
 
     smallFont = love.graphics.newFont('Ark.ttf', 8)
     love.graphics.setFont(smallFont)
@@ -31,6 +33,7 @@ end
 
 
 function love.update(dt)
+    player:update(dt)
 end
 
 --[[
@@ -40,6 +43,17 @@ end
     things to happen right away, just once, like when we want to quit.
 ]]
 function love.keypressed(key)
+    if gameState == 'main_menu' then
+        if key == "return" then
+            gameState = 'game_loop'
+        end
+    elseif gameState == 'game_loop' then
+        if key == 'left' or key == 'a' then
+        elseif key == 'right' or key == 'd' then
+        elseif key == 'w' or key == 'up' then
+        elseif key == 'space' then
+        end
+    end
 end
 
 function love.draw()
@@ -50,6 +64,8 @@ function love.draw()
     if gameState == 'main_menu' then
         love.graphics.setFont(smallFont)
         love.graphics.printf('Press Enter :)', 0, 20, VIRTUAL_WIDTH, 'center')
+    elseif gameState == 'game_loop' then
+        player:render()
     end
     
     push:apply('end')
