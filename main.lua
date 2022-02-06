@@ -1,9 +1,8 @@
 push = require 'push'
-Class = require 'class'
 sti = require 'libraries/sti'
-camera = require 'libraries/camera'
+Class = require 'libraries/hump/class'
+camera = require 'libraries/hump/camera'
 require 'Player'
-sti = require 'libraries/sti'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -31,9 +30,6 @@ function love.load()
         pixelperfect = true,
     })
 
-    gameMap = sti('maps/map_one.lua')
-    cam = camera()
-
     gameState = 'main_menu'
 end
 
@@ -42,20 +38,52 @@ function love.resize(w, h)
 end
 
 function getViewpointForCamera()
-    coordsx = math.floor(push._RWIDTH/2 - VIRTUAL_WIDTH/2 + player.x)
-    coordsy = math.floor(push._RHEIGHT/2 - VIRTUAL_HEIGHT/2 + player.y) --push._RWIDTH/2, push._RHEIGHT/2
+    gameMapPixelWidth = gameMap.width * gameMap.tilewidth
+    gameMapPixelHeight = gameMap.height * gameMap.tileheight
+
+    leftBound = push._RWIDTH/2
+    rightBound = leftBound + gameMapPixelWidth - VIRTUAL_WIDTH
+    topBound = push._RHEIGHT/2
+    bottomBound = topBound + gameMapPixelHeight - VIRTUAL_HEIGHT
+
+    coordsx = math.floor(leftBound - VIRTUAL_WIDTH/2 + player.x)
+    coordsy = math.floor(topBound - VIRTUAL_HEIGHT/2 + player.y) --push._RWIDTH/2, push._RHEIGHT/2
+
+    -- Bound camera to map size horizontally
+    if coordsx < leftBound then
+        coordsx = leftBound
+    elseif coordsx > rightBound then
+        coordsx = rightBound
+    end
+
+    -- Bound camera to map size vertically
+    if coordsy < topBound then
+        coordsy = topBound
+    elseif coordsy > bottomBound then
+        coordsy = bottomBound
+    end
+
+
     return coordsx, coordsy
 end
 
 function love.update(dt)
-    player:update(dt)
-    cam:lookAt(getViewpointForCamera())
-    -- print(cam:position())
+    if gameState == 'game_loop' then
+        player:update(dt)
+        cam:lookAt(getViewpointForCamera())
+        -- print(cam:position())
+    end
 end
 
 function love.keypressed(key)
+    -- Delte following code on production
+    if key == "escape" then
+        love.event.push("quit")
+    end
     if gameState == 'main_menu' then
         if key == "return" then
+            gameMap = sti('maps/map_one.lua')
+            cam = camera()
             gameState = 'game_loop'
         end
     end
@@ -63,16 +91,16 @@ end
 
 function love.draw()
     push:apply('start')
-    cam:attach()
-        gameMap:drawLayer(gameMap.layers["Tile Layer 1"])
 
-
-        if gameState == 'main_menu' then
-            love.graphics.setFont(smallFont)
-            love.graphics.printf('Press Enter :)', 0, 20, VIRTUAL_WIDTH, 'center')
-        elseif gameState == 'game_loop' then
+    if gameState == 'main_menu' then
+        love.graphics.setFont(smallFont)
+        love.graphics.printf('Press Enter :)', 0, 20, VIRTUAL_WIDTH, 'center')
+    elseif gameState == 'game_loop' then
+        cam:attach()
+            gameMap:drawLayer(gameMap.layers["Tile Layer 1"])
             player:render()
-        end
-    cam:detach()
+        cam:detach()
+    end
+
     push:apply('end')
 end
