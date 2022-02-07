@@ -23,8 +23,8 @@ function game_loop:enter()
 end
 
 function game_loop:update(dt)
-    world:update(dt)
     player:update(dt)
+    world:update(dt)
     cam:lookAt(getViewpointForCamera())
 end
 

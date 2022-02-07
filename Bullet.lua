@@ -19,8 +19,8 @@ function Bullet:update(dt)
     local vx = self.dx * self.direction
 
     self.collider:setLinearVelocity(vx, 0)
-    self.x = math.floor(self.collider:getX())
-    self.y = math.floor(self.collider:getY())
+    self.x = self.collider:getX()
+    self.y = self.collider:getY()
 
     if self.collider:enter('Solid') then
         self.markForDeletion = true
@@ -28,7 +28,7 @@ function Bullet:update(dt)
 end
 
 function Bullet:render()
-    love.graphics.rectangle("fill", self.x - self.width/2, self.y - self.height/2, self.width, self.height)
+    love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
 end 
 
 function Bullet:destroy()

@@ -2,7 +2,7 @@
 require "Bullet"
 Player = Class{}
 
-JUMP_SPEED = 50
+JUMP_SPEED = -500
 BULLET_WIDTH = 2
 BULLET_HEIGHT = 2
 
@@ -12,7 +12,6 @@ function Player:init(x, y, width, height)
     self.width = width  
     self.height = height
     self.dx = 50     -- speed x axis
-    self.dy = 5     -- speed y axis
     self.bullets = {}
     self.shootsPerSecond = 1
     self.shootsPerSecondMod = 1
@@ -21,6 +20,20 @@ function Player:init(x, y, width, height)
     self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
     self.collider:setFixedRotation(true)
     self.collider:setCollisionClass('Player')
+    self.jumpable = false
+
+    self.collider:setPreSolve(function(collider_1, collider_2, contact)        
+    if collider_1.collision_class == 'Player' and collider_2.collision_class == 'Solid' then
+        local px, py = collider_1:getPosition()            
+        local pw, ph = self.width, self.height
+        local tx, ty = collider_2:getPosition()            
+        local tx1, ty2, tx2, ty2 = collider_2:getBoundingBox() 
+        local tw, th = tx2 - tx, ty2 - ty
+        -- Check if player is colliding with top of solid collider to enable jump
+        if py + ph/2 < ty - th then self.jumpable = true end
+        end   
+    end)
+  
     self.collider:setObject(self)
 end
 
@@ -36,8 +49,9 @@ function Player:update(dt)
         vx = self.dx
     end
 
-    if love.keyboard.isDown("up", "w") then
-        vy = self.dy * -JUMP_SPEED
+    if love.keyboard.isDown("up", "w") and self:canJump() then
+        vy = JUMP_SPEED
+        self.jumpable = false
     end
 
     if love.keyboard.isDown("space") then
@@ -45,8 +59,8 @@ function Player:update(dt)
     end
 
     self.collider:setLinearVelocity(vx, vy)
-    self.x = math.floor(self.collider:getX())
-    self.y = math.floor(self.collider:getY())
+    self.x = self.collider:getX()
+    self.y = self.collider:getY()
 
     for key, bullet in pairs(self.bullets) do
         bullet:update(dt)
@@ -56,12 +70,18 @@ function Player:update(dt)
         end
     end
     self.timeSinceLastShot = self.timeSinceLastShot + dt
+    
+    -- Desactivate jump when leaving a block to disable
+    -- jumping after dropping down the ground
+    if self.collider:exit('Solid') then
+        self.jumpable = false
+    end
 end
 
 function Player:render()
     love.graphics.setColor(67/255, 82/255, 61/255, 1)
 
-    love.graphics.rectangle("fill", self.x - self.width/2, self.y - self.height/2, self.width, self.height)
+    love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
     for key, bullet in pairs(self.bullets) do
         bullet:render()
     end
@@ -79,6 +99,10 @@ end
 
 function Player:canShoot()
    return self.timeSinceLastShot >= 1 / (self.shootsPerSecond * self.shootsPerSecondMod) 
+end
+
+function Player:canJump()
+    return self.jumpable
 end
 
 function Player:changeShootRate(mod)
