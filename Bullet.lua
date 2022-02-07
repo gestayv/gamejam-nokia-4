@@ -30,3 +30,7 @@ end
 function Bullet:render()
     love.graphics.rectangle("fill", self.x - self.width/2, self.y - self.height/2, self.width, self.height)
 end 
+
+function Bullet:destroy()
+    self.collider:destroy()
+end

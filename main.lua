@@ -38,7 +38,7 @@ function love.load()
     -- Configure world collisions
     world:addCollisionClass('Solid')
     world:addCollisionClass('Player')
-    world:addCollisionClass('Player_Projectile', {ignores = {'Player'}})
+    world:addCollisionClass('Player_Projectile', {ignores = {'Player', 'Player_Projectile'}})
 end
 
 function love.resize(w, h)

@@ -51,6 +51,7 @@ function Player:update(dt)
     for key, bullet in pairs(self.bullets) do
         bullet:update(dt)
         if bullet.markForDeletion then
+            bullet:destroy()
             table.remove(self.bullets, key)
         end
     end
