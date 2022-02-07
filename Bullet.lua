@@ -8,9 +8,11 @@ function Bullet:init(x, y, width, height, direction)
     self.height = height
     self.dx = 30     -- speed x axis
     self.direction = direction
-    self.collider = world:newRectangleCollider(self.x, self.y, self.width - 1, self.height - 1)
-    self.collider:setType('kinematic') -- To ignore walls and gravity
+    self.markForDeletion = false
+    self.collider = world:newRectangleCollider(self.x, self.y, self.width - 1, self.height - 1, {mass = 0})
     self.collider:setCollisionClass('Player_Projectile')
+    self.collider:setGravityScale(0)
+    self.collider:setObject(self)
 end
 
 function Bullet:update(dt)
@@ -19,6 +21,10 @@ function Bullet:update(dt)
     self.collider:setLinearVelocity(vx, 0)
     self.x = math.floor(self.collider:getX())
     self.y = math.floor(self.collider:getY())
+
+    if self.collider:enter('Solid') then
+        self.markForDeletion = true
+    end
 end
 
 function Bullet:render()

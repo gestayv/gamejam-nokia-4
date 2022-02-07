@@ -21,6 +21,7 @@ function Player:init(x, y, width, height)
     self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
     self.collider:setFixedRotation(true)
     self.collider:setCollisionClass('Player')
+    self.collider:setObject(self)
 end
 
 function Player:update(dt)
@@ -49,6 +50,9 @@ function Player:update(dt)
 
     for key, bullet in pairs(self.bullets) do
         bullet:update(dt)
+        if bullet.markForDeletion then
+            table.remove(self.bullets, key)
+        end
     end
     self.timeSinceLastShot = self.timeSinceLastShot + dt
 end
