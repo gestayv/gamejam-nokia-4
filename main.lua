@@ -34,6 +34,11 @@ function love.load()
 
     Gamestate.registerEvents({'update', 'keypressed'})
     Gamestate.switch(main_menu)
+
+    -- Configure world collisions
+    world:addCollisionClass('Solid')
+    world:addCollisionClass('Player')
+    world:addCollisionClass('Player_Projectile', {ignores = {'Player'}})
 end
 
 function love.resize(w, h)

@@ -16,6 +16,7 @@ function game_loop:enter()
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
             wall = world:newRectangleCollider(obj.x + 1, obj.y + 1, obj.width - 2, obj.height - 2)
             wall:setType('static')
+            wall:setCollisionClass('Solid')
             table.insert(walls, wall)
         end
     end

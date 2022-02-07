@@ -3,6 +3,8 @@ require "Bullet"
 Player = Class{}
 
 JUMP_SPEED = 50
+BULLET_WIDTH = 2
+BULLET_HEIGHT = 2
 
 function Player:init(x, y, width, height)
     self.x = x      -- position x axis
@@ -18,6 +20,7 @@ function Player:init(x, y, width, height)
     self.directionX = 1
     self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
     self.collider:setFixedRotation(true)
+    self.collider:setCollisionClass('Player')
 end
 
 function Player:update(dt)
@@ -63,7 +66,7 @@ end
 
 function Player:shoot()
     if self:canShoot() then
-        bullet = Bullet(self.x, self.y, 2, 2, self.directionX)
+        bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX)
         table.insert(self.bullets, bullet)
         self.timeSinceLastShot = 0
     end
