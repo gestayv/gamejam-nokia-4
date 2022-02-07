@@ -1,6 +1,9 @@
 local main_menu = {}
 
 
+function main_menu:update(dt)
+end
+
 function main_menu:draw()
     love.graphics.setFont(smallFont)
     love.graphics.printf('Press Enter :)', 0, 20, VIRTUAL_WIDTH, 'center')

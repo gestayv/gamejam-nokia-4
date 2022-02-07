@@ -17,6 +17,7 @@ function game_loop:enter()
             wall = world:newRectangleCollider(obj.x + 1, obj.y + 1, obj.width - 2, obj.height - 2)
             wall:setType('static')
             wall:setCollisionClass('Solid')
+            wall:setFriction(0)
             table.insert(walls, wall)
         end
     end

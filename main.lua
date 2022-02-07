@@ -5,7 +5,7 @@ Gamestate = require "libraries/hump/gamestate"
 main_menu = require "states/main_menu"
 game_loop = require "states/game_loop"
 wf = require '../libraries/windfield'
-world = wf.newWorld(0, 3000)
+world = wf.newWorld(0, 80)
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -32,13 +32,17 @@ function love.load()
         pixelperfect = true,
     })
 
-    Gamestate.registerEvents({'update', 'keypressed'})
+    Gamestate.registerEvents({'update', 'keypressed', 'keyreleased'})
     Gamestate.switch(main_menu)
 
     -- Configure world collisions
     world:addCollisionClass('Solid')
     world:addCollisionClass('Player')
     world:addCollisionClass('Player_Projectile', {ignores = {'Player', 'Player_Projectile'}})
+
+    -- Manage input
+    love.keyboard.keysPressed = {}
+    love.keyboard.keysReleased = {}
 end
 
 function love.resize(w, h)
@@ -46,14 +50,46 @@ function love.resize(w, h)
 end
 
 function love.keypressed(key)
+     -- add to our table of keys pressed this frame
+    love.keyboard.keysPressed[key] = true
+
     -- Delte following code on production
     if key == "escape" then
-        love.event.push("quit")
-    end
-
-    if key == 'escape' then
         love.event.quit()
     end
+end
+
+function love.keyreleased(key)
+     -- add to our table of keys released this frame
+    love.keyboard.keysReleased[key] = true
+    print(key)
+end
+
+function love.keyboard.wasPressed(...)
+    local args = {...}
+    for i,key in pairs(args) do
+        if love.keyboard.keysPressed[key] then
+            return true
+        end
+    end
+    return false
+end
+
+function love.keyboard.wasReleased(...)
+    local args = {...}
+    for i,key in pairs(args) do
+        if love.keyboard.keysReleased[key] then
+            return true
+        end
+    end
+    return false
+end
+
+function love.update(dt)
+    Gamestate.current():update(dt)
+
+    love.keyboard.keysPressed = {}
+    love.keyboard.keysReleased = {}
 end
 
 function love.draw()
