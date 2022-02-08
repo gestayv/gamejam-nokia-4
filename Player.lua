@@ -1,5 +1,6 @@
 -- Player class, manages player logic duh
 require "Bullet"
+require "Pet"
 Player = Class{}
 
 INITIAL_JUMP_FORCE = -60
@@ -20,7 +21,7 @@ function Player:init(x, y, width, height)
     self.height = height
     self.bullets = {}
     self.shootsPerSecond = 1
-    self.shootsPerSecondMod = 1
+    self.shootsPerSecondMod = 0
     self.timeSinceLastShot = 0
     self.directionX = 1
     self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
@@ -29,6 +30,14 @@ function Player:init(x, y, width, height)
     self.jumpable = false
     self.jumping = false
     self.airTime = 0
+
+    self.pet = Pet()
+
+    -- Player stats
+    self.baseHealth = 5
+    self.maxHealth = self.baseHealth
+    self.health = self.maxHealth
+    self.attack = 1
 
     self.collider:setPreSolve(function(collider_1, collider_2, contact)        
     if collider_1.collision_class == 'Player' and collider_2.collision_class == 'Solid' then
@@ -53,6 +62,7 @@ end
 function Player:update(dt)
     self:movementUpdate(dt)
     self:shootUpdate(dt)
+    self.pet:update(dt)
 end
 
 function Player:render()
@@ -75,15 +85,11 @@ function Player:shoot()
 end
 
 function Player:canShoot()
-   return self.timeSinceLastShot >= 1 / (self.shootsPerSecond * self.shootsPerSecondMod) 
+   return self.timeSinceLastShot >= 1 / (self.shootsPerSecond + self.shootsPerSecondMod) 
 end
 
 function Player:canJump()
     return self.jumpable
-end
-
-function Player:changeShootRate(mod)
-    self.shootsPerSecondMod = mod
 end
 
 function Player:movementUpdate(dt)
@@ -157,4 +163,23 @@ function Player:shootUpdate(dt)
         end
     end
     self.timeSinceLastShot = self.timeSinceLastShot + dt
+    self.shootsPerSecondMod = self.pet:getBuff('fireRate')
+end
+
+-- Battle functions
+function Player:damage()
+    return self.attack + self.pet:getBuff('damage')
+end
+
+function Player:healthUpdate()
+    local newHealth = self.baseHealth + self.pet:getBuff('health')
+    local healthDiff = newHealth - self.maxHealth
+
+    self.maxHealth = newHealth
+
+    if self.health + healthDiff > 0 then
+        self.health = self.health + healthDiff
+    else 
+        self.health = 1
+    end
 end
