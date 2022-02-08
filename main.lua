@@ -37,6 +37,7 @@ function love.load()
 
     -- Configure world collisions
     world:addCollisionClass('Solid')
+    world:addCollisionClass('Enemy')
     world:addCollisionClass('Player')
     world:addCollisionClass('Player_Projectile', {ignores = {'Player', 'Player_Projectile'}})
 
@@ -99,4 +100,13 @@ function love.draw()
     -- love.graphics.print("fps: "..tostring(love.timer.getFPS( )), 10, 10)
 
     push:apply('end')
+end
+
+function speed_bound(currentSpeed, max_speed, min_speed)
+    if currentSpeed > max_speed then
+        currentSpeed = max_speed
+    elseif currentSpeed < min_speed then
+        currentSpeed = min_speed
+    end
+    return currentSpeed
 end

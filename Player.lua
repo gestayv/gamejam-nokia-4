@@ -26,6 +26,7 @@ function Player:init(x, y, width, height)
     self.directionX = 1
     self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
     self.collider:setFixedRotation(true)
+    self.collider:setFriction(0)
     self.collider:setCollisionClass('Player')
     self.jumpable = false
     self.jumping = false
@@ -131,6 +132,7 @@ function Player:movementUpdate(dt)
     end
     if self.jumping then
         self.airTime = self.airTime + dt
+        
         fy = (JUMP_FORCE) + math.exp(3 * self.airTime) - 1
         --self.dy = self.dy * 0.9 -- damping
         if vy <= MAX_JUMP_SPEED then
