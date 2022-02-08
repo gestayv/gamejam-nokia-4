@@ -37,10 +37,7 @@ function Enemy:render()
 end
 
 function Enemy:changeDirection()
-    if self.collider:enter('Player') or self.collider:exit('Player') or self.collider:stay('Player')  then    
-        print(self:collideWithWall(), self:floorOnNextTile())
-    end
-    if self:collideWithWall() or not self:floorOnNextTile() then
+    if self:collideWithWall() or self:fallOnNextStep() then
         self.direction = - self.direction
     end
 end
@@ -48,34 +45,58 @@ end
 function Enemy:collideWithWall()
     if self.collider:enter('Solid') then
         local wallCollider = self.collider:getEnterCollisionData('Solid').collider
-        local tx, _ = wallCollider:getPosition()
         local tx1, _, tx2, _ = wallCollider:getBoundingBox()
-        --local tw = tx2 - tx
         -- Check if enemy is colliding with side of wall
-        local leftX = self.x + (self.width - 1)/2
-        local rightX = self.x - (self.width - 1)/2
-        if leftX <= tx1 or rightX >= tx2 then 
+        local rightX = self.x + (self.width - 1)/2
+        local leftX = self.x - (self.width - 1)/2
+        if rightX <= tx1 or leftX >= tx2 then 
             return true
         end   
     end
     return false
 end
 
-function Enemy:floorOnNextTile()
-    -- hacer una query, 
-    -- si voy para la derecha, ver la tile x + 1, y + 1
-    -- si voy para la izquierda, ver la tile x - 1, y + 1
-    -- si no hay collider, cambia la direccion, pero solo cuando estoy a punto de entrar en la tile X que sigue
-    current_tile_x = math.floor(self.x/TILE_SIZE)
-    current_tile_y = math.floor((self.y + self.height)/TILE_SIZE)
-    
-    query_tile_x = (current_tile_x + (self.direction * 1)) * TILE_SIZE
-    query_tile_y = current_tile_y * TILE_SIZE
+function Enemy:fallOnNextStep()
+    -- Check every frame if the floor is about to end
+    if self.collider:stay('Solid') then
+        local floorCollider_list = self.collider:getStayCollisionData('Solid')
+        for _, collision_data in ipairs(floorCollider_list) do
+            local floorCollider = collision_data.collider
+            local tx1, ty1, tx2, _ = floorCollider:getBoundingBox()
+            -- Check if enemy is colliding with side of wall
+            local rightX = self.x + (self.width - 1)/2
+            local leftX = self.x - (self.width - 1)/2
+            local distanceBeforeFalling = 5
+            
+            if self.y + (self.height - 1)/2 < ty1 then
+                if self.direction == 1 then
+                    return leftX + distanceBeforeFalling > tx2
+                else
+                    return rightX - distanceBeforeFalling < tx1
+                end
+            end
+        end
+    end
 
-    floors = world:queryRectangleArea((self.x + self.direction), self.y + (self.height/2), 4, 4, {"Solid"})
-    local count = 0
-    for _ in pairs(floors) do count = count + 1 end
-    return count > 0
+    -- Jump back if dropping down on next frame
+    --[[ if self.collider:exit('Solid') then
+        local floorCollider = self.collider:getExitCollisionData('Solid').collider
+        local tx1, ty1, tx2, _ = floorCollider:getBoundingBox()
+        -- Check if enemy is colliding with side of wall
+        local rightX = self.x + (self.width - 1)/2
+        local leftX = self.x - (self.width - 1)/2
+        
+        if self.y + (self.height - 1)/2 < ty1 then
+            if self.direction == 1 then
+                self.collider:applyForce(0, -60)
+                return leftX+1 > tx2
+            else
+                self.collider:applyForce(0, -60)
+                return rightX-1 < tx1
+            end
+        end
+    end ]]
+    return false
 end
 
 function queryTile(x, y) 

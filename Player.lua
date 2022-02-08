@@ -41,15 +41,10 @@ function Player:init(x, y, width, height)
     self.attack = 1
 
     self.collider:setPreSolve(function(collider_1, collider_2, contact)        
-    if collider_1.collision_class == 'Player' and collider_2.collision_class == 'Solid' then
-        local vx, vy = collider_1:getLinearVelocity()
-        local px, py = collider_1:getPosition()            
-        local pw, ph = self.width, self.height
-        local tx, ty = collider_2:getPosition()            
-        local tx1, ty2, tx2, ty2 = collider_2:getBoundingBox() 
-        local tw, th = tx2 - tx, ty2 - ty
+    if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid' or collider_2.collision_class == 'Enemy') then
+        local tx1, ty1, tx2, ty2 = collider_2:getBoundingBox()
         -- Check if player is colliding with top of solid collider to enable jump
-        if py + ph/2 < ty - th and vy >= 0 then 
+        if self.y + self.height/2 < ty1 and vy >= 0 then 
             self.jumpable = true
             self.airTime = 0
         end
@@ -159,7 +154,7 @@ function Player:movementUpdate(dt)
     
     -- Desactivate jump when leaving a block to disable
     -- jumping after dropping down the ground
-    if self.collider:exit('Solid') then
+    if self.collider:exit('Solid') or self.collider:exit('Enemy') then
         self.jumpable = false
     end
 end

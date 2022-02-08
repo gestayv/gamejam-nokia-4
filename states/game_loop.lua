@@ -34,6 +34,8 @@ function game_loop:enter()
 end
 
 function game_loop:update(dt)
+    -- Limit dt spikes when moving window
+    -- if dt > 0.02 then dt = 0.02 end
     player:update(dt)
     world:update(dt)
     self:update_list(enemies)

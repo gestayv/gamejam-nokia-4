@@ -102,11 +102,11 @@ function love.draw()
     push:apply('end')
 end
 
-function speed_bound(currentSpeed, max_speed, min_speed)
-    if currentSpeed > max_speed then
-        currentSpeed = max_speed
-    elseif currentSpeed < min_speed then
-        currentSpeed = min_speed
+function range_bound(value, max_value, min_value)
+    if value > max_value then
+        value = max_value
+    elseif value < min_value then
+        value = min_value
     end
-    return currentSpeed
+    return value
 end
