@@ -9,7 +9,7 @@ function Bullet:init(x, y, width, height, direction)
     self.dx = 30     -- speed x axis
     self.direction = direction
     self.markForDeletion = false
-    self.collider = world:newRectangleCollider(self.x, self.y, self.width - 1, self.height - 1, {mass = 0})
+    self.collider = world:newRectangleCollider(self.x, self.y, self.width - 1, self.height - 1)
     self.collider:setCollisionClass('Player_Projectile')
     self.collider:setGravityScale(0)
     self.collider:setObject(self)

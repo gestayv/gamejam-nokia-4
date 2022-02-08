@@ -20,8 +20,8 @@ function Player:init(x, y, width, height)
     self.width = width  
     self.height = height
     self.bullets = {}
-    self.shootsPerSecond = 1
-    self.shootsPerSecondMod = 0
+    self._fireRate = 1
+    self.fireRateMod = 0
     self.timeSinceLastShot = 0
     self.directionX = 1
     self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
@@ -61,7 +61,7 @@ end
 
 function Player:update(dt)
     self:movementUpdate(dt)
-    self:shootUpdate(dt)
+    self:fireUpdate(dt)
     self.pet:update(dt)
 end
 
@@ -73,19 +73,32 @@ function Player:render()
         bullet:render()
     end
 
+    if not self:canFire() then
+        -- love.graphics.setColor(199/255, 240/255, 216/255, 1)
+        -- love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height + 0.5), self.width, 3)
+
+        love.graphics.setColor(67/255, 82/255, 61/255, 1)
+        fillPercent = self.timeSinceLastShot / self:fireRate()
+        love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5 ), math.floor(self.y - self.height + 2 + 0.5), (self.width) * fillPercent, 1)
+    end
+
     love.graphics.setColor(255,255,255)
 end
 
-function Player:shoot()
-    if self:canShoot() then
+function Player:fire()
+    if self:canFire() then
         bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX)
         table.insert(self.bullets, bullet)
         self.timeSinceLastShot = 0
     end
 end
 
-function Player:canShoot()
-   return self.timeSinceLastShot >= 1 / (self.shootsPerSecond + self.shootsPerSecondMod) 
+function Player:fireRate()
+    return (self._fireRate + self.fireRateMod) 
+end
+
+function Player:canFire()
+   return self.timeSinceLastShot >= 1 / self:fireRate()
 end
 
 function Player:canJump()
@@ -107,7 +120,7 @@ function Player:movementUpdate(dt)
         vx = 0
     end
 
-    if love.keyboard.isDown("up", "w") and self:canJump() then
+    if love.keyboard.wasPressed("up", "w") and self:canJump() then
         fy = INITIAL_JUMP_FORCE
         self.jumping = true
         self.jumpable = false
@@ -149,21 +162,23 @@ function Player:movementUpdate(dt)
     end
 end
 
-function Player:shootUpdate(dt)
+function Player:fireUpdate(dt)
     
-    if love.keyboard.isDown("space") then
-        self:shoot()
+    if love.keyboard.wasPressed("space") then
+        self:fire()
     end
 
     for key, bullet in pairs(self.bullets) do
         bullet:update(dt)
+    end
+    for key, bullet in pairs(self.bullets) do
         if bullet.markForDeletion then
             bullet:destroy()
             table.remove(self.bullets, key)
         end
     end
     self.timeSinceLastShot = self.timeSinceLastShot + dt
-    self.shootsPerSecondMod = self.pet:getBuff('fireRate')
+    self.fireRateMod = self.pet:getBuff('fireRate')
 end
 
 -- Battle functions
