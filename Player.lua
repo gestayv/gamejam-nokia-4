@@ -99,6 +99,7 @@ end
 
 function Player:fire()
     if self:canFire() then
+        love.audio.playSound(shootSound)
         bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX, self:damage())
         table.insert(self.bullets, bullet)
         self.timeSinceLastShot = 0

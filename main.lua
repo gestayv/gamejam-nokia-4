@@ -1,3 +1,4 @@
+-- Libraries
 push = require 'push'
 Class = require 'libraries/hump/class'
 
@@ -5,19 +6,23 @@ Gamestate = require "libraries/hump/gamestate"
 main_menu = require "states/main_menu"
 game_loop = require "states/game_loop"
 wf = require '../libraries/windfield'
-world = wf.newWorld(0, 60)
-require 'collision_extension'
-
 anim8 = require '/libraries/anim8'
 
+-- Helpers
+require 'collision_extension'
+require 'audio'
+
+-- Constant definitions
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
 VIRTUAL_WIDTH = 84
 VIRTUAL_HEIGHT = 48
 
-cam_x = 0
-cam_y = 0
+-------------------------------------
+-- WORLD CREATION
+-------------------------------------
+world = wf.newWorld(0, 60)
 
 function love.load()
     love.window.setTitle('gamejam nokia')
@@ -56,6 +61,7 @@ end
 
 function love.update(dt)
     Gamestate.current():update(dt)
+    love.audio.update()
 
     love.keyboard.keysPressed = {}
     love.keyboard.keysReleased = {}
@@ -120,4 +126,24 @@ function range_bound(value, max_value, min_value)
         value = min_value
     end
     return value
+end
+
+-- From: https://stackoverflow.com/a/53038524
+function ArrayRemove(t, fnKeep)
+    local j, n = 1, #t;
+
+    for i=1,n do
+        if (fnKeep(t, i, j)) then
+            -- Move i's kept value to j's position, if it's not already there.
+            if (i ~= j) then
+                t[j] = t[i];
+                t[i] = nil;
+            end
+            j = j + 1; -- Increment position of where we'll place the next kept value.
+        else
+            t[i] = nil;
+        end
+    end
+
+    return t;
 end

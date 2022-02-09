@@ -8,6 +8,9 @@ local game_loop = {}
 
 function game_loop:enter()
 
+    music = love.audio.newSource('audio/music/bad_melody.wav', 'static')
+    shootSound = love.audio.newSource('audio/sounds/blip1.wav', 'static')
+    love.audio.playMusic(music)
     walls = {}
 
     cam = camera()
@@ -34,6 +37,9 @@ function game_loop:enter()
 end
 
 function game_loop:leave()
+    love.audio.playMusic(nil)
+    music:stop()
+    music:release()
     player:destroy()
     for i, obj in pairs(enemies) do
         obj:destroy()
