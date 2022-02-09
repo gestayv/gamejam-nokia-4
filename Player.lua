@@ -5,10 +5,10 @@ Player = Class{}
 
 INITIAL_JUMP_FORCE = -60
 JUMP_FORCE = -40
-HORIZONTAL_FORCE = 30
+HORIZONTAL_FORCE = 25
 BULLET_WIDTH = 2
 BULLET_HEIGHT = 2
-MAX_MOVEMENT_SPEED = 30
+MAX_MOVEMENT_SPEED = 20
 MAX_FALL_SPEED = 80
 MAX_JUMP_SPEED = -40
 -- TO DO: Move these constants into the class itself
@@ -53,18 +53,26 @@ function Player:init(x, y, width, height)
     end)
   
     self.collider:setObject(self)
+    self.spriteSheet = love.graphics.newImage('/sprites/player_spritesheet.png')
+    self.grid = anim8.newGrid(8, 8, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
+    self.animations = {}
+    self.animations.right = anim8.newAnimation(self.grid('1-3', 1), 0.4)
+    self.animations.left = anim8.newAnimation(self.grid('1-3', 1), 0.4):flipH()
+    self.animations.jump = anim8.newAnimation(self.grid('5-6', 1), 0.4)
+    self.animations.idle = anim8.newAnimation(self.grid('4-5', 1), 2)
+
+    self.anim = self.animations.left
 end
 
 function Player:update(dt)
     self:movementUpdate(dt)
     self:fireUpdate(dt)
     self.pet:update(dt)
+    self.anim:update(dt)
 end
 
 function Player:render()
-    love.graphics.setColor(67/255, 82/255, 61/255, 1)
-
-    love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
+    self.anim:draw(self.spriteSheet, self.x - self.width/2, self.y - self.height/2)
     for key, bullet in pairs(self.bullets) do
         bullet:render()
     end
@@ -102,15 +110,20 @@ function Player:canJump()
 end
 
 function Player:movementUpdate(dt)
+    local isMoving = false
     local fx = 0
     local fy = 0
     vx, vy = self.collider:getLinearVelocity()
     if love.keyboard.isDown("left", "a") then
         self.directionX = -1
         fx = -1 * HORIZONTAL_FORCE
+        self.anim = self.animations.left
+        isMoving = true
     elseif love.keyboard.isDown("right", "d") then
         self.directionX = 1
         fx = HORIZONTAL_FORCE
+        self.anim = self.animations.right
+        isMoving = true
     end
     if love.keyboard.wasReleased("left", "a", "right", "d") then
         vx = 0
@@ -148,6 +161,14 @@ function Player:movementUpdate(dt)
     -- jumping after dropping down the ground
     if self.collider:exit('Solid') or self.collider:exit('Enemy') then
         self.jumpable = false
+    end
+
+    if not self.jumpable then 
+        self.anim = self.animations.jump
+        self.anim:gotoFrame(2)
+    end
+    if not isMoving and self.jumpable then
+        self.anim = self.animations.idle
     end
 end
 

@@ -57,11 +57,8 @@ end
 function game_loop:draw()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
-        player:render()
         self:draw_list(enemies, dt)
-        love.graphics.setColor(0,0,1, 1)
-        world:setQueryDebugDrawing(true)
-        -- love.graphics.setColor(1,1,1, 1)
+        player:render()
         -- world:draw() -- this draws colliders, uncomment only if needed
     cam:detach()
 end

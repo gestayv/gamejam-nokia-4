@@ -8,6 +8,8 @@ wf = require '../libraries/windfield'
 world = wf.newWorld(0, 80)
 require 'collision_extension'
 
+anim8 = require '/libraries/anim8'
+
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
