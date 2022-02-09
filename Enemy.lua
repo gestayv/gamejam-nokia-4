@@ -11,7 +11,7 @@ function Enemy:init(x, y, width, height, dx, dy, strength)
     self.dy = 5         -- speed y axis
     self.movementSpeed = 15
     self.strength = strength
-    self.health = 10
+    self.health = 2
     self.direction = 1
     self.collider = world:newRectangleCollider(x, y, width, height)
     self.collider:setCollisionClass('Enemy')

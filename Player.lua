@@ -20,7 +20,6 @@ function Player:init(x, y, width, height)
     self.width = width  
     self.height = height
     self.bullets = {}
-    self.fireDamage = 5
     self._fireRate = 1
     self.fireRateMod = 0
     self.timeSinceLastShot = 0
@@ -31,7 +30,9 @@ function Player:init(x, y, width, height)
     self.collider:setCollisionClass('Player')
     self.jumpable = false
     self.jumping = false
-    self.airTime = 0
+    self.airTime = 0 -- Used to dampen force applied during jump
+    self.timeSinceLastHit = 0
+    self.alive = true
 
     self.pet = Pet()
 
@@ -40,16 +41,16 @@ function Player:init(x, y, width, height)
     self.maxHealth = self.baseHealth
     self.health = self.maxHealth
     self.attack = 1
+    self.invincibilityTime = 0.8
 
     self.collider:setPreSolve(function(collider_1, collider_2, contact)        
-    if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid' or collider_2.collision_class == 'Enemy') then
-        vx, vy = collider_1:getLinearVelocity()
-        -- Check if player is colliding with top of solid collider to enable jump
-        if isCollidingOnTop(self.y, self.height, collider_2) and vy <= 0 then 
-            self.jumpable = true
-            self.airTime = 0
-        end
-        --elseif py + ph/2 > ty + th then self.jumping = false end
+        if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid' or collider_2.collision_class == 'Enemy') then
+            vx, vy = collider_1:getLinearVelocity()
+            -- Enable jump when colliding on top of solid objects
+            if isCollidingOnTop(self.y, self.height, collider_2) and vy <= 0 then 
+                self.jumpable = true
+                self.airTime = 0
+            end
         end   
     end)
   
@@ -68,6 +69,7 @@ end
 function Player:update(dt)
     self:movementUpdate(dt)
     self:fireUpdate(dt)
+    self:resolveEnemyCollisions(dt)
     self.pet:update(dt)
     self.anim:update(dt)
 end
@@ -92,7 +94,7 @@ end
 
 function Player:fire()
     if self:canFire() then
-        bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX, self.fireDamage)
+        bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX, self:damage())
         table.insert(self.bullets, bullet)
         self.timeSinceLastShot = 0
     end
@@ -126,7 +128,7 @@ function Player:movementUpdate(dt)
         self.anim = self.animations.right
         isMoving = true
     end
-    if love.keyboard.wasReleased("left", "a", "right", "d") then
+    if not love.keyboard.isDown("left", "a", "right", "d") then
         vx = 0
     end
 
@@ -194,6 +196,50 @@ end
 -- Battle functions
 function Player:damage()
     return self.attack + self.pet:getBuff('damage')
+end
+
+function Player:resolveEnemyCollisions(dt)
+    if self.collider:enter("Enemy") and self:canTakeDamage() then
+        local collisionData = self.collider:getEnterCollisionData('Enemy')
+        self:resolveEnemyDamage(collisionData)
+    end
+    if self.collider:stay("Enemy") and self:canTakeDamage() then
+        local enemyColliderList = self.collider:getStayCollisionData('Enemy')
+        for _, collisionData in ipairs(enemyColliderList) do
+            self:resolveEnemyDamage(collisionData)
+        end
+    end
+    if self.collider:exit("Enemy") then end
+
+    self.timeSinceLastHit = self.timeSinceLastHit + dt
+end
+
+function Player:resolveEnemyDamage(collisionData)
+    local enemy = collisionData.collider:getObject()
+    if enemy then
+        self:takeDamage(enemy.strength)
+        local ex, ey = collisionData.collider:getPosition()
+        local ix = (self.x - ex) * 4
+        -- Add -2.2 to rise character a little when hit horizontally
+        local iy = (self.y - ey - 2.2) * 0.5
+        -- The following bounds were selected by testing numbers pragmatically
+        ix = range_bound(ix, 40, -40)
+        iy = range_bound(iy, 3.5, -3.5)
+        self.collider:applyLinearImpulse(ix, iy)
+        self.timeSinceLastHit = 0
+    end
+end
+
+function Player:canTakeDamage()
+    return self.timeSinceLastHit >= self.invincibilityTime
+end
+
+function Player:takeDamage(damage)
+    self.health = self.health - damage
+    if self.health <= 0 then
+        self.health = 0
+        self.alive = false
+    end
 end
 
 function Player:healthUpdate()
