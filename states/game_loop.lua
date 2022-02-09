@@ -24,7 +24,7 @@ function game_loop:enter()
 
     if gameMap.layers["Walls"] then
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
-            wall = world:newRectangleCollider(obj.x + 1, obj.y + 1, obj.width - 2, obj.height - 2)
+            wall = world:newRectangleCollider(obj.x + 0.2, obj.y + 0.2 , obj.width - 0.4, obj.height - 0.4)
             wall:setType('static')
             wall:setCollisionClass('Solid')
             wall:setFriction(0)

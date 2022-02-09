@@ -12,7 +12,7 @@ function Enemy:init(x, y, width, height, dx, dy, strength)
     self.movementSpeed = 15
     self.strength = strength
     self.direction = 1
-    self.collider = world:newRectangleCollider(x, y, width - 1, height - 1)
+    self.collider = world:newRectangleCollider(x, y, width, height)
     self.collider:setCollisionClass('Enemy')
     self.collider:setFriction(0)
     self.collider:setFixedRotation(true)
@@ -85,12 +85,12 @@ function Enemy:fallOnNextStep()
             local floorCollider = collision_data.collider
             local tx1, ty1, tx2, _ = floorCollider:getBoundingBox()
             -- Check if enemy is about to fall off the floor
-            local rightX = self.x + (self.width - 1)/2
-            local leftX = self.x - (self.width - 1)/2
+            local rightX = self.x + (self.width)/2
+            local leftX = self.x - (self.width)/2
             local distanceBeforeFalling = 5
             
             -- Enemy is on top of collider
-            if self.y + (self.height - 1)/2 < ty1 then
+            if self.y + (self.height)/2 < ty1 then
                 if self.direction == 1 then
                     return leftX + distanceBeforeFalling > tx2
                 else
@@ -105,10 +105,10 @@ function Enemy:fallOnNextStep()
         local floorCollider = self.collider:getExitCollisionData('Solid').collider
         local tx1, ty1, tx2, _ = floorCollider:getBoundingBox()
         -- Check if enemy is colliding with side of wall
-        local rightX = self.x + (self.width - 1)/2
-        local leftX = self.x - (self.width - 1)/2
+        local rightX = self.x + (self.width)/2
+        local leftX = self.x - (self.width)/2
         
-        if self.y + (self.height - 1)/2 < ty1 then
+        if self.y + (self.height)/2 < ty1 then
             if self.direction == 1 then
                 self.collider:applyForce(0, -60)
                 return leftX+1 > tx2

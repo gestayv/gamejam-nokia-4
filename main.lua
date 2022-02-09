@@ -5,7 +5,7 @@ Gamestate = require "libraries/hump/gamestate"
 main_menu = require "states/main_menu"
 game_loop = require "states/game_loop"
 wf = require '../libraries/windfield'
-world = wf.newWorld(0, 80)
+world = wf.newWorld(0, 60)
 require 'collision_extension'
 
 anim8 = require '/libraries/anim8'
