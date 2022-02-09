@@ -1,15 +1,16 @@
 -- Bullet class, manages Bullet logic duh
 Bullet = Class{}
 
-function Bullet:init(x, y, width, height, direction)
+function Bullet:init(x, y, width, height, direction, attack)
     self.x = x      -- position x axis
     self.y = y      -- position y axis
     self.width = width  
     self.height = height
     self.dx = 30     -- speed x axis
     self.direction = direction
+    self.attack = attack
     self.markForDeletion = false
-    self.collider = world:newRectangleCollider(self.x, self.y, self.width - 1, self.height - 1)
+    self.collider = world:newRectangleCollider(self.x, self.y, self.width, self.height)
     self.collider:setCollisionClass('Player_Projectile')
     self.collider:setGravityScale(0)
     self.collider:setObject(self)
@@ -23,6 +24,15 @@ function Bullet:update(dt)
     self.y = self.collider:getY()
 
     if self.collider:enter('Solid') then
+        self.markForDeletion = true
+    end
+    if self.collider:enter('Enemy') then
+        local collisionData = self.collider:getEnterCollisionData('Enemy')
+        local enemy = collisionData.collider:getObject()
+        if enemy then
+            enemy:takeDamage(self.attack)
+        end
+
         self.markForDeletion = true
     end
 end

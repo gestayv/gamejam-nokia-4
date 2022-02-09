@@ -20,6 +20,7 @@ function Player:init(x, y, width, height)
     self.width = width  
     self.height = height
     self.bullets = {}
+    self.fireDamage = 5
     self._fireRate = 1
     self.fireRateMod = 0
     self.timeSinceLastShot = 0
@@ -91,7 +92,7 @@ end
 
 function Player:fire()
     if self:canFire() then
-        bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX)
+        bullet = Bullet(self.x, self.y, BULLET_WIDTH, BULLET_HEIGHT, self.directionX, self.fireDamage)
         table.insert(self.bullets, bullet)
         self.timeSinceLastShot = 0
     end
@@ -174,17 +175,16 @@ end
 
 function Player:fireUpdate(dt)
     
-    if love.keyboard.wasPressed("space") then
+    if love.keyboard.isDown("space") then
         self:fire()
     end
 
-    for key, bullet in pairs(self.bullets) do
+    for i=#self.bullets,1,-1 do
+        local bullet = self.bullets[i]
         bullet:update(dt)
-    end
-    for key, bullet in pairs(self.bullets) do
         if bullet.markForDeletion then
             bullet:destroy()
-            table.remove(self.bullets, key)
+            table.remove(self.bullets, i)
         end
     end
     self.timeSinceLastShot = self.timeSinceLastShot + dt
@@ -207,4 +207,8 @@ function Player:healthUpdate()
     else 
         self.health = 1
     end
+end
+
+function Player:destroy()
+    self.collider:destroy()
 end

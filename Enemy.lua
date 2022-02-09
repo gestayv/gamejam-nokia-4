@@ -11,11 +11,14 @@ function Enemy:init(x, y, width, height, dx, dy, strength)
     self.dy = 5         -- speed y axis
     self.movementSpeed = 15
     self.strength = strength
+    self.health = 10
     self.direction = 1
     self.collider = world:newRectangleCollider(x, y, width, height)
     self.collider:setCollisionClass('Enemy')
     self.collider:setFriction(0)
     self.collider:setFixedRotation(true)
+    self.collider:setObject(self)
+    self.alive = true
     -- self.map = map
 
     -- Avoids changing direction indefinitely when pushed into wall
@@ -43,6 +46,18 @@ end
 
 function Enemy:render()
     love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
+end
+
+function Enemy:takeDamage(damage)
+    self.health = self.health - damage
+    if self.health <= 0 then
+        self.health = 0
+        self.alive = false
+    end
+end
+
+function Enemy:destroy()
+    self.collider:destroy()
 end
 
 function Enemy:changeDirection()

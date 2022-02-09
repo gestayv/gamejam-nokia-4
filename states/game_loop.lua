@@ -36,15 +36,23 @@ end
 function game_loop:update(dt)
     -- Limit dt spikes when moving window
     -- if dt > 0.02 then dt = 0.02 end
-    player:update(dt)
+    -- First update the world to load collisions
     world:update(dt)
+    -- Then update the player to damage enemy with bullets
+    player:update(dt)
+    -- Then the enemies so they take player damage or damage him
     self:update_list(enemies, dt)
     cam:lookAt(getViewpointForCamera())
 end
 
 function game_loop:update_list(list, dt)
-    for i, obj in pairs(list) do
+    for i=#list,1,-1 do
+        local obj = list[i]
         obj:update(dt)
+        if not obj.alive then
+            obj:destroy()
+            table.remove(list, i)
+        end
     end
 end
 
