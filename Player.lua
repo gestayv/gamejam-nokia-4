@@ -62,15 +62,22 @@ function Player:init(x, y, width, height)
     self.animations.left = anim8.newAnimation(self.grid('1-3', 1), 0.4):flipH()
     self.animations.jump = anim8.newAnimation(self.grid('5-6', 1), 0.4)
     self.animations.idle = anim8.newAnimation(self.grid('4-5', 1), 2)
+    self.animations.death = anim8.newAnimation(self.grid('1-9', 2), 0.4, 'pauseAtEnd')
 
     self.anim = self.animations.left
+    self.test = false
 end
 
 function Player:update(dt)
-    self:movementUpdate(dt)
-    self:fireUpdate(dt)
-    self:resolveEnemyCollisions(dt)
-    self.pet:update(dt)
+    if player.alive then
+        self:movementUpdate(dt)
+        self:fireUpdate(dt)
+        self:resolveEnemyCollisions(dt)
+        self.pet:update(dt)
+    else
+        self.collider:setCollisionClass('Ghost')
+        self.anim = self.animations.death
+    end
     self.anim:update(dt)
 end
 
@@ -81,15 +88,13 @@ function Player:render()
     end
 
     if not self:canFire() then
-        -- love.graphics.setColor(199/255, 240/255, 216/255, 1)
+        -- love.graphics.setLightColor()
         -- love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height + 0.5), self.width, 3)
 
-        love.graphics.setColor(67/255, 82/255, 61/255, 1)
+        love.graphics.setDarkColor()
         fillPercent = self.timeSinceLastShot / self:fireRate()
         love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5 ), math.floor(self.y - self.height + 2 + 0.5), (self.width) * fillPercent, 1)
     end
-
-    love.graphics.setColor(255,255,255)
 end
 
 function Player:fire()

@@ -5,8 +5,10 @@ function main_menu:update(dt)
 end
 
 function main_menu:draw()
-    love.graphics.setFont(smallFont)
-    love.graphics.printf('Press Enter :)', 0, 20, VIRTUAL_WIDTH, 'center')
+    love.graphics.setDarkColor()
+    love.graphics.rectangle("fill", 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
+    love.graphics.setLightColor()
+    love.graphics.printf('Press enter :)', 1, 20, VIRTUAL_WIDTH, 'center')
 end
 
 function main_menu:keypressed(key, code)

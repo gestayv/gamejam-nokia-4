@@ -43,6 +43,7 @@ function love.load()
     world:addCollisionClass('Enemy')
     world:addCollisionClass('Player')
     world:addCollisionClass('Player_Projectile', {ignores = {'Player', 'Player_Projectile'}})
+    world:addCollisionClass('Ghost', {ignores = {'Player', 'Player_Projectile', 'Enemy'}})
 
     -- Manage input
     love.keyboard.keysPressed = {}
@@ -51,6 +52,22 @@ end
 
 function love.resize(w, h)
     push:resize(w, h)
+end
+
+function love.update(dt)
+    Gamestate.current():update(dt)
+
+    love.keyboard.keysPressed = {}
+    love.keyboard.keysReleased = {}
+end
+
+function love.draw()
+    push:apply('start')
+
+    Gamestate.current():draw()
+    -- love.graphics.print("fps: "..tostring(love.timer.getFPS( )), 10, 10)
+
+    push:apply('end')
 end
 
 function love.keypressed(key)
@@ -88,20 +105,12 @@ function love.keyboard.wasReleased(...)
     return false
 end
 
-function love.update(dt)
-    Gamestate.current():update(dt)
-
-    love.keyboard.keysPressed = {}
-    love.keyboard.keysReleased = {}
+function love.graphics.setLightColor()
+    love.graphics.setColor(199/255, 240/255, 216/255, 1)
 end
 
-function love.draw()
-    push:apply('start')
-
-    Gamestate.current():draw()
-    -- love.graphics.print("fps: "..tostring(love.timer.getFPS( )), 10, 10)
-
-    push:apply('end')
+function love.graphics.setDarkColor()
+    love.graphics.setColor(67/255, 82/255, 61/255, 1)
 end
 
 function range_bound(value, max_value, min_value)

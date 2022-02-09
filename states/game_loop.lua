@@ -33,6 +33,13 @@ function game_loop:enter()
     end
 end
 
+function game_loop:leave()
+    player:destroy()
+    for i, obj in pairs(enemies) do
+        obj:destroy()
+    end
+end
+
 function game_loop:update(dt)
     -- Limit dt spikes when moving window
     -- if dt > 0.02 then dt = 0.02 end
@@ -44,8 +51,11 @@ function game_loop:update(dt)
     self:update_list(enemies, dt)
     cam:lookAt(getViewpointForCamera())
 
+    -- Game over
     if not player.alive then
-        Gamestate.switch(main_menu)
+        if love.keyboard.wasPressed('return') then
+            Gamestate.switch(main_menu)
+        end
     end
 end
 
@@ -73,6 +83,13 @@ function game_loop:draw()
         player:render()
         -- world:draw() -- this draws colliders, uncomment only if needed
     cam:detach()
+    if not player.alive then
+        love.graphics.setDarkColor()
+        love.graphics.rectangle("fill", 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT / 2 - player.height)
+        love.graphics.setLightColor()
+        love.graphics.printf('Game over', 0, 0, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf('Press enter', 0, 9, VIRTUAL_WIDTH, 'center')
+    end
 end
 
 
