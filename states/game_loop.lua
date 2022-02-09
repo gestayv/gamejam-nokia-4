@@ -43,6 +43,10 @@ function game_loop:update(dt)
     -- Then the enemies so they take player damage or damage him
     self:update_list(enemies, dt)
     cam:lookAt(getViewpointForCamera())
+
+    if not player.alive then
+        Gamestate.switch(main_menu)
+    end
 end
 
 function game_loop:update_list(list, dt)
