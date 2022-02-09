@@ -6,6 +6,7 @@ main_menu = require "states/main_menu"
 game_loop = require "states/game_loop"
 wf = require '../libraries/windfield'
 world = wf.newWorld(0, 80)
+require 'collision_extension'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -63,7 +64,6 @@ end
 function love.keyreleased(key)
      -- add to our table of keys released this frame
     love.keyboard.keysReleased[key] = true
-    print(key)
 end
 
 function love.keyboard.wasPressed(...)

@@ -38,17 +38,17 @@ function game_loop:update(dt)
     -- if dt > 0.02 then dt = 0.02 end
     player:update(dt)
     world:update(dt)
-    self:update_list(enemies)
+    self:update_list(enemies, dt)
     cam:lookAt(getViewpointForCamera())
 end
 
-function game_loop:update_list(list)
+function game_loop:update_list(list, dt)
     for i, obj in pairs(list) do
         obj:update(dt)
     end
 end
 
-function game_loop:draw_list(list)
+function game_loop:draw_list(list, dt)
     for i, obj in pairs(list) do
         obj:render(dt)
     end
@@ -58,7 +58,7 @@ function game_loop:draw()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
         player:render()
-        self:draw_list(enemies)
+        self:draw_list(enemies, dt)
         love.graphics.setColor(0,0,1, 1)
         world:setQueryDebugDrawing(true)
         -- love.graphics.setColor(1,1,1, 1)
@@ -79,21 +79,9 @@ function getViewpointForCamera()
     coordsx = math.floor(leftBound - VIRTUAL_WIDTH/2 + player.x + 0.5)
     coordsy = math.floor(topBound - VIRTUAL_HEIGHT/2 + player.y + 0.5)
 
-    -- Bound camera to map size horizontally
-    if coordsx < leftBound then
-        coordsx = leftBound
-    elseif coordsx > rightBound then
-        coordsx = rightBound
-    end
-
-    -- Bound camera to map size vertically
-    if coordsy < topBound then
-        coordsy = topBound
-    elseif coordsy > bottomBound then
-        coordsy = bottomBound
-    end
-
-
+    coordsx = range_bound(coordsx, rightBound, leftBound)
+    coordsy = range_bound(coordsy, bottomBound, topBound)
+    
     return coordsx, coordsy
 end
 

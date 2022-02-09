@@ -9,27 +9,36 @@ function Enemy:init(x, y, width, height, dx, dy, strength)
     self.height = height
     self.dx = 15        -- speed x axis
     self.dy = 5         -- speed y axis
+    self.movementSpeed = 15
     self.strength = strength
     self.direction = 1
     self.collider = world:newRectangleCollider(x, y, width - 1, height - 1)
     self.collider:setCollisionClass('Enemy')
     self.collider:setFriction(0)
-    self.collider:setRestitution(0)
     self.collider:setFixedRotation(true)
     -- self.map = map
+
+    -- Avoids changing direction indefinitely when pushed into wall
+    self._timeSinceDirectionChange = 10
 end
 
 function Enemy:update(dt)
+    local fx = 0
+    local fy = 0
     vx, vy = self.collider:getLinearVelocity()
 
-    vx = self.dx * self.direction -- direction
-    --print(vx)
+    fx = self.dx * self.direction
 
-    --vx = speed_bound(vx, 30, 30)
+    vx = range_bound(vx, self.movementSpeed, - self.movementSpeed)
+    vy = range_bound(vy, 80, -60)
+    
+    self.collider:applyForce(fx, fy)
     self.collider:setLinearVelocity(vx, vy) 
     self.x = self.collider:getX()
     self.y = self.collider:getY()
     self:changeDirection()
+
+    self._timeSinceDirectionChange = self._timeSinceDirectionChange + dt
 end
 
 function Enemy:render()
@@ -37,21 +46,33 @@ function Enemy:render()
 end
 
 function Enemy:changeDirection()
-    if self:collideWithWall() or self:fallOnNextStep() then
-        self.direction = - self.direction
+    -- Para que funcione el stay, se deben llamar ambos: el enter y el exit
+    if self.collider:exit('Solid') then end
+    if self:collideWithWall() or self:collidingWithWall() or self:fallOnNextStep() then
+       self.direction = - self.direction
     end
 end
 
 function Enemy:collideWithWall()
     if self.collider:enter('Solid') then
         local wallCollider = self.collider:getEnterCollisionData('Solid').collider
-        local tx1, _, tx2, _ = wallCollider:getBoundingBox()
-        -- Check if enemy is colliding with side of wall
-        local rightX = self.x + (self.width - 1)/2
-        local leftX = self.x - (self.width - 1)/2
-        if rightX <= tx1 or leftX >= tx2 then 
+        if isHorizontalCollision(self.x, self.width, wallCollider) then 
+            self._timeSinceDirectionChange = 0
             return true
         end   
+    end
+    return false
+end
+
+function Enemy:collidingWithWall()
+    if self.collider:stay('Solid') then
+        local wall_collider_list = self.collider:getStayCollisionData('Solid')
+        for _, collision_data in ipairs(wall_collider_list) do
+            if isHorizontalCollision(self.x, self.width, collision_data.collider) and self._timeSinceDirectionChange > 0.5 then 
+                self._timeSinceDirectionChange = 0
+                return true
+            end  
+        end
     end
     return false
 end
@@ -59,15 +80,16 @@ end
 function Enemy:fallOnNextStep()
     -- Check every frame if the floor is about to end
     if self.collider:stay('Solid') then
-        local floorCollider_list = self.collider:getStayCollisionData('Solid')
-        for _, collision_data in ipairs(floorCollider_list) do
+        local floor_collider_list = self.collider:getStayCollisionData('Solid')
+        for _, collision_data in ipairs(floor_collider_list) do
             local floorCollider = collision_data.collider
             local tx1, ty1, tx2, _ = floorCollider:getBoundingBox()
-            -- Check if enemy is colliding with side of wall
+            -- Check if enemy is about to fall off the floor
             local rightX = self.x + (self.width - 1)/2
             local leftX = self.x - (self.width - 1)/2
             local distanceBeforeFalling = 5
             
+            -- Enemy is on top of collider
             if self.y + (self.height - 1)/2 < ty1 then
                 if self.direction == 1 then
                     return leftX + distanceBeforeFalling > tx2

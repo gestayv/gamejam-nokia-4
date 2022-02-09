@@ -42,9 +42,9 @@ function Player:init(x, y, width, height)
 
     self.collider:setPreSolve(function(collider_1, collider_2, contact)        
     if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid' or collider_2.collision_class == 'Enemy') then
-        local tx1, ty1, tx2, ty2 = collider_2:getBoundingBox()
+        vx, vy = collider_1:getLinearVelocity()
         -- Check if player is colliding with top of solid collider to enable jump
-        if self.y + self.height/2 < ty1 and vy >= 0 then 
+        if isCollidingOnTop(self.y, self.height, collider_2) and vy <= 0 then 
             self.jumpable = true
             self.airTime = 0
         end
@@ -129,23 +129,15 @@ function Player:movementUpdate(dt)
         self.airTime = self.airTime + dt
         
         fy = (JUMP_FORCE) + math.exp(3 * self.airTime) - 1
-        --self.dy = self.dy * 0.9 -- damping
         if vy <= MAX_JUMP_SPEED then
             self.jumping = false
             vy = MAX_JUMP_SPEED
         end
     end
     
-    -- limit fall speed
-    if vy > MAX_FALL_SPEED then
-        vy = MAX_FALL_SPEED
-    end
-    -- limit horizontal speed
-    if vx > MAX_MOVEMENT_SPEED then
-        vx = MAX_MOVEMENT_SPEED
-    elseif vx < -MAX_MOVEMENT_SPEED then
-        vx = -MAX_MOVEMENT_SPEED
-    end
+    -- Limit speeds
+    vy = range_bound(vy, MAX_FALL_SPEED, MAX_JUMP_SPEED)
+    vx = range_bound(vx, MAX_MOVEMENT_SPEED, -MAX_MOVEMENT_SPEED)
 
     self.collider:applyForce(fx, fy)
     self.collider:setLinearVelocity(vx, vy) -- Bound velocity
