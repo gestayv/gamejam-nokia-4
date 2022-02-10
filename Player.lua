@@ -82,7 +82,7 @@ function Player:update(dt)
 end
 
 function Player:render()
-    self.anim:draw(self.spriteSheet, self.x - 8/2, self.y - 8/2)
+    self.anim:draw(self.spriteSheet, math.floor(self.x - 8/2 + 0.5), math.floor(self.y - 8/2 + 0.5))
     for key, bullet in pairs(self.bullets) do
         bullet:render()
     end
@@ -231,7 +231,7 @@ function Player:resolveEnemyDamage(collisionData)
     if enemy then
         self:takeDamage(enemy.strength)
         local ex, ey = collisionData.collider:getPosition()
-        local ix = (self.x - ex) * 4
+        local ix = (self.x - ex) * 5
         -- Add -2.2 to rise character a little when hit horizontally
         local iy = (self.y - ey - 2.2) * 0.5
         -- The following bounds were selected by testing numbers pragmatically
