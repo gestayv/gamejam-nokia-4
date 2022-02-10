@@ -8,8 +8,8 @@ return {
   height = 60,
   tilewidth = 8,
   tileheight = 8,
-  nextlayerid = 4,
-  nextobjectid = 38,
+  nextlayerid = 9,
+  nextobjectid = 49,
   properties = {},
   tilesets = {
     {
@@ -192,7 +192,7 @@ return {
           x = 112,
           y = 144,
           width = 8,
-          height = 96,
+          height = 144,
           rotation = 0,
           visible = true,
           properties = {}
@@ -254,10 +254,10 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 80.0001,
-          y = 240.023,
-          width = 31.9295,
-          height = 48.0467,
+          x = 95.9999,
+          y = 279.953,
+          width = 15.9296,
+          height = 8.02388,
           rotation = 359.832,
           visible = true,
           properties = {}
@@ -423,9 +423,9 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 64,
-          y = 256,
-          width = 15.9296,
+          x = 63.9532,
+          y = 256.047,
+          width = 31.9764,
           height = 32.0233,
           rotation = 359.832,
           visible = true,
@@ -583,6 +583,64 @@ return {
           shape = "rectangle",
           x = 40,
           y = 464,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 6,
+      name = "items",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 42,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 104,
+          y = 272,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["item"] = "vida"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 8,
+      name = "Player",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 47,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 40,
+          y = 24,
           width = 8,
           height = 8,
           rotation = 0,

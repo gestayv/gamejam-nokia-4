@@ -1,26 +1,50 @@
 sti = require '../libraries/sti'
 camera = require '../libraries/hump/camera'
+
 require '../Player'
 require '../Enemy'
-gameMap = sti('maps/map_one.lua')
+
+gameMap = nil
 
 local game_loop = {}
 
-function game_loop:enter()
+local levels = {}
+levels.tutorial = {
+    musicFile = 'audio/music/bad_melody.wav',
+    musicType = 'static',
+    mapFile = 'maps/map_one.lua'
+}
 
-    music = love.audio.newSource('audio/music/bad_melody.wav', 'static')
+function game_loop:enter()
+    -- Load all sounds
     shootSound = love.audio.newSource('audio/sounds/blip1.wav', 'static')
-    love.audio.playMusic(music)
-    walls = {}
 
     cam = camera()
-    player = Player(44, 7, 8, 8)
+    player = Player(0, 0, 6, 8)
+
+    game_loop:switch_level(levels.tutorial)
+end
+
+function game_loop:switch_level(level)
+
+    gameMap = sti(level.mapFile)
+
+    music = love.audio.newSource(level.musicFile, level.musicType)
+    love.audio.playMusic(music)
     
+    walls = {}
     enemies = {}
     
+    if gameMap.layers["Player"] then
+        for i, obj in pairs(gameMap.layers["Player"].objects) do
+            print(obj.x, obj.y)
+            player:setPosition(obj.x, obj.y)
+        end
+    end
+
     if gameMap.layers["Enemy"] then
         for i, obj in pairs(gameMap.layers["Enemy"].objects) do
-            enemy = Enemy(obj.x + 1, obj.y + 1, 8, 8, 7, 5, 1)
+            enemy = Enemy(obj.x, obj.y + 1, 8, 8, 7, 5, 1)
             table.insert(enemies, enemy)
         end
     end
@@ -36,14 +60,21 @@ function game_loop:enter()
     end
 end
 
-function game_loop:leave()
+function game_loop:destroy_last_level()
     love.audio.playMusic(nil)
-    music:stop()
-    music:release()
-    player:destroy()
+    if music then
+        music:stop()
+        music:release()
+    end
+
     for i, obj in pairs(enemies) do
         obj:destroy()
     end
+end
+
+function game_loop:leave()
+    self:destroy_last_level()
+    player:destroy()
 end
 
 function game_loop:update(dt)

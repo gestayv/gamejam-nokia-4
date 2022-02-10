@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="60" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="43">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="60" tilewidth="8" tileheight="8" infinite="0" nextlayerid="9" nextobjectid="49">
  <editorsettings>
-  <export target="gamejam/maps/map_one.lua" format="lua"/>
+  <export target="../maps/map_one.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="sprite_sheet" tilewidth="8" tileheight="8" tilecount="60" columns="10">
-  <image source="gamejam/maps/sprite_sheet.png" width="84" height="48"/>
+  <image source="../maps/sprite_sheet.png" width="84" height="48"/>
  </tileset>
  <layer id="1" name="Layer 1" width="15" height="60">
   <data encoding="csv">
@@ -114,5 +114,8 @@
     <property name="item" value="vida"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="8" name="Player">
+  <object id="47" x="40" y="24" width="8" height="8"/>
  </objectgroup>
 </map>

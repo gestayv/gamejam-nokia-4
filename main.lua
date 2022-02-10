@@ -49,6 +49,7 @@ function love.load()
     world:addCollisionClass('Player')
     world:addCollisionClass('Player_Projectile', {ignores = {'Player', 'Player_Projectile'}})
     world:addCollisionClass('Ghost', {ignores = {'Player', 'Player_Projectile', 'Enemy'}})
+    world:addCollisionClass('Item', {ignores = {'Enemy', 'Player_Projectile'}})
 
     -- Manage input
     love.keyboard.keysPressed = {}

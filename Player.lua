@@ -24,7 +24,7 @@ function Player:init(x, y, width, height)
     self.fireRateMod = 0
     self.timeSinceLastShot = 0
     self.directionX = 1
-    self.collider = world:newRectangleCollider(self.x, self.y, 8, 8)
+    self.collider = world:newRectangleCollider(self.x, self.y, width, height)
     self.collider:setFixedRotation(true)
     self.collider:setFriction(0)
     self.collider:setCollisionClass('Player')
@@ -95,6 +95,12 @@ function Player:render()
         fillPercent = self.timeSinceLastShot / self:fireRate()
         love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5 ), math.floor(self.y - self.height + 2 + 0.5), (self.width) * fillPercent, 1)
     end
+end
+
+function Player:setPosition(x, y)
+    self.collider:setPosition(x, y)
+    self.x = x
+    self.y = y
 end
 
 function Player:fire()
