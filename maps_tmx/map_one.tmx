@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="60" tilewidth="8" tileheight="8" infinite="0" nextlayerid="10" nextobjectid="54">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="60" tilewidth="8" tileheight="8" infinite="0" nextlayerid="11" nextobjectid="61">
  <editorsettings>
   <export target="../maps/map_one.lua" format="lua"/>
  </editorsettings>
@@ -70,6 +70,7 @@
 52,32,32,32,32,32,32,32,32,52,52,32,32,32,32
 </data>
  </layer>
+ <objectgroup id="10" name="Gates"/>
  <objectgroup id="2" name="Hitboxes">
   <object id="2" x="24" y="32" width="40" height="24"/>
   <object id="3" x="0" y="0" width="8" height="176"/>
@@ -87,28 +88,49 @@
   <object id="15" x="32" y="336" width="39.9764" height="16.0234" rotation="359.832"/>
   <object id="16" x="23.9765" y="400" width="95.9996" height="24.0703" rotation="359.832"/>
   <object id="17" x="48" y="368" width="47.9294" height="24.1406" rotation="359.832"/>
-  <object id="18" x="0" y="472" width="119.976" height="8.07034" rotation="359.832"/>
   <object id="21" x="0.117354" y="200.023" width="7.78885" height="103.976" rotation="359.832"/>
   <object id="22" x="112" y="440" width="7.99994" height="15.8123" rotation="359.832"/>
   <object id="23" x="40" y="424" width="79.9997" height="8.14071" rotation="359.832"/>
   <object id="24" x="72" y="432" width="47.9763" height="8.14071" rotation="359.832"/>
   <object id="25" x="112" y="288" width="8" height="112"/>
-  <object id="26" x="63.9532" y="256.047" width="31.9764" height="32.0233" rotation="359.832"/>
   <object id="27" x="0" y="304" width="31.9764" height="16.0234" rotation="359.832"/>
   <object id="28" x="0" y="320" width="23.9764" height="8.02342" rotation="359.832"/>
   <object id="29" x="0" y="320" width="23.9764" height="8.02342" rotation="359.832"/>
   <object id="30" x="0" y="328" width="15.9765" height="8.02342" rotation="359.832"/>
   <object id="36" x="15.9767" y="392.047" width="16.3284" height="15.9765" rotation="359.832"/>
   <object id="37" x="72" y="464" width="16.3284" height="8.02342" rotation="359.832"/>
+  <object id="55" x="0" y="472" width="120" height="8"/>
+  <object id="58" x="64" y="256" width="24" height="32"/>
+  <object id="59" x="88" y="264" width="8" height="24"/>
  </objectgroup>
- <objectgroup id="3" name="Enemy">
-  <object id="31" x="96" y="104" width="8" height="8"/>
-  <object id="32" x="16" y="168" width="8" height="8"/>
-  <object id="33" x="48" y="232" width="8" height="8"/>
-  <object id="34" x="48" y="328" width="8" height="8"/>
-  <object id="35" x="40" y="464" width="8" height="8"/>
+ <objectgroup id="3" name="Enemies">
+  <object id="31" x="96" y="104" width="8" height="8">
+   <properties>
+    <property name="type" value="flying"/>
+   </properties>
+  </object>
+  <object id="32" x="16" y="168" width="8" height="8">
+   <properties>
+    <property name="type" value="flying"/>
+   </properties>
+  </object>
+  <object id="33" x="48" y="232" width="8" height="8">
+   <properties>
+    <property name="type" value="flying"/>
+   </properties>
+  </object>
+  <object id="34" x="48" y="328" width="8" height="8">
+   <properties>
+    <property name="type" value="flying"/>
+   </properties>
+  </object>
+  <object id="35" x="40" y="464" width="8" height="8">
+   <properties>
+    <property name="type" value="flying"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="6" name="items">
+ <objectgroup id="6" name="Items">
   <object id="42" x="104" y="272" width="8" height="8">
    <properties>
     <property name="item" value="vida"/>
@@ -119,9 +141,9 @@
   <object id="47" x="40" y="24" width="8" height="8"/>
  </objectgroup>
  <objectgroup id="9" name="Level Transitions">
-  <object id="52" x="8" y="104" width="32" height="32">
+  <object id="52" x="112" y="456" width="8" height="16">
    <properties>
-    <property name="exit_direction" value="bottom"/>
+    <property name="exit_direction" value="right"/>
     <property name="target" value="tutorial"/>
    </properties>
   </object>

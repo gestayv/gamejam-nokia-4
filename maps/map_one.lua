@@ -8,8 +8,8 @@ return {
   height = 60,
   tilewidth = 8,
   tileheight = 8,
-  nextlayerid = 10,
-  nextobjectid = 54,
+  nextlayerid = 11,
+  nextobjectid = 61,
   properties = {},
   tilesets = {
     {
@@ -118,6 +118,20 @@ return {
         31, 48, 48, 52, 52, 48, 48, 47, 47, 1610612769, 3758096417, 52, 47, 52, 47,
         52, 32, 32, 32, 32, 32, 32, 32, 32, 52, 52, 32, 32, 32, 32
       }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 10,
+      name = "Gates",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {}
     },
     {
       type = "objectgroup",
@@ -341,19 +355,6 @@ return {
           properties = {}
         },
         {
-          id = 18,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 0,
-          y = 472,
-          width = 119.976,
-          height = 8.07034,
-          rotation = 359.832,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 21,
           name = "",
           type = "",
@@ -415,19 +416,6 @@ return {
           width = 8,
           height = 112,
           rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 26,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 63.9532,
-          y = 256.047,
-          width = 31.9764,
-          height = 32.0233,
-          rotation = 359.832,
           visible = true,
           properties = {}
         },
@@ -508,6 +496,45 @@ return {
           rotation = 359.832,
           visible = true,
           properties = {}
+        },
+        {
+          id = 55,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 0,
+          y = 472,
+          width = 120,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 58,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 256,
+          width = 24,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 59,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 88,
+          y = 264,
+          width = 8,
+          height = 24,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },
@@ -515,7 +542,7 @@ return {
       type = "objectgroup",
       draworder = "topdown",
       id = 3,
-      name = "Enemy",
+      name = "Enemies",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -535,7 +562,9 @@ return {
           height = 8,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["type"] = "flying"
+          }
         },
         {
           id = 32,
@@ -548,7 +577,9 @@ return {
           height = 8,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["type"] = "flying"
+          }
         },
         {
           id = 33,
@@ -561,7 +592,9 @@ return {
           height = 8,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["type"] = "flying"
+          }
         },
         {
           id = 34,
@@ -574,7 +607,9 @@ return {
           height = 8,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["type"] = "flying"
+          }
         },
         {
           id = 35,
@@ -587,7 +622,9 @@ return {
           height = 8,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["type"] = "flying"
+          }
         }
       }
     },
@@ -595,7 +632,7 @@ return {
       type = "objectgroup",
       draworder = "topdown",
       id = 6,
-      name = "items",
+      name = "Items",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -667,14 +704,14 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 8,
-          y = 104,
-          width = 32,
-          height = 32,
+          x = 112,
+          y = 456,
+          width = 8,
+          height = 16,
           rotation = 0,
           visible = true,
           properties = {
-            ["exit_direction"] = "bottom",
+            ["exit_direction"] = "right",
             ["target"] = "tutorial"
           }
         }
