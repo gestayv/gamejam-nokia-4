@@ -79,6 +79,7 @@ function Player:update(dt)
         self.anim = self.animations.death
     end
     self.anim:update(dt)
+    self:checkTransitions()
 end
 
 function Player:render()
@@ -203,6 +204,17 @@ function Player:fireUpdate(dt)
     end
     self.timeSinceLastShot = self.timeSinceLastShot + dt
     self.fireRateMod = self.pet:getBuff('fireRate')
+end
+
+function Player:checkTransitions()
+    if self.collider:exit('Level Transition') then
+        local transitionLevel = self.collider:getExitCollisionData('Level Transition').collider
+        print(transitionLevel.exit_direction)
+        print(transitionLevel.target)
+        if exitDirectionFromCollision(transitionLevel.exit_direction, self.collider, transitionLevel) then
+            nextLevel = transitionLevel.target
+        end
+    end
 end
 
 -- Battle functions

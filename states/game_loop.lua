@@ -76,14 +76,14 @@ function game_loop:switch_level(level)
         for i, obj in pairs(gameMap.layers["Level Transitions"].objects) do
             levelTransition = world:newRectangleCollider(obj.x + 0.2, obj.y + 0.2 , obj.width - 0.4, obj.height - 0.4)
             levelTransition.exit_direction = obj.properties.exit_direction
-            levelTransition.level = levels[obj.properties.target]
+            levelTransition.target = levels[obj.properties.target]
             levelTransition:setType('static')
             levelTransition:setCollisionClass('Level Transition')
             levelTransition:setFriction(0)
-            levelTransition:setPreSolve(function(transitionCollider, playerCollider, contact)        
+            levelTransition:setPreSolve(function(transitionCollider, playerCollider, contact)
                 if transitionCollider.collision_class == 'Level Transition' and playerCollider.collision_class == 'Player' then
-                    nextLevel = levelTransition.level
-                end   
+                    contact:setEnabled(false)
+                end
             end)
 
             table.insert(transitions, levelTransition)
