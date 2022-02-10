@@ -12,7 +12,7 @@ local levels = {}
 levels.tutorial = {
     musicFile = 'audio/music/bad_melody.wav',
     musicType = 'static',
-    mapFile = 'maps/map_one.lua'
+    mapFile = 'maps/map_level_1.lua'
 }
 
 function game_loop:enter()
@@ -42,15 +42,16 @@ function game_loop:switch_level(level)
         end
     end
 
-    if gameMap.layers["Enemy"] then
-        for i, obj in pairs(gameMap.layers["Enemy"].objects) do
+    if gameMap.layers["Enemies"] then
+        for i, obj in pairs(gameMap.layers["Enemies"].objects) do
+            print(obj.properties.type)
             enemy = Enemy(obj.x, obj.y + 1, 8, 8, 7, 5, 1)
             table.insert(enemies, enemy)
         end
     end
 
-    if gameMap.layers["Walls"] then
-        for i, obj in pairs(gameMap.layers["Walls"].objects) do
+    if gameMap.layers["Hitboxes"] then
+        for i, obj in pairs(gameMap.layers["Hitboxes"].objects) do
             wall = world:newRectangleCollider(obj.x + 0.2, obj.y + 0.2 , obj.width - 0.4, obj.height - 0.4)
             wall:setType('static')
             wall:setCollisionClass('Solid')

@@ -4,13 +4,13 @@ require "Pet"
 Player = Class{}
 
 INITIAL_JUMP_FORCE = -60
-JUMP_FORCE = -40
+JUMP_FORCE = -30
 HORIZONTAL_FORCE = 25
 BULLET_WIDTH = 2
 BULLET_HEIGHT = 2
 MAX_MOVEMENT_SPEED = 20
 MAX_FALL_SPEED = 80
-MAX_JUMP_SPEED = -40
+MAX_JUMP_SPEED = -42
 -- TO DO: Move these constants into the class itself
 -- to be able to updgrade movement speed
 

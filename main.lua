@@ -25,6 +25,8 @@ VIRTUAL_HEIGHT = 48
 world = wf.newWorld(0, 60)
 
 function love.load()
+    love.window.setVSync(1)
+
     love.window.setTitle('gamejam nokia')
     love.graphics.setDefaultFilter("nearest", "nearest")
 
