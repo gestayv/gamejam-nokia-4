@@ -49,9 +49,10 @@ function love.load()
     world:addCollisionClass('Solid')
     world:addCollisionClass('Enemy')
     world:addCollisionClass('Player')
-    world:addCollisionClass('Player_Projectile', {ignores = {'Player', 'Player_Projectile'}})
-    world:addCollisionClass('Ghost', {ignores = {'Player', 'Player_Projectile', 'Enemy'}})
-    world:addCollisionClass('Item', {ignores = {'Enemy', 'Player_Projectile'}})
+    world:addCollisionClass('Player Projectile', {ignores = {'Player', 'Player Projectile'}})
+    world:addCollisionClass('Ghost', {ignores = {'Player', 'Player Projectile', 'Enemy'}})
+    world:addCollisionClass('Item', {ignores = {'Enemy', 'Player Projectile'}})
+    world:addCollisionClass('Level Transition', {ignores = {'Enemy', 'Player Projectile', 'Ghost', 'Item', 'Solid'}})
 
     -- Manage input
     love.keyboard.keysPressed = {}

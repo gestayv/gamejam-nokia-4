@@ -14,6 +14,13 @@ levels.tutorial = {
     musicType = 'static',
     mapFile = 'maps/map_level_1.lua'
 }
+levels.test_level = {
+    musicFile = 'audio/music/bad_melody.wav',
+    musicType = 'static',
+    mapFile = 'maps/map_one.lua'
+}
+
+nextLevel = nil
 
 function game_loop:enter()
     -- Load all sounds
@@ -22,10 +29,15 @@ function game_loop:enter()
     cam = camera()
     player = Player(0, 0, 6, 8)
 
-    game_loop:switch_level(levels.tutorial)
+    game_loop:switch_level(levels.test_level)
 end
 
 function game_loop:switch_level(level)
+    -- Destroy previous level if switching levels
+    if nextLevel then
+        game_loop:destroy_last_level()
+        nextLevel = nil
+    end
 
     gameMap = sti(level.mapFile)
 
@@ -34,6 +46,7 @@ function game_loop:switch_level(level)
     
     walls = {}
     enemies = {}
+    transitions = {}
     
     if gameMap.layers["Player"] then
         for i, obj in pairs(gameMap.layers["Player"].objects) do
@@ -58,6 +71,24 @@ function game_loop:switch_level(level)
             table.insert(walls, wall)
         end
     end
+
+    if gameMap.layers["Level Transitions"] then
+        for i, obj in pairs(gameMap.layers["Level Transitions"].objects) do
+            levelTransition = world:newRectangleCollider(obj.x + 0.2, obj.y + 0.2 , obj.width - 0.4, obj.height - 0.4)
+            levelTransition.exit_direction = obj.properties.exit_direction
+            levelTransition.level = levels[obj.properties.target]
+            levelTransition:setType('static')
+            levelTransition:setCollisionClass('Level Transition')
+            levelTransition:setFriction(0)
+            levelTransition:setPreSolve(function(transitionCollider, playerCollider, contact)        
+                if transitionCollider.collision_class == 'Level Transition' and playerCollider.collision_class == 'Player' then
+                    nextLevel = levelTransition.level
+                end   
+            end)
+
+            table.insert(transitions, levelTransition)
+        end
+    end
 end
 
 function game_loop:destroy_last_level()
@@ -67,9 +98,9 @@ function game_loop:destroy_last_level()
         music:release()
     end
 
-    for i, obj in pairs(enemies) do
-        obj:destroy()
-    end
+    self:destroy_list(walls)
+    self:destroy_list(enemies)
+    self:destroy_list(transitions)
 end
 
 function game_loop:leave()
@@ -78,6 +109,11 @@ function game_loop:leave()
 end
 
 function game_loop:update(dt)
+    -- Switch levels
+    if nextLevel then
+        game_loop:switch_level(nextLevel)
+    end
+
     -- Limit dt spikes when moving window
     -- if dt > 0.02 then dt = 0.02 end
     -- First update the world to load collisions
@@ -107,16 +143,22 @@ function game_loop:update_list(list, dt)
     end
 end
 
-function game_loop:draw_list(list, dt)
+function game_loop:draw_list(list)
     for i, obj in pairs(list) do
-        obj:render(dt)
+        obj:render()
+    end
+end
+
+function game_loop:destroy_list(list)
+    for i, obj in pairs(list) do
+        obj:destroy()
     end
 end
 
 function game_loop:draw()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
-        self:draw_list(enemies, dt)
+        self:draw_list(enemies)
         player:render()
         -- world:draw() -- this draws colliders, uncomment only if needed
     cam:detach()

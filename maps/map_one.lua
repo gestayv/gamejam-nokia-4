@@ -8,8 +8,8 @@ return {
   height = 60,
   tilewidth = 8,
   tileheight = 8,
-  nextlayerid = 9,
-  nextobjectid = 49,
+  nextlayerid = 10,
+  nextobjectid = 54,
   properties = {},
   tilesets = {
     {
@@ -123,7 +123,7 @@ return {
       type = "objectgroup",
       draworder = "topdown",
       id = 2,
-      name = "Walls",
+      name = "Hitboxes",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -646,6 +646,37 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 9,
+      name = "Level Transitions",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 52,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 8,
+          y = 112,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["exit_direction"] = "bottom",
+            ["target"] = "tutorial"
+          }
         }
       }
     }
