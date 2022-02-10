@@ -82,7 +82,7 @@ function Player:update(dt)
 end
 
 function Player:render()
-    self.anim:draw(self.spriteSheet, self.x - 8/2, self.y - self.height/2)
+    self.anim:draw(self.spriteSheet, self.x - 8/2, self.y - 8/2)
     for key, bullet in pairs(self.bullets) do
         bullet:render()
     end

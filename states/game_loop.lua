@@ -44,8 +44,7 @@ function game_loop:switch_level(level)
 
     if gameMap.layers["Enemies"] then
         for i, obj in pairs(gameMap.layers["Enemies"].objects) do
-            print(obj.properties.type)
-            enemy = Enemy(obj.x, obj.y + 1, 8, 8, 7, 5, 1)
+            enemy = Enemy(obj.x, obj.y + 1, obj.properties)
             table.insert(enemies, enemy)
         end
     end

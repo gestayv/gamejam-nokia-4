@@ -2,27 +2,102 @@ Enemy = Class{}
 
 TILE_SIZE = 8
 
-function Enemy:init(x, y, width, height, dx, dy, strength)
+-- aca definir los tipos de enemigos
+enemyProperties = {
+    bigEye = {
+      health = 2,
+      strength = 1,
+      width = 8,
+      height = 8,
+      dx = 15,
+      dy = 5,
+      movementSpeed = 15,
+      spriteRow = 2,
+      frames = "1-4"
+    },
+    lizard = {
+      health = 0,
+      strength = 0,
+      width = 0,
+      height = 0,
+      dx = 0,
+      dy = 0,
+      movementSpeed = 0,
+      spriteRow = 2,
+      frames = "1-6"
+    },
+    eyeBat = {
+        health = 1,
+        strength = 2,
+        width = 8,
+        height = 8,
+        dx = 15,
+        dy = 5,
+        movementSpeed = 20,
+        spriteRow = 1,
+        frames = "1-4"
+      },
+    eye = {
+        health = 0,
+        strength = 0,
+        width = 0,
+        height = 0,
+        dx = 0,
+        dy = 0,
+        movementSpeed = 0,
+        spriteRow = 1,
+        frames = "1-6"
+    },
+    flying = {
+        health = 1,
+        strength = 1,
+        width = 8,
+        height = 8,
+        dx = 1,
+        dy = 1,
+        movementSpeed = 1,
+        spriteRow = 1,
+        frames = "1-6"
+    },
+}
+
+--------------------------------------------------------------------------
+-- TODO: Crear funciones unicas de movimiento para enemigos voladores, 
+-- las funciones se pueden guardar en variables asi que quizas podriamos
+-- definir todo aca, despues lo guardamos en un self y a eso le pasamos el 
+-- dt en el update
+--------------------------------------------------------------------------
+function Enemy:init(x, y, propiedades)
     self.x = x          -- position x axis
     self.y = y          -- position y axis
-    self.width = width  
-    self.height = height
-    self.dx = 15        -- speed x axis
-    self.dy = 5         -- speed y axis
-    self.movementSpeed = 15
-    self.strength = strength
-    self.health = 2
     self.direction = 1
-    self.collider = world:newRectangleCollider(x, y, width, height)
+    self.alive = true
+    -- self.map = map
+
+    -- Unique data
+    data = enemyProperties[propiedades.type]
+    self.dx = data.dx
+    self.dy = data.dy
+    self.movementSpeed = data.movementSpeed
+    self.strength = data.strength
+    self.health = data.health
+    self.width = data.width   -- depende del enemigo
+    self.height = data.height -- depende del enemigo    
+
+    -- Avoids changing direction indefinitely when pushed into wall
+    self._timeSinceDirectionChange = 10
+
+    -- Collisions
+    self.collider = world:newRectangleCollider(x, y, self.width, self.height)
     self.collider:setCollisionClass('Enemy')
     self.collider:setFriction(0)
     self.collider:setFixedRotation(true)
     self.collider:setObject(self)
-    self.alive = true
-    -- self.map = map
 
-    -- Avoids changing direction indefinitely when pushed into wall
-    self._timeSinceDirectionChange = 10
+    -- donde cargamos esto para evitar que todos los enemigos lo carguen cuando se crean y se cargue una sola vez
+    self.spriteSheet = love.graphics.newImage('/sprites/enemies.png')
+    self.grid = anim8.newGrid(8, 8, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
+    self.animations = {}
 end
 
 function Enemy:update(dt)
