@@ -63,11 +63,11 @@ enemyProperties = {
         width = 8,
         height = 8,
         dx = 10,
-        dy = 3,
+        dy = 2,
         movementSpeed = 5,
         spriteRow = 1,
-        frames = "1-4",
-        frameUpdate = 0.2,
+        frames = "5-6",
+        frameUpdate = 0.3,
         movementFunction = "sky"
     },
 }
@@ -259,17 +259,47 @@ function skyBasedMovement(dt, enemy)
 
     -- debug.debug()
     vx, vy = enemy.collider:getLinearVelocity()
+    enemy.collider:setGravityScale(0)
 
-    -- fx = enemy.dx * enemy.direction
+    xDif = enemy.x - player.x
+    yDif = enemy.y - player.y
+    xDistance = math.pow(math.abs(xDif), 2)
+    yDistance = math.pow(math.abs(yDif), 2) 
+    if math.sqrt( xDistance + yDistance ) < 40 and player.health > 0 then
 
-    -- vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
-    -- vy = range_bound(vy, 80, -60)
+        -- si xDif > 0 ? fuerza hacia la izquierda : fuerza hacia la derecha
+        -- si yDif > 0 ? fuerza hacia arriba : fuerza hacia abajo
+        
+        if xDif >= 0 then
+            fx = enemy.dx * -1
+        else
+            fx = enemy.dx
+        end
+
+        vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
+        vy = range_bound(vy, 80, -40)
+
+        enemy.collider:applyForce(fx, fy)
+        enemy.collider:setLinearVelocity(vx, vy)         
+    else
+        enemy.collider:setLinearVelocity(0, 0)        
+    end 
+    if math.sqrt( xDistance + yDistance ) < 20 and player.health > 0 then
+        if yDif >= 0 then
+            fy = enemy.dy * -1
+        else
+            fy = enemy.dy
+        end
+
+        vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
+        vy = range_bound(vy, 80, -40)
+
+        enemy.collider:applyForce(fx, fy)
+        enemy.collider:setLinearVelocity(vx, vy)        
+    end 
     
-    enemy.collider:applyForce(fx, fy)
-    enemy.collider:setLinearVelocity(vx, vy) 
     enemy.x = enemy.collider:getX()
     enemy.y = enemy.collider:getY()
     -- enemy:changeDirection()
-
-    -- enemy._timeSinceDirectionChange = enemy._timeSinceDirectionChange + dt
+    enemy._timeSinceDirectionChange = enemy._timeSinceDirectionChange + dt
 end
