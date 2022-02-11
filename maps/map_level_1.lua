@@ -1,7 +1,7 @@
 return {
   version = "1.5",
   luaversion = "5.1",
-  tiledversion = "1.8.0",
+  tiledversion = "1.7.2",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 132,
@@ -9,8 +9,10 @@ return {
   tilewidth = 8,
   tileheight = 8,
   nextlayerid = 12,
-  nextobjectid = 154,
-  properties = {},
+  nextobjectid = 157,
+  properties = {
+    ["type"] = "bigEye  "
+  },
   tilesets = {
     {
       name = "sprite_sheet",
@@ -1145,7 +1147,7 @@ return {
           properties = {
             ["drop"] = "scripted",
             ["itemType"] = "attack",
-            ["type"] = "flying"
+            ["type"] = "bigEye"
           }
         },
         {
@@ -1162,7 +1164,58 @@ return {
           properties = {
             ["drop"] = "scripted",
             ["itemType"] = "attack",
-            ["type"] = "flying"
+            ["type"] = "bigEye"
+          }
+        },
+        {
+          id = 154,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 936,
+          y = 304,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "lizard"
+          }
+        },
+        {
+          id = 155,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 920,
+          y = 272,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "bigEye"
+          }
+        },
+        {
+          id = 156,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 832,
+          y = 272,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eye"
           }
         }
       }

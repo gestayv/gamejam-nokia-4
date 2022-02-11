@@ -159,7 +159,7 @@ function game_loop:draw()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
         self:draw_list(enemies)
         player:render()
-        -- world:draw() -- this draws colliders, uncomment only if needed
+        world:draw() -- this draws colliders, uncomment only if needed
     cam:detach()
     if not player.alive then
         love.graphics.setDarkColor()

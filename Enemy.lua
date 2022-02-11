@@ -1,5 +1,6 @@
 Enemy = Class{}
 
+anim8 = require '/libraries/anim8'
 TILE_SIZE = 8
 
 -- aca definir los tipos de enemigos
@@ -13,18 +14,22 @@ enemyProperties = {
       dy = 5,
       movementSpeed = 15,
       spriteRow = 2,
-      frames = "1-4"
+      frames = "1-4",
+      frameUpdate = 0.3,
+      movementFunction = "ground"
     },
     lizard = {
-      health = 0,
-      strength = 0,
-      width = 0,
-      height = 0,
-      dx = 0,
-      dy = 0,
-      movementSpeed = 0,
-      spriteRow = 2,
-      frames = "1-6"
+      health = 4,
+      strength = 1,
+      width = 8,
+      height = 8,
+      dx = 10,
+      dy = 5,
+      movementSpeed = 10,
+      spriteRow = 3,
+      frames = "1-6",
+      frameUpdate = 0.7,
+      movementFunction = "ground"
     },
     eyeBat = {
         health = 1,
@@ -35,31 +40,40 @@ enemyProperties = {
         dy = 5,
         movementSpeed = 20,
         spriteRow = 1,
-        frames = "1-4"
+        frames = "5-6",
+        frameUpdate = 0.2,
+        movementFunction = "sky"
       },
     eye = {
-        health = 0,
-        strength = 0,
-        width = 0,
-        height = 0,
-        dx = 0,
-        dy = 0,
-        movementSpeed = 0,
-        spriteRow = 1,
-        frames = "1-6"
-    },
-    flying = {
-        health = 1,
+        health = 2,
         strength = 1,
         width = 8,
         height = 8,
-        dx = 1,
+        dx = 20,
         dy = 1,
-        movementSpeed = 1,
+        movementSpeed = 20,
         spriteRow = 1,
-        frames = "1-6"
+        frames = "1-4",
+        frameUpdate = 0.4,
+        movementFunction = "ground"
+    },
+    flying = {
+        health = 2,
+        strength = 1,
+        width = 8,
+        height = 8,
+        dx = 10,
+        dy = 3,
+        movementSpeed = 5,
+        spriteRow = 1,
+        frames = "1-4",
+        frameUpdate = 0.2,
+        movementFunction = "sky"
     },
 }
+
+spriteSheet = love.graphics.newImage('/sprites/enemies.png')
+grid = anim8.newGrid(8, 8, spriteSheet:getWidth(), spriteSheet:getHeight())
 
 --------------------------------------------------------------------------
 -- TODO: Crear funciones unicas de movimiento para enemigos voladores, 
@@ -83,6 +97,7 @@ function Enemy:init(x, y, propiedades)
     self.health = data.health
     self.width = data.width   -- depende del enemigo
     self.height = data.height -- depende del enemigo    
+    self.movementFunction = data.movementFunction
 
     -- Avoids changing direction indefinitely when pushed into wall
     self._timeSinceDirectionChange = 10
@@ -95,32 +110,29 @@ function Enemy:init(x, y, propiedades)
     self.collider:setObject(self)
 
     -- donde cargamos esto para evitar que todos los enemigos lo carguen cuando se crean y se cargue una sola vez
-    self.spriteSheet = love.graphics.newImage('/sprites/enemies.png')
-    self.grid = anim8.newGrid(8, 8, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
     self.animations = {}
+    self.animations.right = anim8.newAnimation(grid(data.frames, data.spriteRow), 0.4)
+    self.animations.left = anim8.newAnimation(grid(data.frames, data.spriteRow), 0.4):flipH()
+
+    if self.direction == 1 then
+        self.anim = self.animations.right
+    else
+        self.anim = self.animations.left
+    end
+     
 end
 
 function Enemy:update(dt)
-    local fx = 0
-    local fy = 0
-    vx, vy = self.collider:getLinearVelocity()
-
-    fx = self.dx * self.direction
-
-    vx = range_bound(vx, self.movementSpeed, - self.movementSpeed)
-    vy = range_bound(vy, 80, -60)
-    
-    self.collider:applyForce(fx, fy)
-    self.collider:setLinearVelocity(vx, vy) 
-    self.x = self.collider:getX()
-    self.y = self.collider:getY()
-    self:changeDirection()
-
-    self._timeSinceDirectionChange = self._timeSinceDirectionChange + dt
+    if self.movementFunction == "ground" then
+        groundBasedMovement(dt, self)
+    else
+        skyBasedMovement(dt, self)
+    end
+    self.anim:update(dt)
 end
 
 function Enemy:render()
-    love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
+    self.anim:draw(spriteSheet, math.floor(self.x - 8/2 + 0.5), math.floor(self.y - 8/2 + 0.5))
 end
 
 function Enemy:takeDamage(damage)
@@ -139,7 +151,12 @@ function Enemy:changeDirection()
     -- Para que funcione el stay, se deben llamar ambos: el enter y el exit
     if self.collider:exit('Solid') then end
     if self:collideWithWall() or self:collidingWithWall() or self:fallOnNextStep() then
-       self.direction = - self.direction
+        self.direction = - self.direction
+        if self.anim == self.animations.right then
+            self.anim = self.animations.left
+        else
+            self.anim = self.animations.right
+        end
     end
 end
 
@@ -165,6 +182,27 @@ function Enemy:collidingWithWall()
         end
     end
     return false
+end
+
+function groundBasedMovement(dt, enemy)
+    local fx = 0
+    local fy = 0
+
+    -- debug.debug()
+    vx, vy = enemy.collider:getLinearVelocity()
+
+    fx = enemy.dx * enemy.direction
+
+    vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
+    vy = range_bound(vy, 80, -60)
+    
+    enemy.collider:applyForce(fx, fy)
+    enemy.collider:setLinearVelocity(vx, vy) 
+    enemy.x = enemy.collider:getX()
+    enemy.y = enemy.collider:getY()
+    enemy:changeDirection()
+
+    enemy._timeSinceDirectionChange = enemy._timeSinceDirectionChange + dt
 end
 
 function Enemy:fallOnNextStep()
@@ -213,4 +251,25 @@ end
 
 function queryTile(x, y) 
     return ":)"
+end
+
+function skyBasedMovement(dt, enemy)
+    local fx = 0
+    local fy = 0
+
+    -- debug.debug()
+    vx, vy = enemy.collider:getLinearVelocity()
+
+    -- fx = enemy.dx * enemy.direction
+
+    -- vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
+    -- vy = range_bound(vy, 80, -60)
+    
+    enemy.collider:applyForce(fx, fy)
+    enemy.collider:setLinearVelocity(vx, vy) 
+    enemy.x = enemy.collider:getX()
+    enemy.y = enemy.collider:getY()
+    -- enemy:changeDirection()
+
+    -- enemy._timeSinceDirectionChange = enemy._timeSinceDirectionChange + dt
 end
