@@ -84,9 +84,19 @@ function love.keypressed(key)
      -- add to our table of keys pressed this frame
     love.keyboard.keysPressed[key] = true
 
-    -- Delte following code on production
+    -- Delete following code on production
     if key == "escape" then
         love.event.quit()
+    end
+    if Gamestate.current() == game_loop then
+        if key == "1" then
+            nextLevel = levels.test_level
+        end
+        if key == "2" then
+            nextLevel = levels.tutorial
+        end
+        if key == "3" then
+        end
     end
 end
 

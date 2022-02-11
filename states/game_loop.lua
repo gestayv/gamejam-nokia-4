@@ -8,7 +8,7 @@ gameMap = nil
 
 local game_loop = {}
 
-local levels = {}
+levels = {}
 levels.tutorial = {
     musicFile = 'audio/music/bad_melody.wav',
     musicType = 'static',
@@ -50,7 +50,6 @@ function game_loop:switch_level(level)
     
     if gameMap.layers["Player"] then
         for i, obj in pairs(gameMap.layers["Player"].objects) do
-            print(obj.x, obj.y)
             player:setPosition(obj.x, obj.y)
         end
     end
