@@ -184,7 +184,7 @@ function Player:movementUpdate(dt)
     
     -- Desactivate jump when leaving a block to disable
     -- jumping after dropping down the ground
-    if self.collider:exit('Solid') or self.collider:exit('Enemy') then
+    if self.collider:exit('Solid') then
         self.jumpable = false
         self.airTime = 0.2 -- Just used to play landing sound inside preSolve
     end
@@ -249,16 +249,27 @@ end
 function Player:resolveEnemyDamage(collisionData)
     local enemy = collisionData.collider:getObject()
     if enemy then
-        self:takeDamage(enemy.strength)
         local ex, ey = collisionData.collider:getPosition()
-        local ix = (self.x - ex) * 5
-        -- Add -2.2 to rise character a little when hit horizontally
-        local iy = (self.y - ey - 2.2) * 0.5
-        -- The following bounds were selected by testing numbers pragmatically
-        ix = range_bound(ix, 40, -40)
-        iy = range_bound(iy, 3.5, -3.5)
-        self.collider:applyLinearImpulse(ix, iy)
-        self.timeSinceLastHit = 0
+        local ex1, ey1, ex2, ey2 = collisionData.collider:getBoundingBox()
+        local e_width, e_height = ex2 - ex1, ey2 - ey1
+        local manhattanDistance = math.abs(self.x - ex) + math.abs(self.y - ey)
+
+        local touchCornersDistance = self.width/2 + e_width/2 + self.height/2 + e_height / 2 + 1
+        -- Avoid bug where a collision (most of the time) doesn't get canceled
+        if manhattanDistance < touchCornersDistance then
+            self:takeDamage(enemy.strength)
+            local ix = (self.x - ex) * 6
+            -- Add -2.2 to rise character a little when hit horizontally
+            local iy = (self.y - ey - 2.2) * 0.5
+            -- The following bounds were selected by testing numbers pragmatically
+            ix = range_bound(ix, 30, -30)
+            iy = range_bound(iy, 3.5, -3.5)
+            self.collider:applyLinearImpulse(ix, iy)
+            self.timeSinceLastHit = 0
+        else
+            -- Forcefully exit the collision otherwise
+            table.insert(self.collider.collision_events['Enemy'], {collision_type = 'exit', collider_1 = self.collider, collider_2 = collisionData.collider, contact = {}})
+        end
     end
 end
 
