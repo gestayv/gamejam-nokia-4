@@ -23,6 +23,7 @@ VIRTUAL_HEIGHT = 48
 -- WORLD CREATION
 -------------------------------------
 world = wf.newWorld(0, 60)
+debug_mode = false
 
 function love.load()
     love.window.setVSync(1)
@@ -97,6 +98,9 @@ function love.keypressed(key)
         end
         if key == "3" then
             nextLevel = levels.flying_bug
+        end
+        if key == "0" then
+            debug_mode = not debug_mode
         end
     end
 end

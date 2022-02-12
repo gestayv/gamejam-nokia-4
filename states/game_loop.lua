@@ -166,7 +166,9 @@ function game_loop:draw()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
         self:draw_list(enemies)
         player:render()
-        -- world:draw() -- this draws colliders, uncomment only if needed
+        if debug_mode then
+            world:draw() -- this draws colliders, uncomment only if needed
+        end
     cam:detach()
     hud:render()
     if not player.alive then
