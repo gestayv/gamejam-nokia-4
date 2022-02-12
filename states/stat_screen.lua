@@ -2,11 +2,30 @@ local stat_screen = {}
 
 function stat_screen:enter(from)
     self.from = from
+    self.animatingEntry = true
+    self.animatingLeave = false
+    self.topY = VIRTUAL_HEIGHT
+    self.speed = 100
+    self.topYLimit = 10
     -- music = love.audio.newSource('audio/sounds/blip1.wav', 'static')
     -- love.audio.playMusic(music)
 end
 
 function stat_screen:update(dt)
+    print(self.topY)
+    if self.animatingEntry then
+        self.topY = self.topY - self.speed * dt
+        if self.topY <= self.topYLimit then
+            self.topY = self.topYLimit
+            self.animatingEntry = false
+        end
+    end
+    if self.animatingLeave then
+        self.topY = self.topY + self.speed * dt
+        if self.topY >= VIRTUAL_HEIGHT then
+            Gamestate.pop()
+        end
+    end
 end
 
 function stat_screen:draw()
@@ -15,7 +34,7 @@ function stat_screen:draw()
     local boxWidth, boxHeight = VIRTUAL_WIDTH, VIRTUAL_HEIGHT - 10
     local leftX = 0
     local rightX = boxWidth + leftX
-    local topY = 10
+    local topY = self.topY
     local bottomY = topY + boxHeight
     love.graphics.rectangle("fill", leftX, topY, boxWidth, boxHeight)
     -- Add lines on each side
@@ -41,7 +60,8 @@ end
 
 function stat_screen:keypressed(key, code)
     if key == 'p' or key == 'space' or key == 'return' then
-        Gamestate.pop()
+        self.animatingEntry = false
+        self.animatingLeave = true
     end
 end
 
