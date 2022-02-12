@@ -10,7 +10,7 @@ function Bullet:init(x, y, width, height, direction, attack)
     self.direction = direction
     self.attack = attack
     self.markForDeletion = false
-    self.collider = world:newRectangleCollider(self.x, self.y, self.width, self.height)
+    self.collider = world:newRectangleCollider(self.x, self.y, self.width - 2, self.height)
     self.collider:setCollisionClass('Player Projectile')
     self.collider:setGravityScale(0)
     self.collider:setObject(self)
@@ -38,7 +38,16 @@ function Bullet:update(dt)
 end
 
 function Bullet:render()
-    love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
+    local x = math.floor(self.x - self.width/2 + 0.5)
+    local y = math.floor(self.y - self.height/2 + 0.5)
+    love.graphics.setDarkColor()
+    love.graphics.rectangle("fill", x+1, y, 2, 1)
+    love.graphics.rectangle("fill", x+1, y+2, 2, 1)
+    love.graphics.rectangle("fill", x, y+1, 1, 1)
+    love.graphics.rectangle("fill", x+3, y+1, 1, 1)
+    
+    love.graphics.setLightColor()
+    love.graphics.rectangle("fill", x+1, y+1, 2, 1)
 end 
 
 function Bullet:destroy()
