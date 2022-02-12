@@ -38,7 +38,7 @@ enemyProperties = {
         height = 8,
         dx = 15,
         dy = 5,
-        movementSpeed = 20,
+        movementSpeed = 5,
         spriteRow = 1,
         frames = "5-6",
         frameUpdate = 0.2,
@@ -62,14 +62,14 @@ enemyProperties = {
         strength = 1,
         width = 8,
         height = 8,
-        dx = 10,
-        dy = 2,
-        movementSpeed = 5,
+        dx = 20,
+        dy = 1,
+        movementSpeed = 20,
         spriteRow = 1,
-        frames = "5-6",
-        frameUpdate = 0.3,
-        movementFunction = "sky"
-    },
+        frames = "1-4",
+        frameUpdate = 0.4,
+        movementFunction = "ground"
+    }
 }
 
 spriteSheet = love.graphics.newImage('/sprites/enemies.png')
@@ -90,6 +90,8 @@ function Enemy:init(x, y, propiedades)
 
     -- Unique data
     data = enemyProperties[propiedades.type]
+    self.originalX = x
+    self.originalY = y
     self.dx = data.dx
     self.dy = data.dy
     self.movementSpeed = data.movementSpeed
@@ -98,6 +100,7 @@ function Enemy:init(x, y, propiedades)
     self.width = data.width   -- depende del enemigo
     self.height = data.height -- depende del enemigo    
     self.movementFunction = data.movementFunction
+    self.type = propiedades.type
 
     -- Avoids changing direction indefinitely when pushed into wall
     self._timeSinceDirectionChange = 10
@@ -257,7 +260,6 @@ function skyBasedMovement(dt, enemy)
     local fx = 0
     local fy = 0
 
-    -- debug.debug()
     vx, vy = enemy.collider:getLinearVelocity()
     enemy.collider:setGravityScale(0)
 
@@ -267,24 +269,12 @@ function skyBasedMovement(dt, enemy)
     yDistance = math.pow(math.abs(yDif), 2) 
     if math.sqrt( xDistance + yDistance ) < 40 and player.health > 0 then
 
-        -- si xDif > 0 ? fuerza hacia la izquierda : fuerza hacia la derecha
-        -- si yDif > 0 ? fuerza hacia arriba : fuerza hacia abajo
-        
         if xDif >= 0 then
             fx = enemy.dx * -1
         else
             fx = enemy.dx
         end
 
-        vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
-        vy = range_bound(vy, 80, -40)
-
-        enemy.collider:applyForce(fx, fy)
-        enemy.collider:setLinearVelocity(vx, vy)         
-    else
-        enemy.collider:setLinearVelocity(0, 0)        
-    end 
-    if math.sqrt( xDistance + yDistance ) < 20 and player.health > 0 then
         if yDif >= 0 then
             fy = enemy.dy * -1
         else
@@ -292,12 +282,34 @@ function skyBasedMovement(dt, enemy)
         end
 
         vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
-        vy = range_bound(vy, 80, -40)
-
+        vy = range_bound(vy, enemy.movementSpeed, - enemy.movementSpeed)
         enemy.collider:applyForce(fx, fy)
         enemy.collider:setLinearVelocity(vx, vy)        
-    end 
+    else
+        xDifToOrigin = enemy.x - enemy.originalX
+        yDifToOrigin = enemy.y - enemy.originalY
+
+        if xDifToOrigin >= 0 then
+            fx = enemy.dx * -1
+        else
+            fx = enemy.dx
+        end
+
+        if yDifToOrigin >= 0 then
+            fy = enemy.dy * -1
+        else
+            fy = enemy.dy
+        end
+
+        vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
+        vy = range_bound(vy, enemy.movementSpeed, - enemy.movementSpeed)
     
+        enemy.collider:applyForce(fx, fy)
+        enemy.collider:setLinearVelocity(vx, vy)
+    end
+    
+    
+
     enemy.x = enemy.collider:getX()
     enemy.y = enemy.collider:getY()
     -- enemy:changeDirection()

@@ -9,7 +9,7 @@ return {
   tilewidth = 8,
   tileheight = 8,
   nextlayerid = 12,
-  nextobjectid = 157,
+  nextobjectid = 199,
   properties = {
     ["type"] = "bigEye  "
   },
@@ -1216,6 +1216,176 @@ return {
             ["drop"] = "scripted",
             ["itemType"] = "attack",
             ["type"] = "eye"
+          }
+        },
+        {
+          id = 158,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 408,
+          y = 248,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eyeBat"
+          }
+        },
+        {
+          id = 159,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 488,
+          y = 216,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eyeBat"
+          }
+        },
+        {
+          id = 160,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 296,
+          y = 80,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eyeBat"
+          }
+        },
+        {
+          id = 161,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 144,
+          y = 88,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eyeBat"
+          }
+        },
+        {
+          id = 168,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 728,
+          y = 288,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eye"
+          }
+        },
+        {
+          id = 169,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 888,
+          y = 304,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "lizard"
+          }
+        },
+        {
+          id = 170,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 240,
+          y = 328,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "bigEye"
+          }
+        },
+        {
+          id = 171,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 504,
+          y = 280,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eye"
+          }
+        },
+        {
+          id = 172,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 760,
+          y = 256,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eyeBat"
+          }
+        },
+        {
+          id = 173,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 704,
+          y = 312,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["drop"] = "scripted",
+            ["itemType"] = "attack",
+            ["type"] = "eyeBat"
           }
         }
       }

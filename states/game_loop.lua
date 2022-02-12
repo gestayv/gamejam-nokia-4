@@ -3,6 +3,7 @@ camera = require '../libraries/hump/camera'
 
 require '../Player'
 require '../Enemy'
+require '../Hud'
 
 gameMap = nil
 
@@ -19,6 +20,11 @@ levels.test_level = {
     musicType = 'static',
     mapFile = 'maps/map_one.lua'
 }
+levels.flying_bug = {
+    musicFile = 'audio/music/bad_melody.wav',
+    musicType = 'static',
+    mapFile = 'maps/flying_bug.lua'
+}
 
 nextLevel = nil
 
@@ -28,7 +34,7 @@ function game_loop:enter()
 
     cam = camera()
     player = Player(0, 0, 6, 8)
-
+    hud = Hud()
     game_loop:switch_level(levels.test_level)
 end
 
@@ -114,7 +120,7 @@ function game_loop:update(dt)
     end
 
     -- Limit dt spikes when moving window
-    -- if dt > 0.02 then dt = 0.02 end
+    if dt > 0.02 then dt = 0.02 end
     -- First update the world to load collisions
     world:update(dt)
     -- Then update the player to damage enemy with bullets
@@ -129,6 +135,7 @@ function game_loop:update(dt)
             Gamestate.switch(main_menu)
         end
     end
+    hud:update(dt)
 end
 
 function game_loop:update_list(list, dt)
@@ -161,6 +168,7 @@ function game_loop:draw()
         player:render()
         -- world:draw() -- this draws colliders, uncomment only if needed
     cam:detach()
+    hud:render()
     if not player.alive then
         love.graphics.setDarkColor()
         love.graphics.rectangle("fill", 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT / 2 - player.height)

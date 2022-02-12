@@ -96,6 +96,7 @@ function love.keypressed(key)
             nextLevel = levels.tutorial
         end
         if key == "3" then
+            nextLevel = levels.flying_bug
         end
     end
 end
