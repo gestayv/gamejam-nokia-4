@@ -3,6 +3,7 @@ camera = require '../libraries/hump/camera'
 
 require '../Player'
 require '../Enemy'
+require '../PickupItem'
 require '../Hud'
 
 gameMap = nil
@@ -18,7 +19,7 @@ levels.tutorial = {
 levels.test_level = {
     musicFile = 'audio/music/bad_melody.wav',
     musicType = 'stream',
-    mapFile = 'maps/map_one.lua'
+    mapFile = 'maps/map_test.lua'
 }
 levels.flying_bug = {
     musicFile = 'audio/music/boss_music_nokia.wav',
@@ -36,7 +37,8 @@ function game_loop:enter()
     hitEnemySound = love.audio.newSource('audio/sounds/blip9.wav', 'static')
     jumpSound = love.audio.newSource('audio/sounds/blip14.wav', 'static')
     gameOverSound = love.audio.newSource('audio/sounds/negative1.wav', 'static')
-    sounds = {shootSound, landSound, hitPlayerSound, hitEnemySound, jumpSound, gameOverSound}
+    pickupItemSound = love.audio.newSource('audio/sounds/good3.wav', 'static')
+    sounds = {shootSound, landSound, hitPlayerSound, hitEnemySound, jumpSound, gameOverSound, pickupItemSound}
 
     animations = {}
 
@@ -61,6 +63,8 @@ function game_loop:switch_level(level)
     walls = {}
     enemies = {}
     transitions = {}
+    items = {}
+
     
     if gameMap.layers["Player"] then
         for i, obj in pairs(gameMap.layers["Player"].objects) do
@@ -72,6 +76,14 @@ function game_loop:switch_level(level)
         for i, obj in pairs(gameMap.layers["Enemies"].objects) do
             enemy = Enemy(obj.x, obj.y + 1, obj.properties)
             table.insert(enemies, enemy)
+        end
+    end
+    
+    if gameMap.layers["Items"] then
+        for i, obj in pairs(gameMap.layers["Items"].objects) do
+            -- Add one to x to center 5x5 or 6x6 item on 8x8 tiles
+            item = PickupItem(obj.x + 1, obj.y, obj.properties)
+            table.insert(items, item)
         end
     end
 
@@ -113,6 +125,7 @@ function game_loop:destroy_last_level()
 
     self:destroy_list(walls)
     self:destroy_list(enemies)
+    self:destroy_list(items)
     self:destroy_list(transitions)
 end
 
@@ -141,6 +154,7 @@ function game_loop:update(dt)
     player:update(dt)
     -- Then the enemies so they take player damage or damage him
     self:update_list(enemies, dt)
+    self:update_list(items, dt)
     self:update_list(animations, dt)
     cam:lookAt(getViewpointForCamera())
 
@@ -187,6 +201,7 @@ function game_loop:draw()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
         self:draw_list(enemies)
+        self:draw_list(items)
         self:draw_list(animations)
         player:render()
         if debug_mode then

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="67">
+ <tileset firstgid="1" name="sprite_sheet" tilewidth="8" tileheight="8" tilecount="60" columns="10">
+  <image source="sprite_sheet.png" width="84" height="48"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="40" height="20">
+  <data encoding="csv">
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,3221225507,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,35,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,52,52,1073741859,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,3221225507,52,52,2147483679,
+31,3221225507,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,35,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,52,52,1073741859,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,3221225507,52,52,2147483679,
+31,3221225507,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,35,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,52,52,35,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,3221225507,52,52,2147483679,
+31,3221225507,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,35,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,52,52,35,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,3221225507,52,52,2147483679,
+31,3221225507,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,35,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+31,52,52,35,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,2147483683,52,52,2147483679,
+31,3221225507,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,35,2147483679,
+31,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,2147483679,
+51,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,2147483699
+</data>
+ </layer>
+ <objectgroup id="2" name="Items">
+  <object id="21" x="32" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="25" x="56" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="27" x="80" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="28" x="104" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="29" x="128" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="30" x="152" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="31" x="176" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="32" x="200" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="33" x="224" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="34" x="272" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="35" x="248" y="144" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="36" x="32" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="37" x="56" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="38" x="80" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="39" x="104" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="40" x="128" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="41" x="152" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="42" x="176" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="43" x="224" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="44" x="248" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="45" x="200" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="46" x="272" y="120" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="47" x="32" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="48" x="56" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="49" x="80" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="50" x="104" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="51" x="128" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="52" x="152" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="53" x="176" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="54" x="200" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="55" x="224" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="56" x="248" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="57" x="272" y="96" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Player">
+  <object id="59" x="8" y="8" width="8" height="8"/>
+ </objectgroup>
+ <objectgroup id="4" name="Hitboxes">
+  <object id="1" x="0" y="0" width="8" height="160"/>
+  <object id="2" x="8" y="152" width="304" height="8"/>
+  <object id="3" x="312" y="0" width="8" height="160"/>
+  <object id="4" x="24" y="32" width="272" height="8"/>
+  <object id="5" x="24" y="56" width="272" height="8"/>
+  <object id="6" x="24" y="80" width="272" height="8"/>
+  <object id="7" x="24" y="104" width="272" height="8"/>
+  <object id="8" x="24" y="128" width="272" height="8"/>
+  <object id="9" x="304" y="136" width="8" height="8"/>
+  <object id="10" x="304" y="112" width="8" height="8"/>
+  <object id="11" x="304" y="88" width="8" height="8"/>
+  <object id="12" x="304" y="64" width="8" height="8"/>
+  <object id="13" x="304" y="40" width="8" height="8"/>
+  <object id="14" x="304" y="16" width="8" height="8"/>
+  <object id="15" x="8" y="16" width="8" height="8"/>
+  <object id="16" x="8" y="40" width="8" height="8"/>
+  <object id="17" x="8" y="64" width="8" height="8"/>
+  <object id="18" x="8" y="88" width="8" height="8"/>
+  <object id="19" x="8" y="112" width="8" height="8"/>
+  <object id="20" x="8" y="136" width="8" height="8"/>
+ </objectgroup>
+ <objectgroup id="5" name="Enemies">
+  <object id="60" x="32" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="attack"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="61" x="56" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="max_health"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="62" x="80" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="attack"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="63" x="104" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="attack"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="64" x="152" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="attack"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="65" x="128" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="attack"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="66" x="176" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="attack"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

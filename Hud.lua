@@ -15,6 +15,6 @@ end
 function Hud:render()
     love.graphics.setDarkColor()
     love.graphics.rectangle("fill", 8, 4, self.currentLife, 2)
-    love.graphics.setColor(255,255,255)
+    love.graphics.resetColor()
     love.graphics.draw(self.heart, self.quad, 1, 1)
 end

@@ -55,7 +55,7 @@ function love.load()
     world:addCollisionClass('Player')
     world:addCollisionClass('Player Projectile', {ignores = {'Player', 'Player Projectile'}})
     world:addCollisionClass('Ghost', {ignores = {'Player', 'Player Projectile', 'Enemy'}})
-    world:addCollisionClass('Item', {ignores = {'Enemy', 'Player Projectile'}})
+    world:addCollisionClass('Item', {ignores = {'Enemy', 'Player Projectile', 'Ghost'}})
     world:addCollisionClass('Level Transition', {ignores = {'Enemy', 'Player Projectile', 'Ghost', 'Item', 'Solid'}})
 
     -- Manage input
@@ -139,6 +139,10 @@ end
 
 function love.graphics.setDarkColor()
     love.graphics.setColor(67/255, 82/255, 61/255, 1)
+end
+
+function love.graphics.resetColor()
+    love.graphics.setColor(255,255,255)
 end
 
 function range_bound(value, max_value, min_value)

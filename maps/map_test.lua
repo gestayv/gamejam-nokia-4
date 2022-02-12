@@ -9,7 +9,7 @@ return {
   tilewidth = 8,
   tileheight = 8,
   nextlayerid = 11,
-  nextobjectid = 75,
+  nextobjectid = 78,
   properties = {},
   tilesets = {
     {
@@ -757,7 +757,37 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["item"] = "vida"
+            ["type"] = "recovery"
+          }
+        },
+        {
+          id = 75,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 56,
+          y = 24,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["type"] = "attack"
+          }
+        },
+        {
+          id = 77,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 96,
+          y = 272,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["type"] = "max_health"
           }
         }
       }

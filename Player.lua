@@ -276,6 +276,13 @@ function Player:takeDamage(damage)
     end
 end
 
+function Player:recover(amount)
+    self.health = self.health + amount
+    if self.health >= self.maxHealth then
+        self.health = self.maxHealth
+    end
+end
+
 function Player:healthUpdate()
     local newHealth = self.baseHealth + self.pet:getBuff('health')
     local healthDiff = newHealth - self.maxHealth
