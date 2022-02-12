@@ -6,8 +6,8 @@ TILE_SIZE = 8
 -- aca definir los tipos de enemigos
 enemyProperties = {
     bigEye = {
-      health = 2,
-      strength = 1,
+      health = 20,
+      strength = 10,
       width = 8,
       height = 8,
       dx = 15,
@@ -19,8 +19,8 @@ enemyProperties = {
       movementFunction = "ground"
     },
     lizard = {
-      health = 4,
-      strength = 1,
+      health = 40,
+      strength = 10,
       width = 8,
       height = 8,
       dx = 10,
@@ -32,8 +32,8 @@ enemyProperties = {
       movementFunction = "ground"
     },
     eyeBat = {
-        health = 1,
-        strength = 2,
+        health = 10,
+        strength = 20,
         width = 8,
         height = 8,
         dx = 15,
@@ -45,8 +45,8 @@ enemyProperties = {
         movementFunction = "sky"
       },
     eye = {
-        health = 2,
-        strength = 1,
+        health = 20,
+        strength = 10,
         width = 8,
         height = 8,
         dx = 20,
@@ -58,8 +58,8 @@ enemyProperties = {
         movementFunction = "ground"
     },
     flying = {
-        health = 2,
-        strength = 1,
+        health = 20,
+        strength = 10,
         width = 8,
         height = 8,
         dx = 20,
