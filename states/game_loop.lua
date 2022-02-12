@@ -11,18 +11,18 @@ local game_loop = {}
 
 levels = {}
 levels.tutorial = {
-    musicFile = 'audio/music/bad_melody.wav',
-    musicType = 'static',
+    musicFile = 'audio/music/stage_music_nokia.wav',
+    musicType = 'stream',
     mapFile = 'maps/map_level_1.lua'
 }
 levels.test_level = {
     musicFile = 'audio/music/bad_melody.wav',
-    musicType = 'static',
+    musicType = 'stream',
     mapFile = 'maps/map_one.lua'
 }
 levels.flying_bug = {
-    musicFile = 'audio/music/bad_melody.wav',
-    musicType = 'static',
+    musicFile = 'audio/music/boss_music_nokia.wav',
+    musicType = 'stream',
     mapFile = 'maps/flying_bug.lua'
 }
 
