@@ -33,11 +33,12 @@ function Player:init(x, y, width, height)
     self.airTime = 0 -- Used to dampen force applied during jump
     self.timeSinceLastHit = 0
     self.alive = true
+    self.dying = false
 
     self.pet = Pet()
 
     -- Player stats
-    self.baseHealth = 500
+    self.baseHealth = 100
     self.maxHealth = self.baseHealth
     self.health = self.maxHealth
     self.attack = 10
@@ -47,7 +48,10 @@ function Player:init(x, y, width, height)
         if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid') then
             vx, vy = collider_1:getLinearVelocity()
             -- Enable jump when colliding on top of solid objects
-            if isCollidingOnTop(self.y, self.height, collider_2) and vy <= 0 then 
+            if isCollidingOnTop(self.y, self.height, collider_2) and vy >= 0 then 
+                if not self.jumpable and self.airTime >= 0.1 then
+                    love.audio.playSound(landSound)
+                end
                 self.jumpable = true
                 self.airTime = 0
             end
@@ -75,8 +79,12 @@ function Player:update(dt)
         self:resolveEnemyCollisions(dt)
         self.pet:update(dt)
     else
-        self.collider:setCollisionClass('Ghost')
-        self.anim = self.animations.death
+        if not self.dying then
+            self.collider:setCollisionClass('Ghost')
+            self.anim = self.animations.death
+            self.dying = true
+            love.audio.playSound(gameOverSound)
+        end
     end
     self.anim:update(dt)
     self:checkTransitions()
@@ -149,10 +157,11 @@ function Player:movementUpdate(dt)
         fy = INITIAL_JUMP_FORCE
         self.jumping = true
         self.jumpable = false
+        love.audio.playSound(jumpSound)
     end
     if love.keyboard.wasReleased("up", "w") then
         self.jumping = false
-        self.airTime = 0
+        -- self.airTime = 0
     end
     if self.jumping then
         self.airTime = self.airTime + dt
@@ -177,6 +186,7 @@ function Player:movementUpdate(dt)
     -- jumping after dropping down the ground
     if self.collider:exit('Solid') or self.collider:exit('Enemy') then
         self.jumpable = false
+        self.airTime = 0.2 -- Just used to play landing sound inside preSolve
     end
 
     if not self.jumpable then 
@@ -257,6 +267,7 @@ function Player:canTakeDamage()
 end
 
 function Player:takeDamage(damage)
+    love.audio.playSound(hitPlayerSound)
     self.health = self.health - damage
     if self.health <= 0 then
         self.health = 0

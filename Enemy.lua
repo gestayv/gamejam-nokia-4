@@ -139,6 +139,7 @@ function Enemy:render()
 end
 
 function Enemy:takeDamage(damage)
+    love.audio.playSound(hitEnemySound)
     self.health = self.health - damage
     if self.health <= 0 then
         self.health = 0

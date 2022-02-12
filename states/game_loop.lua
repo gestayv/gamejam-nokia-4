@@ -30,7 +30,13 @@ nextLevel = nil
 
 function game_loop:enter()
     -- Load all sounds
-    shootSound = love.audio.newSource('audio/sounds/blip1.wav', 'static')
+    shootSound = love.audio.newSource('audio/sounds/blip2.wav', 'static')
+    landSound = love.audio.newSource('audio/sounds/blip4.wav', 'static')
+    hitPlayerSound = love.audio.newSource('audio/sounds/blip8.wav', 'static')
+    hitEnemySound = love.audio.newSource('audio/sounds/blip9.wav', 'static')
+    jumpSound = love.audio.newSource('audio/sounds/blip14.wav', 'static')
+    gameOverSound = love.audio.newSource('audio/sounds/negative1.wav', 'static')
+    sounds = {shootSound, landSound, hitPlayerSound, hitEnemySound, jumpSound, gameOverSound}
 
     cam = camera()
     player = Player(0, 0, 6, 8)
@@ -110,6 +116,12 @@ end
 
 function game_loop:leave()
     self:destroy_last_level()
+    love.audio.playSound(nil)
+    for i, sound in ipairs(sounds) do
+        sound:stop()
+        sound:release()
+    end
+
     player:destroy()
 end
 
@@ -129,18 +141,19 @@ function game_loop:update(dt)
     self:update_list(enemies, dt)
     cam:lookAt(getViewpointForCamera())
 
+    hud:update(dt)
+end
+
+function game_loop:keypressed(key, code)
     -- Game over
     if not player.alive then
         if love.keyboard.wasPressed('return') then
             Gamestate.switch(main_menu)
         end
-    end
-    hud:update(dt)
-end
-
-function game_loop:keypressed(key, code)
-    if key == 'p' or key == 'return' then
-        Gamestate.push(stat_screen)
+    else 
+        if key == 'p' or key == 'return' then
+            Gamestate.push(stat_screen)
+        end
     end
 end
 

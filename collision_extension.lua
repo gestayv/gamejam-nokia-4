@@ -27,7 +27,6 @@ end
 function isCollidingOnBottom(y, height, collider)
     local _, _, _, ty2 = collider:getBoundingBox()
     local topY = y - height/2
-    print(topY, ty2)
     return topY >= ty2
 end
 

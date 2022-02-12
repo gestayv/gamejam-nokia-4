@@ -12,7 +12,6 @@ function stat_screen:enter(from)
 end
 
 function stat_screen:update(dt)
-    print(self.topY)
     if self.animatingEntry then
         self.topY = self.topY - self.speed * dt
         if self.topY <= self.topYLimit then

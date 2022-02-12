@@ -12,8 +12,10 @@ function love.audio.playSound( sound )
         _sound:stop()
     end
     _sound = sound
-    _sound:setVolume(AUDIO_VOLUME)
-    _sound:play()
+    if _sound then
+        _sound:setVolume(AUDIO_VOLUME)
+        _sound:play()
+    end
 end
 
 function love.audio.playMusic( music )
