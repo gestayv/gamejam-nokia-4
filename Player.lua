@@ -91,18 +91,18 @@ function Player:update(dt)
 end
 
 function Player:render()
-    self.anim:draw(self.spriteSheet, math.floor(self.x - 8/2 + 0.5), math.floor(self.y - 8/2 + 0.5))
+    self.anim:draw(self.spriteSheet, round(self.x - 8/2), round(self.y - 8/2))
     for key, bullet in pairs(self.bullets) do
         bullet:render()
     end
 
     if not self:canFire() then
         -- love.graphics.setLightColor()
-        -- love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height + 0.5), self.width, 3)
+        -- love.graphics.rectangle("fill", round(self.x - self.width/2), round(self.y - self.height), self.width, 3)
 
         love.graphics.setDarkColor()
         fillPercent = self.timeSinceLastShot / self:fireRate()
-        love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5 ), math.floor(self.y - self.height + 2 + 0.5), (self.width) * fillPercent, 1)
+        love.graphics.rectangle("fill", round(self.x - self.width/2), round(self.y - self.height + 2), (self.width) * fillPercent, 1)
     end
 end
 
@@ -268,6 +268,7 @@ end
 
 function Player:takeDamage(damage)
     love.audio.playSound(hitPlayerSound)
+    table.insert(animations, Text(round(self.x - self.width / 2), self.y - self.height, damage, round(self.x - self.width / 2), self.y - self.height - 4, 1))
     self.health = self.health - damage
     if self.health <= 0 then
         self.health = 0

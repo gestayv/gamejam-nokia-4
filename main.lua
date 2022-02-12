@@ -12,6 +12,8 @@ anim8 = require '/libraries/anim8'
 -- Helpers
 require 'collision_extension'
 require 'audio'
+require 'animations/helpers'
+require 'animations/Text'
 
 -- Constant definitions
 WINDOW_WIDTH = 1280
@@ -149,7 +151,7 @@ function range_bound(value, max_value, min_value)
 end
 
 -- From: https://stackoverflow.com/a/53038524
-function ArrayRemove(t, fnKeep)
+function array_remove(t, fnKeep)
     local j, n = 1, #t;
 
     for i=1,n do
@@ -166,4 +168,8 @@ function ArrayRemove(t, fnKeep)
     end
 
     return t;
+end
+
+function round(number)
+    return math.floor(number + 0.5)
 end

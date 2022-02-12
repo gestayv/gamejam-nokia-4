@@ -135,10 +135,11 @@ function Enemy:update(dt)
 end
 
 function Enemy:render()
-    self.anim:draw(spriteSheet, math.floor(self.x - 8/2 + 0.5), math.floor(self.y - 8/2 + 0.5))
+    self.anim:draw(spriteSheet, round(self.x - 8/2), round(self.y - 8/2))
 end
 
 function Enemy:takeDamage(damage)
+    table.insert(animations, Text(round(self.x - self.width/2), self.y - self.height, damage, round(self.x - self.width/2), self.y - self.height - 4, 1))
     love.audio.playSound(hitEnemySound)
     self.health = self.health - damage
     if self.health <= 0 then

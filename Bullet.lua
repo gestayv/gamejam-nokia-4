@@ -38,8 +38,8 @@ function Bullet:update(dt)
 end
 
 function Bullet:render()
-    local x = math.floor(self.x - self.width/2 + 0.5)
-    local y = math.floor(self.y - self.height/2 + 0.5)
+    local x = round(self.x - self.width/2)
+    local y = round(self.y - self.height/2)
     love.graphics.setDarkColor()
     love.graphics.rectangle("fill", x+1, y, 2, 1)
     love.graphics.rectangle("fill", x+1, y+2, 2, 1)

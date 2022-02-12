@@ -17,7 +17,7 @@ function Sumoga:update(dt)
 end
 
 function Sumoga:render()
-    love.graphics.rectangle("fill", math.floor(self.x - self.width/2 + 0.5), math.floor(self.y - self.height/2 + 0.5), self.width, self.height)
+    love.graphics.rectangle("fill", round(self.x - self.width/2), round(self.y - self.height/2), self.width, self.height)
 end
 
 function Sumoga:destroy()

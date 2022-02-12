@@ -38,10 +38,12 @@ function game_loop:enter()
     gameOverSound = love.audio.newSource('audio/sounds/negative1.wav', 'static')
     sounds = {shootSound, landSound, hitPlayerSound, hitEnemySound, jumpSound, gameOverSound}
 
+    animations = {}
+
     cam = camera()
     player = Player(0, 0, 6, 8)
     hud = Hud()
-    game_loop:switch_level(levels.test_level)
+    game_loop:switch_level(levels.tutorial)
 end
 
 function game_loop:switch_level(level)
@@ -139,6 +141,7 @@ function game_loop:update(dt)
     player:update(dt)
     -- Then the enemies so they take player damage or damage him
     self:update_list(enemies, dt)
+    self:update_list(animations, dt)
     cam:lookAt(getViewpointForCamera())
 
     hud:update(dt)
@@ -184,6 +187,7 @@ function game_loop:draw()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
         self:draw_list(enemies)
+        self:draw_list(animations)
         player:render()
         if debug_mode then
             world:draw() -- this draws colliders, uncomment only if needed
@@ -209,8 +213,8 @@ function getViewpointForCamera()
     topBound = push._RHEIGHT/2
     bottomBound = topBound + gameMapPixelHeight - VIRTUAL_HEIGHT
 
-    coordsx = math.floor(leftBound - VIRTUAL_WIDTH/2 + player.x + 0.5)
-    coordsy = math.floor(topBound - VIRTUAL_HEIGHT/2 + player.y + 0.5)
+    coordsx = round(leftBound - VIRTUAL_WIDTH/2 + player.x)
+    coordsy = round(topBound - VIRTUAL_HEIGHT/2 + player.y)
 
     coordsx = range_bound(coordsx, rightBound, leftBound)
     coordsy = range_bound(coordsy, bottomBound, topBound)
