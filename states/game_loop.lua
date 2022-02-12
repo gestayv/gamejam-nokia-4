@@ -138,6 +138,12 @@ function game_loop:update(dt)
     hud:update(dt)
 end
 
+function game_loop:keypressed(key, code)
+    if key == 'p' or key == 'return' then
+        Gamestate.push(stat_screen)
+    end
+end
+
 function game_loop:update_list(list, dt)
     for i=#list,1,-1 do
         local obj = list[i]

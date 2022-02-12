@@ -37,14 +37,14 @@ function Player:init(x, y, width, height)
     self.pet = Pet()
 
     -- Player stats
-    self.baseHealth = 5
+    self.baseHealth = 500
     self.maxHealth = self.baseHealth
     self.health = self.maxHealth
-    self.attack = 1
-    self.invincibilityTime = 0.8
+    self.attack = 10
+    self.invincibilityTime = 1.3
 
     self.collider:setPreSolve(function(collider_1, collider_2, contact)        
-        if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid' or collider_2.collision_class == 'Enemy') then
+        if collider_1.collision_class == 'Player' and (collider_2.collision_class == 'Solid') then
             vx, vy = collider_1:getLinearVelocity()
             -- Enable jump when colliding on top of solid objects
             if isCollidingOnTop(self.y, self.height, collider_2) and vy <= 0 then 
@@ -209,8 +209,6 @@ end
 function Player:checkTransitions()
     if self.collider:exit('Level Transition') then
         local transitionLevel = self.collider:getExitCollisionData('Level Transition').collider
-        print(transitionLevel.exit_direction)
-        print(transitionLevel.target)
         if exitDirectionFromCollision(transitionLevel.exit_direction, self.collider, transitionLevel) then
             nextLevel = transitionLevel.target
         end
