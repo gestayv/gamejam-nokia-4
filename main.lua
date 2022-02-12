@@ -102,6 +102,9 @@ function love.keypressed(key)
         if key == "3" then
             nextLevel = levels.flying_bug
         end
+        if key == "4" then
+            nextLevel = levels.item_test
+        end
         if key == "0" then
             debug_mode = not debug_mode
         end

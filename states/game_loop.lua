@@ -26,6 +26,11 @@ levels.flying_bug = {
     musicType = 'stream',
     mapFile = 'maps/flying_bug.lua'
 }
+levels.item_test = {
+    musicFile = 'audio/music/stage_music_nokia.wav',
+    musicType = 'stream',
+    mapFile = 'maps/item_test.lua'
+}
 
 nextLevel = nil
 

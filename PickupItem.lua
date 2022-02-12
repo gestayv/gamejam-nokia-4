@@ -59,6 +59,13 @@ function PickupItem:init(x, y, properties)
     self.collider:setObject(self)
 end
 
+function PickupItem:setPosition(x, y)
+    self.collider:setPosition(x, y)
+    self.collider:setLinearVelocity(0, 0)
+    self.x = x
+    self.y = y
+end
+
 function PickupItem:update(dt)
     self.x = self.collider:getX()
     self.y = self.collider:getY()

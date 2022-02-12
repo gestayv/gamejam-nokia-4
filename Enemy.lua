@@ -81,7 +81,7 @@ grid = anim8.newGrid(8, 8, spriteSheet:getWidth(), spriteSheet:getHeight())
 -- definir todo aca, despues lo guardamos en un self y a eso le pasamos el 
 -- dt en el update
 --------------------------------------------------------------------------
-function Enemy:init(x, y, propiedades)
+function Enemy:init(x, y, properties)
     self.x = x          -- position x axis
     self.y = y          -- position y axis
     self.direction = 1
@@ -89,7 +89,7 @@ function Enemy:init(x, y, propiedades)
     -- self.map = map
 
     -- Unique data
-    data = enemyProperties[propiedades.type]
+    data = enemyProperties[properties.type]
     self.originalX = x
     self.originalY = y
     self.dx = data.dx
@@ -100,7 +100,18 @@ function Enemy:init(x, y, propiedades)
     self.width = data.width   -- depende del enemigo
     self.height = data.height -- depende del enemigo    
     self.movementFunction = data.movementFunction
-    self.type = propiedades.type
+    self.type = properties.type
+
+    -- Drop item associated 
+    self.item = nil
+    if properties.itemType and properties.drop then
+        self.item = PickupItem(0, 0, {type = properties.itemType})
+        if properties.drop == 'scripted' then
+            self.dropPercent = 100
+        elseif properties.drop == 'rng' then
+            self.dropPercent = 5
+        end
+    end
 
     -- Avoids changing direction indefinitely when pushed into wall
     self._timeSinceDirectionChange = 10
@@ -150,12 +161,20 @@ end
 
 function Enemy:destroy()
     self.collider:destroy()
+    -- Check if an item should be spawned after death
+    if self.item then
+        local drop = love.math.random(1, 100)
+        if drop <= self.dropPercent then
+            self.item:setPosition(round(self.x) + 1, round(self.y))
+            table.insert(items, self.item)
+        end
+    end
 end
 
 function Enemy:changeDirection()
     -- Para que funcione el stay, se deben llamar ambos: el enter y el exit
-    if self.collider:exit('Solid') then end
-    if self:collideWithWall() or self:collidingWithWall() or self:fallOnNextStep() then
+    if self.collider:exit('Solid') or self.collider:exit('Enemy') then end
+    if self:collideWithWall() or self:collidingWithWall() or self:collideWithEnemy() or self:collidingWithEnemy() or self:fallOnNextStep() then
         self.direction = - self.direction
         if self.anim == self.animations.right then
             self.anim = self.animations.left
@@ -184,6 +203,34 @@ function Enemy:collidingWithWall()
                 self._timeSinceDirectionChange = 0
                 return true
             end  
+        end
+    end
+    return false
+end
+
+function Enemy:collideWithEnemy()
+    if self.collider:enter('Enemy') then
+        local enemyCollider = self.collider:getEnterCollisionData('Enemy').collider
+        if not enemyCollider:isDestroyed() then
+            if isHorizontalCollision(self.x, self.width, enemyCollider) then 
+                self._timeSinceDirectionChange = 0
+                return true
+            end
+        end
+    end
+    return false
+end
+
+function Enemy:collidingWithEnemy()
+    if self.collider:stay('Enemy') then
+        local enemy_collider_list = self.collider:getStayCollisionData('Enemy')
+        for _, collision_data in ipairs(enemy_collider_list) do
+            if not collision_data.collider:isDestroyed() then
+                if isHorizontalCollision(self.x, self.width, collision_data.collider) and self._timeSinceDirectionChange > 0.5 then 
+                    self._timeSinceDirectionChange = 0
+                    return true
+                end  
+            end
         end
     end
     return false
