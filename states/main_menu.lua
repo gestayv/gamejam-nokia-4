@@ -1,18 +1,21 @@
 local main_menu = {}
 
+function main_menu:enter()
+    self.spriteSheet = love.graphics.newImage('/sprites/title_screen_spritesheet.png')
+    self.grid = anim8.newGrid(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
+    self.anim = anim8.newAnimation(self.grid('1-2', 1), {1.5, 0.3})
+end
 
 function main_menu:update(dt)
+    self.anim:update(dt)
 end
 
 function main_menu:draw()
-    love.graphics.setDarkColor()
-    love.graphics.rectangle("fill", 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
-    love.graphics.setLightColor()
-    love.graphics.printf('Title screen', 1, 20, VIRTUAL_WIDTH, 'center')
+    self.anim:draw(self.spriteSheet, 0, 0)
 end
 
 function main_menu:keypressed(key, code)
-    if key == 'return' then
+    if key == 'return' or key == 'space' then
         Gamestate.switch(game_loop)
     end
 end
