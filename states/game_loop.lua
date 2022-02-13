@@ -215,6 +215,10 @@ function game_loop:destroy_list(list)
 end
 
 function game_loop:draw()
+    -- Fill background to avoid black space when shaking camera
+    love.graphics.setLightColor()
+    love.graphics.rectangle("fill", -10, -10, (gameMap.layers["Layer 1"].width * TILE_SIZE) + 20, (gameMap.layers["Layer 1"].height * TILE_SIZE) + 20)
+    love.graphics.resetColor()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
         self:draw_list(items)
