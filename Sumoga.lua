@@ -218,7 +218,6 @@ end
 
 function Sumoga:followPlayerFx()
     -- sprite sigue al jugador basado en la posicion
-    print(self.head.x, player.x)
     if self.head.x  + 2 < player.x then
         fx = self:increaseMod(self.dx)
     else
@@ -276,7 +275,7 @@ function Sumoga:eggThrow()
         egg = SumogaEgg(player.x, player.y - 60)
         egg.collider:setLinearVelocity(0, 10)
         table.insert(enemies, egg)
-        self.eggTime = love.math.random(1.5, self:decreaseMod(3.5))
+        self.eggTime = love.math.random(2.2, self:decreaseMod(4.5))
     end)
 end
 

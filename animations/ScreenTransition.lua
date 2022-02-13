@@ -17,7 +17,6 @@ end
 function ScreenTransition:update(dt)
     local squareCount = #self.squares
     if self.status == 'add-squares' then
-        print("add-squares", self.animationTime)
         local time = self.animationTime / self.fourthSeconds
         local squareTarget = bezier_blend(time) * self.totalSquares
         if squareCount < self.totalSquares then
