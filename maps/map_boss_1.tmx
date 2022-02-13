@@ -3,10 +3,6 @@
  <editorsettings>
   <export target="map_boss_1.lua" format="lua"/>
  </editorsettings>
- <properties>
-  <property name="event" value="eventChic"/>
-  <property name="type" value="bigEye  "/>
- </properties>
  <tileset firstgid="1" name="sprite_sheet" tilewidth="8" tileheight="8" tilecount="60" columns="10">
   <image source="sprite_sheet.png" width="84" height="48"/>
  </tileset>

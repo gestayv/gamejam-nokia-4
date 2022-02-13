@@ -212,8 +212,10 @@ function game_loop:draw_list(list)
 end
 
 function game_loop:destroy_list(list)
-    for i, obj in pairs(list) do
+    for i=#list,1,-1 do
+        local obj = list[i]
         obj:destroy()
+        table.remove(list, i)
     end
 end
 

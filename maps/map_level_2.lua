@@ -8,11 +8,9 @@ return {
   height = 108,
   tilewidth = 8,
   tileheight = 8,
-  nextlayerid = 16,
-  nextobjectid = 779,
-  properties = {
-    ["type"] = "bigEye  "
-  },
+  nextlayerid = 17,
+  nextobjectid = 784,
+  properties = {},
   tilesets = {
     {
       name = "sprite_sheet",
@@ -3150,6 +3148,32 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        },
+        {
+          id = 782,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 384,
+          y = 488,
+          width = 40,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 783,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 392,
+          y = 480,
+          width = 24,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },
@@ -4814,6 +4838,34 @@ return {
             ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 16,
+      name = "Mysterious Creature",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 780,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 392,
+          y = 448,
+          width = 24,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },
