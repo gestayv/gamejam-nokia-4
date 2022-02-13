@@ -16,6 +16,7 @@ require 'collision_extension'
 require 'audio'
 require 'animations/helpers'
 require 'animations/Text'
+require 'animations/ScreenTransition'
 
 -- Constant definitions
 WINDOW_WIDTH = 1280
