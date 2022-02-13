@@ -59,7 +59,7 @@ function Sumoga:init()
     self.head.collider:setObject(self)
     
     self.strength = 40
-    self.health = player.attack * 51
+    self.health = player.attack * 40
     self.maxHealth = self.health
     self.dx = 60
     self.dy = 10
@@ -87,7 +87,7 @@ function Sumoga:update(dt)
             self.eggStatus = 'spawn'
         end
     end
-    if lifePercentage <= 0.75 then
+    if lifePercentage <= 0.85 then
         if not self.peckStatus then
             self.peckStatus = 'spawn'
             self.head.collider:setPosition(player.x, -20)
@@ -241,7 +241,7 @@ end
 
 function Sumoga:peckAttack()
     local fx, fy = 0, 1000
-    self.peckTime = math.random(self:decreaseMod(2), self:decreaseMod(6))
+    self.peckTime = math.random(self:decreaseMod(1.4), self:decreaseMod(4.1))
     
     if self.head.collider:enter('Player') then
         self.peckStatus = 'return'
@@ -275,7 +275,7 @@ function Sumoga:eggThrow()
         egg = SumogaEgg(player.x, player.y - 60)
         egg.collider:setLinearVelocity(0, 10)
         table.insert(enemies, egg)
-        self.eggTime = love.math.random(2.2, self:decreaseMod(4.5))
+        self.eggTime = love.math.random(self:decreaseMod(2.4), self:decreaseMod(4.5))
     end)
 end
 
