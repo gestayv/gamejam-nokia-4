@@ -187,6 +187,10 @@ function Player:movementUpdate(dt)
     if self.collider:exit('Solid') then
         self.jumpable = false
         self.airTime = 0.2 -- Just used to play landing sound inside preSolve
+        local wallData = self.collider:getExitCollisionData('Solid').collider
+        if isCollidingOnBottom(player.y, player.height, wallData) then
+            self.jumping = false
+        end
     end
 
     if not self.jumpable then 
