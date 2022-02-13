@@ -6,6 +6,7 @@ require '../Enemy'
 require '../PickupItem'
 require '../Hud'
 require '../Sumoga'
+require '../MysteriousCreature'
 
 gameMap = nil
 
@@ -93,15 +94,14 @@ function game_loop:switch_level(level)
 
     if gameMap.layers["Enemies"] then
         for i, obj in pairs(gameMap.layers["Enemies"].objects) do
-            enemy = Enemy(obj.x, obj.y + 1, obj.properties)
+            enemy = Enemy(obj.x, obj.y, obj.properties)
             table.insert(enemies, enemy)
         end
     end
     
     if gameMap.layers["Items"] then
         for i, obj in pairs(gameMap.layers["Items"].objects) do
-            -- Add one to x to center 5x5 or 6x6 item on 8x8 tiles
-            item = PickupItem(obj.x + 1, obj.y, obj.properties)
+            item = PickupItem(obj.x, obj.y, obj.properties)
             table.insert(items, item)
         end
     end
@@ -131,6 +131,14 @@ function game_loop:switch_level(level)
             end)
 
             table.insert(transitions, levelTransition)
+        end
+    end
+
+    -- Most important layer in the game
+    if gameMap.layers["Mysterious Creature"] then
+        for i, obj in pairs(gameMap.layers["Mysterious Creature"].objects) do
+            notEnemy = MysteriousCreature(obj.x, obj.y)
+            table.insert(enemies, notEnemy)
         end
     end
 end
