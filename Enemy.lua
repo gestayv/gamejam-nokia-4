@@ -129,7 +129,7 @@ function Enemy:init(x, y, properties)
             -- now you can reliably return a random key
             itemType = keyset[math.random(#keyset)]
         end
-        self.item = PickupItem(0, 0, {type = itemType})
+        self.item = itemType
         if properties.drop == 'scripted' then
             self.dropPercent = 100
         elseif properties.drop == 'rng' then
@@ -186,11 +186,11 @@ end
 function Enemy:destroy()
     self.collider:destroy()
     -- Check if an item should be spawned after death
-    if self.item then
+    if self.item and not self.alive then
         local drop = love.math.random(1, 100)
         if drop <= self.dropPercent then
-            self.item:setPosition(round(self.x) + 1, round(self.y))
-            table.insert(items, self.item)
+            local item = PickupItem(round(self.x), round(self.y), {type = self.item})
+            table.insert(items, item)
         end
     end
 

@@ -10,10 +10,7 @@ return {
   tileheight = 8,
   nextlayerid = 17,
   nextobjectid = 787,
-  properties = {
-    ["event"] = "eventChic",
-    ["type"] = "bigEye  "
-  },
+  properties = {},
   tilesets = {
     {
       name = "sprite_sheet",
