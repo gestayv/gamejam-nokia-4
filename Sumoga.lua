@@ -65,6 +65,7 @@ function Sumoga:init()
     self.peckTimerActive = false
     self.eggTimerActive = false
     self.alive = true
+    self.moveLegOutside = false
 end
 
 -- como la pelea es scripted, en terminos de como se va a mover y los ataques que va a realizar, va a funcionar
@@ -84,6 +85,7 @@ function Sumoga:update(dt)
         if not self.peckStatus then
             self.peckStatus = 'spawn'
             self.head.collider:setPosition(player.x, -20)
+            self.moveLegOutside = true
         end
     end
 
@@ -100,12 +102,28 @@ function Sumoga:update(dt)
     end
 
     local _, vy = self.leg.collider:getLinearVelocity()
-    if vy <= 0 then
-        if self.leg.falling then
-            screen_shake(0.5)
-            self.leg.falling = false
+    if not self.peckStatus then
+        if vy <= 0 then
+            if self.leg.falling then
+                screen_shake(0.5)
+                self.leg.falling = false
+            end
+            self.leg.collider:setLinearVelocity(0, 0)
         end
-        self.leg.collider:setLinearVelocity(0, 0)
+    elseif self.moveLegOutside then
+        if self.leg.x < 209 then
+            -- yeet the leg to the right of the screen
+            self.leg.collider:setCollisionClass('Level Transition') -- Ignores solid
+            self.leg.collider:applyLinearImpulse(2.3, -3)
+        else
+            self.leg.collider:setX(209)
+            if self.leg.y > 60.2 then
+                self.leg.collider:setY(60.2)
+                self.leg.collider:setLinearVelocity(0, 0)
+                self.leg.collider:setGravityScale(0)
+                self.moveLegOutside = false
+            end
+        end
     end
     self.leg.anim:update(dt)
     self.head.anim:update(dt)
@@ -119,7 +137,6 @@ end
 function Sumoga:destroy()
     self.leg.collider:destroy()
     self.head.collider:destroy()
-    Timer.clear()
 end
 
 function Sumoga:peck(dt)
@@ -287,11 +304,6 @@ function Sumoga:takeDamage(damage)
         self.health = 0
         self.alive = false
     end
-
-    -- Move leg one pixel to the right until 188
-    self.leg.x = range_bound(self.leg.x + 1, 188, 90)
-    self.leg.collider:setX(self.leg.x)
-
 end
 
 -- Timer wrapper
