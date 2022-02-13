@@ -59,10 +59,8 @@ function Sumoga:init()
     self.head.collider:setObject(self)
     
     self.strength = 40
-    self.health = 1
-    self.maxHealth = 100
-    -- self.health = player.attack * 30
-    -- self.maxHealth = self.health
+    self.health = player.attack * 50
+    self.maxHealth = self.health
     self.dx = 60
     self.dy = 10
     self.peckTime = 3
@@ -145,6 +143,7 @@ end
 function Sumoga:destroy()
     self.leg.collider:destroy()
     self.head.collider:destroy()
+    camShake = false
     Timer.clear()
 
     -- Kill all enemies
@@ -296,7 +295,7 @@ end
 
 
 function Sumoga:fuckingDies()
-    -- rip
+    Gamestate.push(credits)
 end
 
 function Sumoga:takeDamage(damage)

@@ -6,6 +6,7 @@ Gamestate = require "libraries/hump/gamestate"
 main_menu = require "states/main_menu"
 game_loop = require "states/game_loop"
 stat_screen = require "states/stat_screen"
+credits = require "states/credits"
 wf = require '../libraries/windfield'
 anim8 = require '/libraries/anim8'
 Timer = require './libraries/hump/timer'

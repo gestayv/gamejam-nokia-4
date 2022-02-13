@@ -1,5 +1,5 @@
 
-AUDIO_VOLUME = 0.02
+AUDIO_VOLUME = 0.1
 
 _sound = nil
 _music = nil

@@ -1,6 +1,6 @@
 Text = Class{}
 
-function Text:init(x, y, text, targetX, targetY, seconds)
+function Text:init(x, y, text, targetX, targetY, seconds, centering, width)
     self.x = x
     self.y = y
     self.startingX = x
@@ -10,6 +10,8 @@ function Text:init(x, y, text, targetX, targetY, seconds)
     self.endY = targetY
     self.seconds = seconds
     self.animationTime = 0
+    self.centering = centering or 'left'
+    self.width = width or 40
     self.alive = true
 end
 
@@ -26,7 +28,7 @@ end
 
 function Text:render()
     love.graphics.setDarkColor()
-    love.graphics.printf(self.text, self.x, self.y, 40, 'left')
+    love.graphics.printf(self.text, self.x, self.y, self.width, self.centering)
     love.graphics.setColor(255, 255, 255)
 end
 
