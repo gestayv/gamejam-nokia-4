@@ -1181,7 +1181,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["itemType"] = "max_health",
             ["type"] = "bigEye"
           }
         },
@@ -1197,8 +1197,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "lizard"
           }
         },
@@ -1215,7 +1215,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["itemType"] = "recovery",
             ["type"] = "bigEye"
           }
         },
@@ -1248,8 +1248,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -1265,8 +1265,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -1283,7 +1283,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["itemType"] = "recovery",
             ["type"] = "eye"
           }
         },
@@ -1299,8 +1299,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "lizard"
           }
         },
@@ -1333,8 +1333,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -1350,8 +1350,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -1367,8 +1367,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         }

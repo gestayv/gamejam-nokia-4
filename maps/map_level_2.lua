@@ -221,7 +221,7 @@ return {
           visible = true,
           properties = {
             ["exit_direction"] = "right",
-            ["target"] = "boss_1"
+            ["target"] = "test_level"
           }
         }
       }
@@ -3178,8 +3178,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3195,8 +3195,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "lizard"
           }
         },
@@ -3212,8 +3212,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3229,8 +3229,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3246,8 +3246,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3263,8 +3263,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3280,8 +3280,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3297,8 +3297,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3314,8 +3314,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "lizard"
           }
         },
@@ -3331,8 +3331,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "lizard"
           }
         },
@@ -3348,8 +3348,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3365,8 +3365,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3382,8 +3382,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3399,8 +3399,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3416,8 +3416,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3433,8 +3433,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3450,8 +3450,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3467,8 +3467,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3484,8 +3484,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3501,8 +3501,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3518,8 +3518,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3535,8 +3535,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3552,8 +3552,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3569,8 +3569,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3586,8 +3586,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3603,8 +3603,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3620,8 +3620,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3637,8 +3637,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3654,8 +3654,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3671,8 +3671,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3688,8 +3688,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3705,8 +3705,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3722,8 +3722,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3739,8 +3739,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3756,8 +3756,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3773,8 +3773,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3790,8 +3790,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3807,8 +3807,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3824,8 +3824,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3841,8 +3841,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3858,8 +3858,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3875,8 +3875,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3892,8 +3892,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3909,8 +3909,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3926,8 +3926,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3943,8 +3943,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -3960,8 +3960,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -3977,8 +3977,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -3994,8 +3994,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4011,8 +4011,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4028,8 +4028,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4045,8 +4045,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4062,8 +4062,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4079,8 +4079,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4096,8 +4096,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4113,8 +4113,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4130,8 +4130,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4147,8 +4147,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4164,8 +4164,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4181,8 +4181,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4198,8 +4198,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4215,8 +4215,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4232,8 +4232,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4249,8 +4249,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4266,8 +4266,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4283,8 +4283,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4300,8 +4300,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4317,8 +4317,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4334,8 +4334,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4351,8 +4351,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4368,8 +4368,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4385,8 +4385,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "lizard"
           }
         },
@@ -4402,8 +4402,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4419,8 +4419,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4436,8 +4436,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4453,8 +4453,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4470,8 +4470,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4487,8 +4487,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -4504,8 +4504,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4521,8 +4521,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4538,8 +4538,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4555,8 +4555,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4572,8 +4572,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4589,8 +4589,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4606,8 +4606,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4623,8 +4623,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4640,8 +4640,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4657,8 +4657,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4674,8 +4674,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4691,8 +4691,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -4708,8 +4708,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -4725,8 +4725,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4742,8 +4742,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4759,8 +4759,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         },
@@ -4776,8 +4776,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eye"
           }
         },
@@ -4793,8 +4793,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -4810,8 +4810,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["drop"] = "scripted",
-            ["itemType"] = "attack",
+            ["drop"] = "rng",
+            ["itemType"] = "random",
             ["type"] = "eyeBat"
           }
         }

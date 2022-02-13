@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="60" tilewidth="8" tileheight="8" infinite="0" nextlayerid="11" nextobjectid="78">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="60" tilewidth="8" tileheight="8" infinite="0" nextlayerid="11" nextobjectid="130">
  <editorsettings>
   <export target="map_test.lua" format="lua"/>
  </editorsettings>
@@ -8,161 +8,209 @@
  </tileset>
  <layer id="1" name="Layer 1" width="15" height="60">
   <data encoding="csv">
-25,46,52,48,46,52,52,52,47,47,48,46,48,48,25,
-25,46,47,52,46,52,47,48,48,48,46,48,48,46,25,
-25,47,46,47,46,46,48,46,52,47,52,46,47,52,25,
-25,52,52,46,48,48,47,52,52,47,46,52,52,48,25,
-25,48,47,25,25,26,25,25,52,48,47,46,46,48,25,
-25,47,47,25,25,26,25,25,46,47,52,47,48,47,25,
-25,48,46,25,25,26,25,25,46,52,52,48,52,46,25,
-25,46,46,48,52,52,47,52,48,47,52,48,46,48,25,
-25,47,48,46,48,48,48,46,47,47,46,47,47,46,25,
-25,52,47,48,47,46,47,48,48,46,46,52,48,52,25,
-25,47,48,48,52,46,47,47,48,52,52,46,46,52,25,
-25,48,46,48,47,52,46,46,47,52,48,52,47,46,25,
-25,46,48,47,48,48,47,46,46,47,52,46,48,48,25,
-25,46,52,52,52,46,47,47,46,46,46,47,46,47,25,
-25,52,47,47,48,25,25,26,27,25,26,27,25,26,27,
-25,47,47,46,48,25,25,26,27,25,26,27,25,26,27,
-25,46,47,48,52,25,25,26,27,25,26,27,25,26,27,
-25,46,48,48,52,25,25,26,27,25,26,27,25,26,27,
-25,52,52,52,48,52,52,47,52,47,47,48,52,47,25,
-25,52,47,52,48,52,48,48,47,48,52,52,47,52,25,
-25,46,46,47,48,47,52,52,46,25,25,25,48,52,25,
-25,47,52,46,46,47,25,25,26,25,26,25,52,47,25,
-25,25,26,27,25,26,25,26,27,25,26,25,47,48,25,
-25,26,27,25,26,27,25,26,27,25,26,25,48,47,25,
-25,25,26,27,25,26,27,25,26,27,25,25,46,48,25,
-25,47,47,48,48,46,52,46,48,46,48,46,46,46,25,
-25,46,46,47,47,48,52,46,52,52,47,46,48,47,25,
-25,46,47,46,48,52,46,52,47,48,48,46,47,48,25,
-25,46,46,46,47,48,47,47,46,48,52,52,46,48,25,
-25,46,46,52,48,46,47,48,48,48,47,46,46,47,25,
-25,48,25,25,52,48,25,25,46,48,25,25,26,27,27,
-25,46,25,25,52,48,25,25,46,46,25,25,25,26,27,
-25,46,25,25,25,26,25,25,25,26,25,25,25,26,27,
-25,47,25,25,26,27,25,26,27,25,26,25,25,26,27,
-25,48,25,25,26,27,25,26,27,25,26,25,25,26,27,
-25,48,25,25,26,27,25,26,27,25,26,25,25,26,27,
-25,46,46,48,46,52,46,47,48,48,48,46,47,52,25,
-25,48,48,46,48,47,46,46,48,48,47,52,47,48,25,
-25,25,26,25,48,52,48,52,47,48,48,46,46,52,25,
-25,26,27,25,48,52,47,48,46,47,48,47,48,47,25,
-25,26,25,48,48,47,52,47,48,48,48,48,46,47,25,
-25,25,48,48,48,47,52,48,52,48,46,48,46,46,25,
-25,48,47,46,25,25,26,27,25,48,47,46,52,46,25,
-25,48,52,47,25,25,26,27,25,47,48,52,52,48,25,
-25,48,46,48,48,52,46,52,52,52,48,48,47,47,25,
-25,48,47,48,52,46,48,52,52,47,46,48,46,47,25,
-25,46,52,47,52,48,1610612769,32,32,32,32,33,47,52,25,
-25,46,48,47,52,46,1610612768,1610612768,3221225504,3221225504,2684354592,2684354592,48,52,25,
-25,46,47,47,48,48,3221225505,3221225504,3221225504,3221225504,3221225504,2684354593,46,48,25,
-25,48,25,25,46,47,46,47,52,52,52,52,46,52,25,
-25,47,25,25,25,26,27,25,26,27,25,26,27,25,26,
-25,46,46,25,25,26,27,25,26,27,25,26,27,25,26,
-25,48,48,25,25,26,27,25,26,27,25,26,27,25,26,
-25,46,52,48,48,25,25,26,27,27,25,26,27,25,26,
-25,47,48,47,48,52,46,52,52,25,25,26,27,25,26,
-25,48,48,47,48,52,47,47,46,47,48,46,52,52,25,
-25,52,52,48,47,52,52,52,48,52,46,52,48,48,25,
-25,48,46,47,48,48,47,52,47,52,48,48,46,46,52,
-25,48,48,52,52,48,48,47,47,25,25,52,47,52,47,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,25,25,26,25,25,52,52,52,52,52,52,25,
+25,52,52,25,25,26,25,25,52,52,52,52,52,52,25,
+25,52,52,25,25,26,25,25,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,25,25,26,27,25,26,27,25,26,27,
+25,52,52,52,52,25,25,26,27,25,26,27,25,26,27,
+25,52,52,52,52,25,25,26,27,25,26,27,25,26,27,
+25,52,52,52,52,25,25,26,27,25,26,27,25,26,27,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,25,25,25,52,52,25,
+25,52,52,52,52,52,25,25,26,25,26,25,52,52,25,
+25,25,26,27,25,26,25,26,27,25,26,25,52,52,25,
+25,26,27,25,26,27,25,26,27,25,26,25,52,52,25,
+25,25,26,27,25,26,27,25,26,27,25,25,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,25,25,52,52,25,25,52,52,25,25,26,27,27,
+25,52,25,25,52,52,25,25,52,52,25,25,25,26,27,
+25,52,25,25,25,26,25,25,25,26,25,25,25,26,27,
+25,52,25,25,26,27,25,26,27,25,26,25,25,26,27,
+25,52,25,25,26,27,25,26,27,25,26,25,25,26,27,
+25,52,25,25,26,27,25,26,27,25,26,25,25,26,27,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,25,26,25,52,52,52,52,52,52,52,52,52,52,25,
+25,26,27,25,52,52,52,52,52,52,52,52,52,52,25,
+25,26,25,52,52,52,52,52,52,52,52,52,52,52,25,
+25,25,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,25,25,26,27,25,52,52,52,52,52,25,
+25,52,52,52,25,25,26,27,25,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,1610612769,32,32,32,32,33,52,52,25,
+25,52,52,52,52,52,1610612768,1610612768,3221225504,3221225504,2684354592,2684354592,52,52,25,
+25,52,52,52,52,52,3221225505,3221225504,3221225504,3221225504,3221225504,2684354593,52,52,25,
+25,52,25,25,52,52,52,52,52,52,52,52,52,52,25,
+25,52,25,25,25,26,27,25,26,27,25,26,27,25,26,
+25,52,52,25,25,26,27,25,26,27,25,26,27,25,26,
+25,52,52,25,25,26,27,25,26,27,25,26,27,25,26,
+25,52,52,52,52,25,25,26,27,27,25,26,27,25,26,
+25,52,52,52,52,52,52,52,52,25,25,26,27,25,26,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,25,
+25,52,52,52,52,52,52,52,52,52,52,52,52,52,52,
+25,52,52,52,52,52,52,52,52,25,25,52,52,52,52,
 25,25,26,27,25,26,27,25,26,25,26,25,26,27,25
 </data>
  </layer>
- <objectgroup id="10" name="Gates"/>
  <objectgroup id="2" name="Hitboxes">
-  <object id="2" x="24" y="32" width="40" height="24"/>
-  <object id="4" x="112" y="0" width="8" height="112"/>
-  <object id="5" x="40" y="112" width="80" height="32"/>
-  <object id="6" x="112" y="144" width="8" height="144"/>
-  <object id="7" x="0" y="336" width="8" height="135.999" rotation="359.832"/>
-  <object id="8" x="48" y="168" width="47.9763" height="8.11725" rotation="359.832"/>
-  <object id="9" x="8" y="176" width="87.9762" height="24.0234" rotation="359.832"/>
-  <object id="10" x="72" y="160" width="23.9999" height="8.11725" rotation="359.832"/>
-  <object id="11" x="95.9999" y="279.953" width="15.9296" height="8.02388" rotation="359.832"/>
-  <object id="12" x="16" y="240" width="15.9296" height="48.0467" rotation="359.832"/>
-  <object id="13" x="48" y="240" width="15.9296" height="48.0467" rotation="359.832"/>
-  <object id="14" x="32" y="256" width="15.9296" height="32.0233" rotation="359.832"/>
-  <object id="15" x="32" y="336" width="39.9764" height="16.0234" rotation="359.832"/>
-  <object id="16" x="23.9765" y="400" width="95.9996" height="24.0703" rotation="359.832"/>
-  <object id="17" x="48" y="368" width="47.9294" height="24.1406" rotation="359.832"/>
-  <object id="21" x="0.117354" y="200.023" width="7.78885" height="103.976" rotation="359.832"/>
-  <object id="22" x="112" y="440" width="7.99994" height="15.8123" rotation="359.832"/>
-  <object id="23" x="40" y="424" width="79.9997" height="8.14071" rotation="359.832"/>
-  <object id="24" x="72" y="432" width="47.9763" height="8.14071" rotation="359.832"/>
-  <object id="25" x="112" y="288" width="8" height="112"/>
-  <object id="27" x="0" y="304" width="31.9764" height="16.0234" rotation="359.832"/>
-  <object id="28" x="0" y="320" width="23.9764" height="8.02342" rotation="359.832"/>
-  <object id="29" x="0" y="320" width="23.9764" height="8.02342" rotation="359.832"/>
-  <object id="30" x="0" y="328" width="15.9765" height="8.02342" rotation="359.832"/>
-  <object id="36" x="15.9767" y="392.047" width="16.3284" height="15.9765" rotation="359.832"/>
-  <object id="37" x="72" y="464" width="16.3284" height="8.02342" rotation="359.832"/>
-  <object id="55" x="0" y="472" width="120" height="8"/>
-  <object id="58" x="64" y="256" width="24" height="32"/>
-  <object id="59" x="88" y="264" width="8" height="24"/>
-  <object id="63" x="-40" y="8" width="40" height="8"/>
-  <object id="64" x="-40" y="16" width="8" height="64"/>
-  <object id="66" x="-40" y="80" width="40" height="8"/>
-  <object id="69" x="0" y="80" width="8" height="104"/>
-  <object id="70" x="0" y="0" width="8" height="16"/>
-  <object id="71" x="0" y="24" width="8" height="48"/>
-  <object id="72" x="-24" y="24" width="24" height="8"/>
-  <object id="73" x="-24" y="32" width="8" height="40"/>
-  <object id="74" x="-16" y="64" width="16" height="8"/>
+  <object id="78" x="0" y="0" width="8" height="480"/>
+  <object id="79" x="8" y="472" width="112" height="8"/>
+  <object id="80" x="72" y="464" width="16" height="8"/>
+  <object id="81" x="16" y="392" width="16" height="16"/>
+  <object id="82" x="24" y="408" width="96" height="16"/>
+  <object id="83" x="32" y="400" width="88" height="8"/>
+  <object id="84" x="40" y="424" width="80" height="8"/>
+  <object id="85" x="72" y="432" width="48" height="8"/>
+  <object id="86" x="112" y="440" width="8" height="16"/>
+  <object id="88" x="112" y="0" width="8" height="400"/>
+  <object id="89" x="24" y="32" width="40" height="24"/>
+  <object id="91" x="40" y="112" width="72" height="32"/>
+  <object id="92" x="72" y="160" width="24" height="40"/>
+  <object id="93" x="48" y="168" width="24" height="32"/>
+  <object id="94" x="8" y="176" width="40" height="24"/>
+  <object id="95" x="16" y="240" width="16" height="48"/>
+  <object id="97" x="32" y="256" width="16" height="32"/>
+  <object id="98" x="48" y="240" width="16" height="48"/>
+  <object id="99" x="64" y="256" width="16" height="32"/>
+  <object id="100" x="80" y="240" width="32" height="48"/>
+  <object id="101" x="8" y="304" width="24" height="16"/>
+  <object id="102" x="8" y="320" width="16" height="8"/>
+  <object id="103" x="8" y="328" width="8" height="8"/>
+  <object id="105" x="32" y="336" width="40" height="16"/>
+  <object id="108" x="48" y="368" width="8" height="24"/>
+  <object id="113" x="88" y="368" width="8" height="24"/>
+  <object id="114" x="56" y="384" width="32" height="8"/>
+  <object id="115" x="56" y="368" width="32" height="8"/>
  </objectgroup>
  <objectgroup id="3" name="Enemies">
-  <object id="31" x="96" y="104" width="8" height="8">
-   <properties>
-    <property name="type" value="eye"/>
-   </properties>
-  </object>
-  <object id="32" x="16" y="168" width="8" height="8">
-   <properties>
-    <property name="type" value="eye"/>
-   </properties>
-  </object>
   <object id="33" x="48" y="232" width="8" height="8">
    <properties>
+    <property name="drop" value="rng"/>
+    <property name="itemType" value="random"/>
+    <property name="type" value="lizard"/>
+   </properties>
+  </object>
+  <object id="34" x="40" y="392" width="8" height="8">
+   <properties>
+    <property name="drop" value="rng"/>
+    <property name="itemType" value="random"/>
+    <property name="type" value="lizard"/>
+   </properties>
+  </object>
+  <object id="35" x="80" y="456" width="8" height="8">
+   <properties>
+    <property name="drop" value="scripted"/>
+    <property name="itemType" value="recovery"/>
     <property name="type" value="eye"/>
    </properties>
   </object>
-  <object id="34" x="48" y="328" width="8" height="8">
+  <object id="116" x="72" y="376" width="8" height="8">
    <properties>
-    <property name="type" value="eye"/>
+    <property name="type" value="bigEye"/>
    </properties>
   </object>
-  <object id="35" x="40" y="464" width="8" height="8">
+  <object id="117" x="64" y="376" width="8" height="8">
    <properties>
-    <property name="type" value="eye"/>
+    <property name="type" value="bigEye"/>
+   </properties>
+  </object>
+  <object id="118" x="80" y="152" width="8" height="8">
+   <properties>
+    <property name="drop" value="rng"/>
+    <property name="itemType" value="random"/>
+    <property name="type" value="lizard"/>
+   </properties>
+  </object>
+  <object id="119" x="80" y="8" width="8" height="8">
+   <properties>
+    <property name="drop" value="rng"/>
+    <property name="itemType" value="random"/>
+    <property name="type" value="eyeBat"/>
+   </properties>
+  </object>
+  <object id="120" x="8" y="8" width="8" height="8">
+   <properties>
+    <property name="drop" value="rng"/>
+    <property name="itemType" value="random"/>
+    <property name="type" value="eyeBat"/>
+   </properties>
+  </object>
+  <object id="121" x="88" y="24" width="8" height="8">
+   <properties>
+    <property name="drop" value="rng"/>
+    <property name="itemType" value="random"/>
+    <property name="type" value="eyeBat"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="6" name="Items">
-  <object id="42" x="104" y="272" width="8" height="8">
+  <object id="122" x="56" y="104" width="8" height="8">
    <properties>
     <property name="type" value="recovery"/>
    </properties>
   </object>
-  <object id="75" x="56" y="24" width="8" height="8">
-   <properties>
-    <property name="type" value="attack"/>
-   </properties>
-  </object>
-  <object id="77" x="96" y="272" width="8" height="8">
+  <object id="123" x="72" y="104" width="8" height="8">
    <properties>
     <property name="type" value="max_health"/>
    </properties>
   </object>
+  <object id="124" x="88" y="104" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="125" x="24" y="168" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="126" x="104" y="392" width="8" height="8">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="127" x="88" y="232" width="8" height="8">
+   <properties>
+    <property name="type" value="max_health"/>
+   </properties>
+  </object>
+  <object id="128" x="48" y="328" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
+  <object id="129" x="32" y="464" width="8" height="8">
+   <properties>
+    <property name="type" value="recovery"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="Player">
-  <object id="47" x="40" y="24" width="8" height="8"/>
+  <object id="47" x="40" y="0" width="8" height="8"/>
  </objectgroup>
  <objectgroup id="9" name="Level Transitions">
   <object id="52" x="112" y="456" width="8" height="16">
    <properties>
     <property name="exit_direction" value="right"/>
-    <property name="target" value="tutorial"/>
+    <property name="target" value="boss_1"/>
    </properties>
   </object>
  </objectgroup>

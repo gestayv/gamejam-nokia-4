@@ -18,7 +18,7 @@ levels.tutorial = {
     mapFile = 'maps/map_level_1.lua'
 }
 levels.test_level = {
-    musicFile = 'audio/music/bad_melody.wav',
+    musicFile = 'audio/music/stage_music_nokia.wav',
     musicType = 'stream',
     mapFile = 'maps/map_test.lua'
 }
