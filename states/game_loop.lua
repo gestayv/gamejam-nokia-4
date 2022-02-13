@@ -216,8 +216,8 @@ end
 function game_loop:draw()
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Layer 1"])
-        self:draw_list(enemies)
         self:draw_list(items)
+        self:draw_list(enemies)
         self:draw_list(animations)
         player:render()
         if debug_mode then
