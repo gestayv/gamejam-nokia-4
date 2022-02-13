@@ -5,6 +5,7 @@ require '../Player'
 require '../Enemy'
 require '../PickupItem'
 require '../Hud'
+require '../Sumoga'
 
 gameMap = nil
 

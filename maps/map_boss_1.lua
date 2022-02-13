@@ -8,9 +8,10 @@ return {
   height = 13,
   tilewidth = 8,
   tileheight = 8,
-  nextlayerid = 16,
-  nextobjectid = 783,
+  nextlayerid = 17,
+  nextobjectid = 787,
   properties = {
+    ["event"] = "eventChic",
     ["type"] = "bigEye  "
   },
   tilesets = {
@@ -180,7 +181,24 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 785,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 96,
+          y = 88,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["event"] = "chick",
+            ["type"] = "egg"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -214,8 +232,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 40,
-          y = 64,
+          x = 16,
+          y = -8,
           width = 8,
           height = 8,
           rotation = 0,

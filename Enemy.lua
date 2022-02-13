@@ -57,6 +57,32 @@ enemyProperties = {
         frameUpdate = 0.4,
         movementFunction = "ground"
     },
+    chick = {
+        health = 10, -- CAMBIAR DESPUES
+        strength = 1,
+        width = 8,
+        height = 8,
+        dx = 20,
+        dy = 1,
+        movementSpeed = 50,
+        spriteRow = 4,
+        frames = "1-2",
+        frameUpdate = 0.3,
+        movementFunction = "ground"
+    },
+    egg = {
+        health = 10,  -- CAMBIAR DESPUES
+        strength = 0,
+        width = 8,
+        height = 8,
+        dx = 0,
+        dy = 0,
+        movementSpeed = 0,
+        spriteRow = 5, --?
+        frames = "1-1", -- cambiar con daño aaaaAAAA
+        frameUpdate = 0.3,
+        movementFunction = "ground"
+    }, 
 }
 
 spriteSheet = love.graphics.newImage('/sprites/enemies.png')
@@ -88,6 +114,7 @@ function Enemy:init(x, y, properties)
     self.height = data.height -- depende del enemigo    
     self.movementFunction = data.movementFunction
     self.type = properties.type
+    self.event = properties.event
 
     -- Drop item associated 
     self.item = nil
@@ -165,6 +192,14 @@ function Enemy:destroy()
             self.item:setPosition(round(self.x) + 1, round(self.y))
             table.insert(items, self.item)
         end
+    end
+
+    if self.event == 'chick' then
+        enemy = Enemy(self.x, self.y, {type = 'chick', itemType = 'recovery', drop = 'rng', event = 'sumoga'})
+        table.insert(enemies, enemy)
+    elseif self.event == 'sumoga' then
+        sumoga = Sumoga()
+        table.insert(enemies, sumoga)
     end
 end
 

@@ -38,7 +38,7 @@ function Player:init(x, y, width, height)
     self.pet = Pet()
 
     -- Player stats
-    self.baseHealth = 50
+    self.baseHealth = 50000
     self.maxHealth = self.baseHealth
     self.health = self.maxHealth
     self.attack = 10

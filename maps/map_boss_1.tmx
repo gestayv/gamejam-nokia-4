@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="26" height="13" tilewidth="8" tileheight="8" infinite="0" nextlayerid="16" nextobjectid="783">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="26" height="13" tilewidth="8" tileheight="8" infinite="0" nextlayerid="17" nextobjectid="787">
  <editorsettings>
   <export target="map_boss_1.lua" format="lua"/>
  </editorsettings>
  <properties>
+  <property name="event" value="eventChic"/>
   <property name="type" value="bigEye  "/>
  </properties>
  <tileset firstgid="1" name="sprite_sheet" tilewidth="8" tileheight="8" tilecount="60" columns="10">
@@ -35,9 +36,16 @@
   <object id="780" x="8" y="96" width="200" height="8"/>
   <object id="781" x="200" y="0" width="8" height="96"/>
  </objectgroup>
- <objectgroup color="#ff0000" id="10" name="Enemies"/>
+ <objectgroup color="#ff0000" id="10" name="Enemies">
+  <object id="785" x="96" y="88" width="8" height="8">
+   <properties>
+    <property name="event" value="chick"/>
+    <property name="type" value="egg"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#e6e616" id="14" name="Items"/>
  <objectgroup color="#00b900" id="11" name="Player">
-  <object id="764" x="40" y="64" width="8" height="8"/>
+  <object id="764" x="16" y="-8" width="8" height="8"/>
  </objectgroup>
 </map>

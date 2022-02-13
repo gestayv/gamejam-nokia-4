@@ -8,6 +8,7 @@ game_loop = require "states/game_loop"
 stat_screen = require "states/stat_screen"
 wf = require '../libraries/windfield'
 anim8 = require '/libraries/anim8'
+Timer = require './libraries/hump/timer'
 
 -- Helpers
 require 'collision_extension'
@@ -68,6 +69,8 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
+    Timer.update(dt)
+
     Gamestate.current():update(dt)
     love.audio.update()
 
