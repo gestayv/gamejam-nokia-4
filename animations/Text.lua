@@ -26,7 +26,7 @@ end
 
 function Text:render()
     love.graphics.setDarkColor()
-    love.graphics.printf(self.text, self.x, self.y, 20, 'left')
+    love.graphics.printf(self.text, self.x, self.y, 40, 'left')
     love.graphics.setColor(255, 255, 255)
 end
 
