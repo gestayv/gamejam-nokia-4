@@ -1,3 +1,11 @@
+function screen_shake(seconds)
+    Timer.during(seconds, function()
+        camShake = true
+    end, function()
+        camShake = false
+    end)
+end
+
 -- Credits to the following functions: https://stackoverflow.com/a/25730573
 -- Times between 0 and 1
 function bezier_blend(time)

@@ -200,7 +200,7 @@ end
 
 function Player:fireUpdate(dt)
     
-    if love.keyboard.isDown("space") then
+    if love.keyboard.wasPressed("space") then
         self:fire()
     end
 

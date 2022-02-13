@@ -8,13 +8,15 @@ bossSpriteSheet = love.graphics.newImage('/sprites/boss_spritesheet.png')
 TILE_SIZE = 8
 
 function Sumoga:init()
-    local legX = player.x + 16
+    local legX = player.x + 24
     legX = range_bound(legX, 180, 90)
     self.leg = {
         x = legX,
-        y = -72,
+        y = -36,
         width = 16,
         height = 72,
+        movementSpeed = 0,
+        falling = true,
     }
     self.leg.grid = anim8.newGrid(self.leg.width, self.leg.height, bossSpriteSheet:getWidth(), bossSpriteSheet:getHeight())
     self.leg.animations = {
@@ -25,20 +27,22 @@ function Sumoga:init()
     self.leg.collider:setCollisionClass('Enemy')
     self.leg.collider:setFixedRotation(true)
     self.leg.collider:setObject(self)
+    self.leg.collider:setLinearVelocity(0, 40) -- Initial boost of speed
 
     self.head = {
         x = -20,
         y = 0,
         width = 16,
         height = 120,
+        movementSpeed = 15,
     }
     self.head.grid = anim8.newGrid(self.head.width, self.head.height, bossSpriteSheet:getWidth(), bossSpriteSheet:getHeight())
     self.head.animations = {
-        falling = anim8.newAnimation(grid('3-4', 1), 0.5),
-        rising = anim8.newAnimation(grid('5-6', 1), 0.5),
-        chase = anim8.newAnimation(grid('5-5', 1), 0.5),
-        hitOnFall = anim8.newAnimation(grid('7-8', 1), 0.5),
-        hitOnRise = anim8.newAnimation(grid('7-8', 1), 0.5),
+        falling = anim8.newAnimation(self.head.grid('3-4', 1), 0.5),
+        rising = anim8.newAnimation(self.head.grid('5-6', 1), 0.5),
+        chase = anim8.newAnimation(self.head.grid('5-5', 1), 0.5),
+        hitOnFall = anim8.newAnimation(self.head.grid('7-8', 1), 0.5),
+        hitOnRise = anim8.newAnimation(self.head.grid('7-8', 1), 0.5),
     }
     self.head.anim = self.head.animations.chase
     self.head.collider = world:newRectangleCollider(self.head.x, self.head.y, self.head.width, self.head.height)
@@ -51,41 +55,57 @@ function Sumoga:init()
     self.strength = 40
     self.health = player.attack * 30
     self.maxHealth = self.health
-    self.movementSpeed = 0
+    self.dx = 50
+    self.dy = 10
     self.peckTime = 3
     self.actionSpeed = 1
-    self.peckStatus = "hidden"
-    self.timerActive = false
-    self.width = 16
-    self.height = 56
+    self.peckStatus = nil
+    self.peckTimerActive = false
+    self.eggTimerActive = false
     self.alive = true
 end
 
 -- como la pelea es scripted, en terminos de como se va a mover y los ataques que va a realizar, va a funcionar
 -- un poco distinto a los enemigos comunes y corrientes
 function Sumoga:update(dt)
-    self.actionSpeed = self:updateActionSpeed()
-    lifePercentage = self.maxHealth/self.health
-    if lifePercentage > 0.75 then
-        self:peck(dt)
-    elseif lifePercentage > 0.5 then
-        self:eggThrow()
-    elseif lifePercentage <= 0 then 
+    self:updateActionSpeed()
+    lifePercentage = self.health/self.maxHealth
+    if lifePercentage <= 0 then 
         self:fuckingDies()
+    elseif lifePercentage <= 0.5 then
+        self:eggThrow()
+    elseif lifePercentage <= 0.75 then
+        if not self.peckStatus then
+            self.peckStatus = 'spawn'
+            self.head.collider:setPosition(player.x, -20)
+        end
     end
-
-    self.leg.collider.setLinearVelocity(0, 0)
 
     self.leg.x = self.leg.collider:getX()    
     self.head.x = self.head.collider:getX()
     self.leg.y = self.leg.collider:getY()    
     self.head.y = self.head.collider:getY()
+
+    if self.peckStatus then
+        self:peck(dt)
+    end
+
+    local _, vy = self.leg.collider:getLinearVelocity()
+    if vy <= 0 then
+        if self.leg.falling then
+            screen_shake(0.5)
+            self.leg.falling = false
+        end
+        self.leg.collider:setLinearVelocity(0, 0)
+    end
+    self.leg.anim:update(dt)
+    self.head.anim:update(dt)
 end
 
 function Sumoga:render()
     
     self.leg.anim:draw(bossSpriteSheet, round(self.leg.x - self.leg.width/2), round(self.leg.y - self.leg.height/2) + 1)
-    self.head.anim:draw(bossSpriteSheet, round(self.head.x - self.head.width/2), round(self.head.y - self.head.height/2))
+    self.head.anim:draw(bossSpriteSheet, round(self.head.x - self.head.width/2), round(self.head.y - self.head.height/2) + 2)
 
     -- love.graphics.rectangle("fill", round(self.leg.x - self.leg.width/2), round(self.leg.y - self.leg.height/2), self.leg.width, self.leg.height)
     
@@ -95,30 +115,65 @@ end
 function Sumoga:destroy()
     self.leg.collider:destroy()
     self.head.collider:destroy()
+    Timer.clear()
 end
 
 function Sumoga:peck(dt)
     local fx, fy = 0, 0
-    vx, vy = self.head.collider:getLinearVelocity()
 
     self.head.collider:setGravityScale(1)
     if self.peckStatus == 'spawn' then
-        
+        self.head.anim = self.head.animations.falling
+        fx, fy = self:peckSpawn(dt)
     elseif self.peckStatus == 'chase' then
+        self.head.anim = self.head.animations.chase
         fx, fy = self:peckChase()
     elseif self.peckStatus == 'peck-rise' then
+        self.head.anim = self.head.animations.rising
         fx, fy = self:peckRise()
     elseif self.peckStatus == 'peck-attack' then
+        self.head.anim = self.head.animations.falling
         fx, fy = self:peckAttack()
+    elseif self.peckStatus == 'grounded' then
+        self.head.anim = self.head.animations.falling
+        self:peckGrounded()
     elseif self.peckStatus == 'return' then
-
+        self.head.anim = self.head.animations.rising
+        fx, fy = self:peckReturn()
     end
 
-    vx = range_bound(vx, enemy.movementSpeed, - enemy.movementSpeed)
-    vy = range_bound(vy, 100, -30)
+    local vx, vy = self.head.collider:getLinearVelocity()
+    vx = range_bound(vx, self.head.movementSpeed, - self.head.movementSpeed)
+    vy = range_bound(vy, 80, -20)
 
     self.head.collider:applyForce(fx, fy)
     self.head.collider:setLinearVelocity(vx, vy)
+end
+
+function Sumoga:peckSpawn(dt)
+    local fx, fy = 0, 0
+    self.head.collider:setGravityScale(0)
+
+    -- sprite sigue al jugador basado en la posicion
+    if self.head.x < player.x then
+        fx = self.dx
+    else
+        fx = self.dx * -1
+    end
+    fx = fx * (1 / self.actionSpeed)
+
+    print(self.head.y)
+    if self.head.y < 8 then
+        self.head.y = self.head.y + self.dy*dt
+        self.head.collider:setY(self.head.y)
+    else 
+        self.head.collider:setY(8)
+        self.peckStatus = 'chase'
+    end
+    local vx, vy = self.head.collider:getLinearVelocity()
+    self.head.collider:setLinearVelocity(vx, 0)
+
+    return fx, fy
 end
 
 function Sumoga:peckChase()
@@ -126,68 +181,117 @@ function Sumoga:peckChase()
     self.head.collider:setGravityScale(0)
 
     -- sprite sigue al jugador basado en la posicion
-    if self.x < player.x then
-        fx = enemy.dx
+    if self.head.x < player.x then
+        fx = self.dx
     else
-        fx = enemy.dx * -1
+        fx = self.dx * -1
     end
-    if not self.timerActive then
-        Timer.after(self.peckTime, function() 
-            self.peckStatus = 'peck-rise'
-            self.timerActive = false
-        end)
-        self.timerActive = true
-    end
+
+    self:peckAfter(self.peckTime, function() 
+        self.peckStatus = 'peck-rise'
+    end)
+
     return fx, 0
 end
 
 function Sumoga:peckRise()
-    local fx, fy = 0, -30
+    local fx, fy = 0, -600
 
-    if not self.timerActive then
-        Timer.after(0.4, function()
-            self.peckStatus = 'peck-attack'
-            self.timerActive = false
-        end)
-        self.timerActive = true
+    self:peckAfter(1, function()
+        self.peckStatus = 'peck-attack'
+        self.head.collider:setLinearVelocity(0, 0)
+    end)
+
+    local vx, vy = self.head.collider:getLinearVelocity()
+    self.head.collider:setLinearVelocity(0, vy)
+    return fx, fy
+end
+
+function Sumoga:peckAttack()
+    local fx, fy = 0, 1000
+    self.peckTime = math.random(2, 5 * self.actionSpeed)
+    
+    if self.head.collider:enter('Player') then
+        self.peckStatus = 'return'
+    elseif self.head.collider:enter('Solid') then
+        self.peckStatus = 'grounded'
+        screen_shake(0.5)
     end
 
     return fx, fy
 end
 
-function Sumoga:peckAttack()
-    local fx, fy = 0, 40
-    self.peckTime = math.random(2, 5 * self.actionSpeed)
-    
-    if self.collider:enter('Player') or self.collider:enter('Solid') then
+function Sumoga:peckGrounded()
+    self:peckAfter(1.5, function()
         self.peckStatus = 'return'
-    end
+    end)
+    self.head.collider:setLinearVelocity(0, 0)
+end
+
+function Sumoga:peckReturn()
+    local fx, fy = 0, -600
+
+    self:peckAfter(1, function()
+        self.peckStatus = 'spawn'
+    end)
 
     return fx, fy
 end
 
 function Sumoga:eggThrow()
-    egg = SumogaEgg(self.head.x, self.head.y)
-    table.insert(enemies, egg)
+    --self:eggAfter(1, function()
+        egg = SumogaEgg(player.x, player.y-40)
+        table.insert(enemies, egg)
+    --end)
 end
 
 function Sumoga:updateActionSpeed()
-    lifePercentage = self.maxHealth/self.health
+    lifePercentage = self.health/self.maxHealth
     self.actionSpeed = math.cos(lifePercentage - 1)
 end
 
 function Sumoga:fuckingDies()
     -- rip
-    Timer.clear()
 end
 
 function Sumoga:takeDamage(damage)
-    table.insert(animations, Text(round(self.leg.x - self.leg.width/2), player.y -5, damage, round(self.leg.x - self.leg.width/2), player.y -10, 1))
-    table.insert(animations, Text(round(self.head.x - self.head.width/2), self.head.y - self.head.height, damage, round(self.head.x - self.head.width/2), self.head.y - self.head.height - 4, 1))
+    local headTextY = player.y - 5
+    local legTextY = player.y - 5
+    -- Limit y text to the bottom of each collider
+    if headTextY > round(self.head.y + self.head.height / 2) then
+        headTextY = round(self.head.y + self.head.height / 2)
+    end
+    if legTextY > round(self.leg.y + self.leg.height / 2) then
+        legTextY = round(self.leg.y + self.leg.height / 2)
+    end
+    
+    table.insert(animations, Text(round(self.leg.x - self.leg.width/2), legTextY, damage, round(self.leg.x - self.leg.width/2), legTextY -5, 1.4))
+    table.insert(animations, Text(round(self.head.x - self.head.width/2), headTextY, damage, round(self.head.x - self.head.width/2), headTextY -5, 1.4))
     love.audio.playSound(hitEnemySound)
     self.health = self.health - damage
     if self.health <= 0 then
         self.health = 0
         self.alive = false
+    end
+end
+
+-- Timer wrapper
+function Sumoga:peckAfter(seconds, callback)
+    if not self.peckTimerActive then
+        Timer.after(seconds, function()
+            callback()
+            self.peckTimerActive = false
+        end)
+        self.peckTimerActive = true
+    end
+end
+
+function Sumoga:eggAfter(seconds, callback)
+    if not self.eggTimerActive then
+        Timer.after(seconds, function()
+            callback()
+            self.eggTimerActive = false
+        end)
+        self.eggTimerActive = true
     end
 end

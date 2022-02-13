@@ -33,13 +33,13 @@ levels.item_test = {
     mapFile = 'maps/item_test.lua'
 }
 levels.level_1 = {
-    musicFile = 'audio/music/bad_melody.wav',
-    musicType = 'static',
+    musicFile = 'audio/music/stage_music_nokia.wav',
+    musicType = 'stream',
     mapFile = 'maps/map_level_2.lua'
 }
 levels.boss_1 = {
-    musicFile = 'audio/music/bad_melody.wav',
-    musicType = 'static',
+    musicFile = 'audio/music/boss_music_nokia.wav',
+    musicType = 'stream',
     mapFile = 'maps/map_boss_1.lua'
 }
 
@@ -59,6 +59,7 @@ function game_loop:enter()
     animations = {}
 
     cam = camera()
+    camShake = false
     player = Player(0, 0, 6, 8)
     hud = Hud()
     game_loop:switch_level(levels.tutorial)
@@ -249,6 +250,11 @@ function getViewpointForCamera()
 
     coordsx = range_bound(coordsx, rightBound, leftBound)
     coordsy = range_bound(coordsy, bottomBound, topBound)
+
+    if camShake then
+        coordsx = coordsx + math.random(-1,1)
+        coordsy = coordsy + math.random(-1,1)
+    end
     
     return coordsx, coordsy
 end
