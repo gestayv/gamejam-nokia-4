@@ -128,7 +128,7 @@
   <object id="515" x="992" y="792" width="8" height="16">
    <properties>
     <property name="exit_direction" value="right"/>
-    <property name="target" value="tutorial"/>
+    <property name="target" value="boss_1"/>
    </properties>
   </object>
  </objectgroup>

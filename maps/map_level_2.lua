@@ -221,7 +221,7 @@ return {
           visible = true,
           properties = {
             ["exit_direction"] = "right",
-            ["target"] = "tutorial"
+            ["target"] = "boss_1"
           }
         }
       }
