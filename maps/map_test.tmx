@@ -114,27 +114,27 @@
  <objectgroup id="3" name="Enemies">
   <object id="31" x="96" y="104" width="8" height="8">
    <properties>
-    <property name="type" value="flying"/>
+    <property name="type" value="eye"/>
    </properties>
   </object>
   <object id="32" x="16" y="168" width="8" height="8">
    <properties>
-    <property name="type" value="flying"/>
+    <property name="type" value="eye"/>
    </properties>
   </object>
   <object id="33" x="48" y="232" width="8" height="8">
    <properties>
-    <property name="type" value="flying"/>
+    <property name="type" value="eye"/>
    </properties>
   </object>
   <object id="34" x="48" y="328" width="8" height="8">
    <properties>
-    <property name="type" value="flying"/>
+    <property name="type" value="eye"/>
    </properties>
   </object>
   <object id="35" x="40" y="464" width="8" height="8">
    <properties>
-    <property name="type" value="flying"/>
+    <property name="type" value="eye"/>
    </properties>
   </object>
  </objectgroup>

@@ -99,6 +99,9 @@ function love.keypressed(key)
         if key == "2" then
             nextLevel = levels.level_1
         end
+        if key == "3" then
+            nextLevel = levels.boss_1
+        end
         if key == "7" then
             nextLevel = levels.item_test
         end

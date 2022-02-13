@@ -48,7 +48,7 @@ return {
       height = 60,
       id = 1,
       name = "Layer 1",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -124,7 +124,7 @@ return {
       draworder = "topdown",
       id = 10,
       name = "Gates",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -138,7 +138,7 @@ return {
       draworder = "topdown",
       id = 2,
       name = "Hitboxes",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -667,7 +667,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["type"] = "flying"
+            ["type"] = "eye"
           }
         },
         {
@@ -682,7 +682,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["type"] = "flying"
+            ["type"] = "eye"
           }
         },
         {
@@ -697,7 +697,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["type"] = "flying"
+            ["type"] = "eye"
           }
         },
         {
@@ -712,7 +712,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["type"] = "flying"
+            ["type"] = "eye"
           }
         },
         {
@@ -727,7 +727,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["type"] = "flying"
+            ["type"] = "eye"
           }
         }
       }
@@ -737,7 +737,7 @@ return {
       draworder = "topdown",
       id = 6,
       name = "Items",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -797,7 +797,7 @@ return {
       draworder = "topdown",
       id = 8,
       name = "Player",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -825,7 +825,7 @@ return {
       draworder = "topdown",
       id = 9,
       name = "Level Transitions",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,

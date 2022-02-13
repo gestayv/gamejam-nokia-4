@@ -7,7 +7,7 @@ TILE_SIZE = 8
 enemyProperties = {
     bigEye = {
       health = 20,
-      strength = 10,
+      strength = 15,
       width = 8,
       height = 8,
       dx = 15,
@@ -33,7 +33,7 @@ enemyProperties = {
     },
     eyeBat = {
         health = 10,
-        strength = 20,
+        strength = 5,
         width = 8,
         height = 8,
         dx = 15,
@@ -57,19 +57,6 @@ enemyProperties = {
         frameUpdate = 0.4,
         movementFunction = "ground"
     },
-    flying = {
-        health = 20,
-        strength = 10,
-        width = 8,
-        height = 8,
-        dx = 20,
-        dy = 1,
-        movementSpeed = 20,
-        spriteRow = 1,
-        frames = "1-4",
-        frameUpdate = 0.4,
-        movementFunction = "ground"
-    }
 }
 
 spriteSheet = love.graphics.newImage('/sprites/enemies.png')

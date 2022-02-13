@@ -36,7 +36,11 @@ levels.level_1 = {
     musicType = 'static',
     mapFile = 'maps/map_level_2.lua'
 }
-
+levels.boss_1 = {
+    musicFile = 'audio/music/bad_melody.wav',
+    musicType = 'static',
+    mapFile = 'maps/map_boss_1.lua'
+}
 
 nextLevel = nil
 
