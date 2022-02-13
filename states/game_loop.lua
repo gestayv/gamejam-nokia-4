@@ -57,7 +57,7 @@ function game_loop:enter()
     sounds = {shootSound, landSound, hitPlayerSound, hitEnemySound, jumpSound, gameOverSound, pickupItemSound}
 
     animations = {}
-    --outOfCameraAnimations = {}
+    outOfCameraAnimations = {}
 
     cam = camera()
     camShake = false
@@ -72,7 +72,7 @@ function game_loop:switch_level(level)
         game_loop:destroy_last_level()
         nextLevel = nil
     end
-    --table.insert(outOfCameraAnimations, ScreenTransition())
+    table.insert(outOfCameraAnimations, ScreenTransition())
 
     gameMap = sti(level.mapFile)
 
@@ -175,7 +175,7 @@ function game_loop:update(dt)
     self:update_list(enemies, dt)
     self:update_list(items, dt)
     self:update_list(animations, dt)
-    --self:update_list(outOfCameraAnimations, dt)
+    self:update_list(outOfCameraAnimations, dt)
     cam:lookAt(getViewpointForCamera())
 
     hud:update(dt)
@@ -232,7 +232,7 @@ function game_loop:draw()
             world:draw() -- this draws colliders, uncomment only if needed
         end
     cam:detach()
-    --self:draw_list(outOfCameraAnimations)
+    self:draw_list(outOfCameraAnimations)
     hud:render()
     if not player.alive then
         love.graphics.setDarkColor()
