@@ -20,7 +20,7 @@ enemyProperties = {
     },
     lizard = {
       health = 40,
-      strength = 10,
+      strength = 20,
       width = 8,
       height = 8,
       dx = 10,
@@ -38,7 +38,7 @@ enemyProperties = {
         height = 8,
         dx = 15,
         dy = 5,
-        movementSpeed = 5,
+        movementSpeed = 7,
         spriteRow = 1,
         frames = "5-6",
         frameUpdate = 0.2,

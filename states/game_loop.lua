@@ -31,6 +31,12 @@ levels.item_test = {
     musicType = 'stream',
     mapFile = 'maps/item_test.lua'
 }
+levels.level_1 = {
+    musicFile = 'audio/music/bad_melody.wav',
+    musicType = 'static',
+    mapFile = 'maps/map_level_2.lua'
+}
+
 
 nextLevel = nil
 
