@@ -59,7 +59,7 @@ function Sumoga:init()
     self.head.collider:setObject(self)
     
     self.strength = 40
-    self.health = player.attack * 50
+    self.health = player.attack * 1
     self.maxHealth = self.health
     self.dx = 60
     self.dy = 10

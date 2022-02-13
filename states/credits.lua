@@ -21,11 +21,13 @@ function credits:enter(from)
         "",
         "Love2D and the Love2D community",
     }
+    music:stop()
+    music = love.audio.newSource('audio/music/credits.wav', 'static')
+    love.audio.playMusic(music)
+    _music:setLooping(false)
 end
 
 function credits:update(dt)
-    music:stop()
-    love.audio.playMusic(nil)
     self.from:update(dt)
     self.topY = self.topY - dt * 4
 end
