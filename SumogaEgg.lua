@@ -30,7 +30,7 @@ function SumogaEgg:update(dt)
 
     vx, vy = self.collider:getLinearVelocity()
     vx = range_bound(vx, 0, 0)
-    vy = range_bound(vy, 50, 0)
+    vy = range_bound(vy, 30, 0)
     
     self.collider:applyForce(0, 50)
     self.collider:setLinearVelocity(vx, vy) 

@@ -34,7 +34,7 @@ function Sumoga:init()
         y = 0,
         width = 16,
         height = 120,
-        movementSpeed = 15,
+        movementSpeed = 18,
     }
     self.head.grid = anim8.newGrid(self.head.width, self.head.height, bossSpriteSheet:getWidth(), bossSpriteSheet:getHeight())
     self.head.animations = {
@@ -50,12 +50,20 @@ function Sumoga:init()
     self.head.collider:setGravityScale(0)
     self.head.collider:setFriction(0)
     self.head.collider:setFixedRotation(true)
+    self.head.collider.sumoga = true
+    self.head.collider:setPreSolve(function(collider_1, collider_2, contact)
+        if collider_1.sumoga and collider_1.collision_class == 'Enemy' and collider_2.collision_class == 'Enemy' then
+            contact:setEnabled(false)
+        end   
+    end)
     self.head.collider:setObject(self)
     
     self.strength = 40
-    self.health = player.attack * 30
-    self.maxHealth = self.health
-    self.dx = 50
+    self.health = 1
+    self.maxHealth = 100
+    -- self.health = player.attack * 30
+    -- self.maxHealth = self.health
+    self.dx = 60
     self.dy = 10
     self.peckTime = 3
     self.eggTime = 2
@@ -137,6 +145,12 @@ end
 function Sumoga:destroy()
     self.leg.collider:destroy()
     self.head.collider:destroy()
+    Timer.clear()
+
+    -- Kill all enemies
+    for i, obj in ipairs(enemies) do
+        obj.alive = false
+    end
 end
 
 function Sumoga:peck(dt)
@@ -176,11 +190,7 @@ function Sumoga:peckSpawn(dt)
     self.head.collider:setGravityScale(0)
 
     -- sprite sigue al jugador basado en la posicion
-    if self.head.x < player.x then
-        fx = self.dx
-    else
-        fx = self.dx * -1
-    end
+    fx = self:followPlayerFx()
     fx = fx * (1 / self.actionSpeed)
 
     if self.head.y < 8 then
@@ -197,21 +207,25 @@ function Sumoga:peckSpawn(dt)
 end
 
 function Sumoga:peckChase()
-    local fx = 0
     self.head.collider:setGravityScale(0)
-
-    -- sprite sigue al jugador basado en la posicion
-    if self.head.x < player.x then
-        fx = self:increaseMod(self.dx)
-    else
-        fx = self:increaseMod(self.dx) * -1
-    end
+    local fx = self:followPlayerFx()
 
     self:peckAfter(self.peckTime, function() 
         self.peckStatus = 'peck-rise'
     end)
 
     return fx, 0
+end
+
+function Sumoga:followPlayerFx()
+    -- sprite sigue al jugador basado en la posicion
+    print(self.head.x, player.x)
+    if self.head.x  + 2 < player.x then
+        fx = self:increaseMod(self.dx)
+    else
+        fx = self:increaseMod(self.dx) * -1
+    end
+    return fx
 end
 
 function Sumoga:peckRise()
@@ -229,7 +243,7 @@ end
 
 function Sumoga:peckAttack()
     local fx, fy = 0, 1000
-    self.peckTime = math.random(2, self:decreaseMod(6))
+    self.peckTime = math.random(self:decreaseMod(2), self:decreaseMod(6))
     
     if self.head.collider:enter('Player') then
         self.peckStatus = 'return'
@@ -261,7 +275,7 @@ end
 function Sumoga:eggThrow()
     self:eggAfter(self.eggTime, function()
         egg = SumogaEgg(player.x, player.y - 60)
-        egg.collider:setLinearVelocity(0, 40)
+        egg.collider:setLinearVelocity(0, 10)
         table.insert(enemies, egg)
         self.eggTime = love.math.random(1.5, self:decreaseMod(3.5))
     end)
