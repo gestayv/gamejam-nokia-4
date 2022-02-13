@@ -9,7 +9,7 @@ return {
   tilewidth = 8,
   tileheight = 8,
   nextlayerid = 7,
-  nextobjectid = 167,
+  nextobjectid = 169,
   properties = {},
   tilesets = {
     {
@@ -1046,7 +1046,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "rng",
-            ["itemType"] = "attack",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -1063,7 +1063,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "rng",
-            ["itemType"] = "max_health",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -1080,7 +1080,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "rng",
-            ["itemType"] = "recovery",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },
@@ -1097,7 +1097,7 @@ return {
           visible = true,
           properties = {
             ["drop"] = "rng",
-            ["itemType"] = "attack",
+            ["itemType"] = "random",
             ["type"] = "bigEye"
           }
         },

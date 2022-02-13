@@ -3,7 +3,7 @@ PickupItem = Class{}
 itemProperties = {
     attack = {
         action = function(self)
-            local amount = self:defaultAmount(5)
+            local amount = self:defaultAmount(2)
             player.attack = player.attack + amount
         end,
         sprite = nil,

@@ -105,11 +105,21 @@ function Enemy:init(x, y, properties)
     -- Drop item associated 
     self.item = nil
     if properties.itemType and properties.drop then
-        self.item = PickupItem(0, 0, {type = properties.itemType})
+        local itemType = properties.itemType
+        if itemType == 'random' then
+            -- iterate over whole table to get all keys
+            local keyset = {}
+            for k in pairs(itemProperties) do
+                table.insert(keyset, k)
+            end
+            -- now you can reliably return a random key
+            itemType = keyset[math.random(#keyset)]
+        end
+        self.item = PickupItem(0, 0, {type = itemType})
         if properties.drop == 'scripted' then
             self.dropPercent = 100
         elseif properties.drop == 'rng' then
-            self.dropPercent = 5
+            self.dropPercent = 13
         end
     end
 
