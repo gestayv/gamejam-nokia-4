@@ -94,32 +94,32 @@ function love.keypressed(key)
     love.keyboard.keysPressed[key] = true
 
     -- Delete following code on production
-    if key == "escape" then
-        love.event.quit()
-    end
-    if Gamestate.current() == game_loop then
-        if key == "1" then
-            nextLevel = levels.tutorial
-        end
-        if key == "2" then
-            nextLevel = levels.level_1
-        end
-        if key == "3" then
-            nextLevel = levels.boss_1
-        end
-        if key == "7" then
-            nextLevel = levels.item_test
-        end
-        if key == "8" then
-            nextLevel = levels.flying_bug
-        end
-        if key == "9" then
-            nextLevel = levels.test_level
-        end
-        if key == "0" then
-            debug_mode = not debug_mode
-        end
-    end
+    -- if key == "escape" then
+    --     love.event.quit()
+    -- end
+    -- if Gamestate.current() == game_loop then
+    --     if key == "1" then
+    --         nextLevel = levels.tutorial
+    --     end
+    --     if key == "2" then
+    --         nextLevel = levels.level_1
+    --     end
+    --     if key == "3" then
+    --         nextLevel = levels.boss_1
+    --     end
+    --     if key == "7" then
+    --         nextLevel = levels.item_test
+    --     end
+    --     if key == "8" then
+    --         nextLevel = levels.flying_bug
+    --     end
+    --     if key == "9" then
+    --         nextLevel = levels.test_level
+    --     end
+    --     if key == "0" then
+    --         debug_mode = not debug_mode
+    --     end
+    -- end
 end
 
 function love.keyreleased(key)
