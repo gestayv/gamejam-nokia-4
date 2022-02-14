@@ -122,7 +122,7 @@
 </data>
  </layer>
  <objectgroup id="15" name="Level Transitions">
-  <object id="515" x="992" y="792" width="8" height="16">
+  <object id="515" x="984" y="784" width="16" height="24">
    <properties>
     <property name="exit_direction" value="right"/>
     <property name="target" value="test_level"/>
@@ -1041,7 +1041,7 @@
  <objectgroup id="16" name="Mysterious Creature">
   <object id="780" x="392" y="448" width="24" height="32"/>
  </objectgroup>
- <objectgroup color="#e6e616" id="14" name="Items">
+ <objectgroup color="#e6e616" id="14" name="Items" visible="0">
   <object id="542" x="768" y="640" width="8" height="8">
    <properties>
     <property name="type" value="recovery"/>

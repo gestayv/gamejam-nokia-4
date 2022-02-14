@@ -59,7 +59,7 @@ function Sumoga:init()
     self.head.collider:setObject(self)
     
     self.strength = 40
-    self.health = player.attack * 40
+    self.health = player.attack * 35
     self.maxHealth = self.health
     self.dx = 60
     self.dy = 10
@@ -82,7 +82,7 @@ function Sumoga:update(dt)
     if lifePercentage <= 0 then 
         self:fuckingDies()
     end
-    if lifePercentage <= 0.5 then
+    if lifePercentage <= 0.6 then
         if not self.eggStatus then
             self.eggStatus = 'spawn'
         end

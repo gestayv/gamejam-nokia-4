@@ -59,7 +59,7 @@ enemyProperties = {
     },
     chick = {
         health = 10, -- CAMBIAR DESPUES
-        strength = 1,
+        strength = 5,
         width = 8,
         height = 8,
         dx = 20,
@@ -108,7 +108,11 @@ function Enemy:init(x, y, properties)
     self.dx = data.dx
     self.dy = data.dy
     self.movementSpeed = data.movementSpeed
-    self.strength = data.strength
+    if properties.type == 'chick' then
+        self.strength = math.ceil(player.maxHealth/10)
+    else
+        self.strength = data.strength
+    end
     self.health = data.health
     self.width = data.width   -- depende del enemigo
     self.height = data.height -- depende del enemigo    

@@ -14,7 +14,7 @@ itemProperties = {
     },
     recovery = {
         action = function(self)
-            local amount = self:defaultAmount(30)
+            local amount = self:defaultAmount(20)
             player:recover(amount)
             return amount
         end,
@@ -25,7 +25,7 @@ itemProperties = {
     },
     max_health = {
         action = function(self)
-            local amount = self:defaultAmount(20)
+            local amount = self:defaultAmount(15)
             player.maxHealth = player.maxHealth + amount
             player:recover(amount)
             return amount
