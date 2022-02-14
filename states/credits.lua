@@ -25,11 +25,19 @@ function credits:enter(from)
     music = love.audio.newSource('audio/music/credits.wav', 'static')
     love.audio.playMusic(music)
     _music:setLooping(false)
+    self.time = 0
 end
 
 function credits:update(dt)
     self.from:update(dt)
     self.topY = self.topY - dt * 4
+    if not _music:isPlaying() then
+        self.time = self.time + dt
+        if self.time > 3 then
+            Gamestate.pop()
+            Gamestate.switch(main_menu)
+        end
+    end
 end
 
 function credits:draw()
