@@ -34,7 +34,7 @@ debug_mode = false
 function love.load()
     love.window.setVSync(1)
 
-    love.window.setTitle('gamejam nokia')
+    love.window.setTitle('Chicken Dystopia')
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     math.randomseed(os.time())
